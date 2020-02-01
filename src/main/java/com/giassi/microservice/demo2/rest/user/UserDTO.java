@@ -6,12 +6,12 @@ import lombok.Data;
 public class UserDTO {
 
     public UserDTO(User user) {
-        this.Id = user.getId();
+        this.id = user.getId();
         this.name = user.getName();
         this.surname = user.getSurname();
     }
 
-    private Long Id;
+    private Long id;
     private String name;
     private String surname;
 
