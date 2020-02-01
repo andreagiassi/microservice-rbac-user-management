@@ -1,4 +1,4 @@
-package com.giassi.microservice.demo2.rest.user;
+package com.giassi.microservice.demo2.rest.user.entities;
 
 import lombok.Data;
 

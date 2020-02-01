@@ -1,8 +1,8 @@
 package com.giassi.microservice.demo2.rest;
 
-import com.giassi.microservice.demo2.rest.user.User;
-import com.giassi.microservice.demo2.rest.user.UserDTO;
-import com.giassi.microservice.demo2.rest.user.UserService;
+import com.giassi.microservice.demo2.rest.user.entities.User;
+import com.giassi.microservice.demo2.rest.user.dtos.UserDTO;
+import com.giassi.microservice.demo2.rest.user.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-public class UserController {
+public class UserRestController {
 
     @Autowired
     private UserService userService;
