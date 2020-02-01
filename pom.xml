@@ -8,11 +8,11 @@
 		<version>2.2.4.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.giassi.microservice.demo2</groupId>
-	<artifactId>demo2</artifactId>
+	<groupId>com.giassi.microservice</groupId>
+	<artifactId>microdemo2</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<name>microdemo2</name>
-	<description>Demo project for Spring Boot</description>
+	<name>MicroserviceDemo1</name>
+	<description>Microservice Demo project for Spring Boot / JPA / Dockerfile</description>
 
 	<properties>
 		<java.version>1.8</java.version>
