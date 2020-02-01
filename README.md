@@ -9,7 +9,8 @@ The database schema must to be created using the simple db.sql script included o
 The other files insert some test data.
 
 * db_create.sql : create the empty database "reports" . 
-* db_populate.sql : insert some test data inside the users table .
+* schema.sql : create the table/s on the database .
+* data.sql : insert some test data inside the users table on start up .
 
 #### REST apis exposed
 
