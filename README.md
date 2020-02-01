@@ -2,9 +2,22 @@
 
 This is a microservice project that is using Spring Boot and JPA to exposes a small set of REST apis.
 
-The database schema must to be created using the simple db.sql script included.
-
 The port exposed is the 8090 .
+
+#### Database
+The database schema must to be created using the simple db.sql script included one time.
+The other files insert some test data.
+
+* db_create.sql : create the empty database "reports" . 
+* db_populate.sql : insert some test data inside the users table .
+
+#### REST apis exposed
+
+##### Retrieve the user's list:
+http://localhost:8090/users
+
+##### Retrieve a single user by Id:
+http://localhost:8090/users/1
 
 #### Docker
 
