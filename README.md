@@ -6,7 +6,8 @@ The port exposed is the 8090 .
 
 #### Database
 The database schema must to be created using the simple db.sql script included one time.
-The other files insert some test data.
+The other two sql files are executed in automatic from Spring boot in order to create the db schema and to
+ insert some test data.
 
 * db_create.sql : create the empty database "reports" . 
 * schema.sql : create the table/s on the database .
