@@ -1,0 +1,9 @@
+
+Following the instruction to setup a local docker image for the mysql8.0 database:
+
+https://medium.com/@crmcmullen/how-to-run-mysql-in-a-docker-container-on-macos-with-persistent-local-data-58b89aec496a
+
+After that:
+
+
+
