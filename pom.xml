@@ -11,7 +11,7 @@
 	<groupId>com.giassi.microservice</groupId>
 	<artifactId>microdemo2</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<name>MicroserviceDemo1</name>
+	<name>MicroserviceDemo2</name>
 	<description>Microservice Demo project for Spring Boot / JPA / Dockerfile</description>
 
 	<properties>
