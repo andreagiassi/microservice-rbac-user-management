@@ -1,27 +1,32 @@
 
-Following the instruction to setup a local docker image for the mysql8.0 database:
+The project is composed of two architectural components:
+- one microservice using Spring Boot 2
+- one database MySql 8
+
+Follow the instructions below to setup a local docker image for the mysql8.0 database:
 
 https://medium.com/@crmcmullen/how-to-run-mysql-in-a-docker-container-on-macos-with-persistent-local-data-58b89aec496a
 
 After that:
 
-- run the database:
+- Run the database:
 
 docker run --restart always --name mysql8.0
 -v /Users/andreagiassi/dev/mysql_data/8.0:/var/lib/mysql -p 3306:3306 -d -e MYSQL_ROOT_PASSWORD=root mysql:8.0
 
-- retrieve the new database IP from the docker container:
+- Retrieve the new IP's database from the docker container using the inspect command:
 
-docker inspect 73e5
+Ex.: docker inspect 73e5
 
-- change the database IP of the application.properties with the new one.
+- Change targeted IP's database in the application.properties file with the identiefied new one in the previous step:
 
+spring.datasource.url=jdbc:mysql://172.18.0.2:3306/reports?useSSL=false&allowPublicKeyRetrieval=true
 
-- build the new micro service locally with the new configuration file:
+- Build the new micro service deploy locally with maven:
 
 mvn clean install -DskipTests=true
 
-- run the micro service app:
+- Run the micro service application:
 
 docker run --name micro2 -p 8090:8090 micro2
 
