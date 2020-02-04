@@ -1,18 +1,18 @@
 package com.giassi.microservice.demo2.rest.user.entities;
 
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-@Data
 @Entity
 @Table(name="users")
+@Data
 public class User {
 
     @Id
+    @GeneratedValue(strategy= GenerationType.AUTO, generator="native")
+    @GenericGenerator(name = "native", strategy = "native")
     @Column(name="id")
     private Long id;
 
@@ -21,5 +21,8 @@ public class User {
 
     @Column(name="surname", nullable = false)
     private String surname;
+
+    @Column(name="email", nullable = false)
+    private String email;
 
 }

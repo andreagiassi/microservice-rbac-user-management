@@ -11,11 +11,13 @@ public class UserDTO {
             this.id = user.getId();
             this.name = user.getName();
             this.surname = user.getSurname();
+            this.email = user.getEmail();
         }
     }
 
     private Long id;
     private String name;
     private String surname;
+    private String email;
 
 }
