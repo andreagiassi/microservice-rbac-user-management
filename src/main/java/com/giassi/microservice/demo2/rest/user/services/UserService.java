@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -58,6 +59,7 @@ public class UserService {
         user.setName(createUserDTO.getName());
         user.setSurname(createUserDTO.getSurname());
         user.setEmail(createUserDTO.getEmail());
+        user.setCreationDt(LocalDateTime.now());
 
         return userRepository.save(user);
     }
@@ -87,6 +89,7 @@ public class UserService {
         user.setName(updateUserDTO.getName());
         user.setSurname(updateUserDTO.getSurname());
         user.setEmail(updateUserDTO.getEmail());
+        user.setUpdatedDt(LocalDateTime.now());
 
         return userRepository.save(user);
     }

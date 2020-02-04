@@ -25,4 +25,10 @@ public class User {
     @Column(name="email", nullable = false)
     private String email;
 
+    @Basic
+    private java.time.LocalDateTime creationDt;
+
+    @Basic
+    private java.time.LocalDateTime updatedDt;
+
 }
