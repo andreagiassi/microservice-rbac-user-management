@@ -1,7 +1,9 @@
 
+## Note
+
 The project is composed of two architectural components:
-- one microservice using Spring Boot 2
-- one database MySql 8
+- one microservice based on Java and Spring Boot 2
+- one database MySql 8.0
 
 Follow the instructions below to setup a local docker image for the mysql8.0 database:
 
@@ -18,7 +20,7 @@ docker run --name mysql8.0
 
 Ex.: docker inspect 73e5
 
-- Change targeted IP's database in the application.properties file with the identified new one as in the previous step:
+- Change targeted IP's database in the application.properties file with the identified new one, example:
 
 spring.datasource.url=jdbc:mysql://172.18.0.2:3306/reports?useSSL=false&allowPublicKeyRetrieval=true
 
@@ -34,3 +36,6 @@ docker run --name micro2 -p 8090:8090 micro2
 
 - check the output calling the http://localhost:8090/users
 
+Two additional files has been added:
+* run.cmd as utility to assist during the normal development
+* db.cmd as utility to pull down the database image and start it
