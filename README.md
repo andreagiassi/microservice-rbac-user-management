@@ -43,12 +43,13 @@ The other two sql files are executed in automatic from Spring Boot in order to c
 * data.sql : insert some test data inside the users table on start up .
 
 #### REST apis exposed
-It's possible to interact with the REST apis also with Swagger and it's comfortable UI interface.
+It's possible to interact with the REST apis also with Swagger and its comfortable web interface.
 The address to explore the REST apis using the web browser is:
 
 http://localhost:8090/swagger-ui.html
 
-Another alternative is to using a tool, for example Postman.
-The project contains the export file micro2.postman_collection.json with some configured test calls.
+Another alternative is to using a tool, for example Postman (https://www.postman.com/).
+
+This project contains the export file micro2.postman_collection.json with some configured test calls.
 
 
