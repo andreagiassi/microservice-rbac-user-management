@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -21,7 +22,7 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public ArrayList<UserDTO> getUserPresentationList() {
+    public List<UserDTO> getUserPresentationList() {
         ArrayList<UserDTO> listDto = new ArrayList<>();
         Iterable<User> list = getUserList();
         list.forEach(e -> listDto.add(new UserDTO(e)));
