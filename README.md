@@ -7,13 +7,13 @@ Andrea he's an italian software engineer actives in web systems and services.
 Since 2002, Andrea is working in the It market for many different companies and start ups and it has contributed to the
 success of several companies.
 
-You can connect and find more info about him here:
+You can connect and find more info here:
 https://www.linkedin.com/in/andreagiassi/
 
 #### Overview
 This project is a microservice that is using Spring Boot and JPA to exposes a small set of REST apis.
 
-The project support the CRUD operation on an User entity on a real MySql database.
+The project support the CRUD operation on an User entity on a MySql database.
 
 The project is using the Docker technologies with two different containers:
 * the Spring Boot microservice that exposes the REST apis
@@ -49,5 +49,6 @@ The address to explore the REST apis using the web browser is:
 http://localhost:8090/swagger-ui.html
 
 Another alternative is to using a tool, for example Postman.
+The project contains the export file micro2.postman_collection.json with some configured test calls.
 
 
