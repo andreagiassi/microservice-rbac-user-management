@@ -14,5 +14,6 @@ public class CreateOrUpdateUserDTO {
     private String email;
     private boolean enabled;
     private String gender;
+    private String phone;
 
 }

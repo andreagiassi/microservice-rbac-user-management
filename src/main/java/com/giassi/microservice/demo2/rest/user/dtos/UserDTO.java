@@ -15,6 +15,7 @@ public class UserDTO {
             this.email = user.getEmail();
             this.enabled = user.isEnabled();
             this.gender = user.getGender().name();
+            this.phone = user.getPhone();
         }
     }
 
@@ -25,5 +26,6 @@ public class UserDTO {
     private String email;
     private boolean enabled;
     private String gender;
+    private String phone;
 
 }

@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` varchar(255) DEFAULT NULL UNIQUE,
   gender TINYINT DEFAULT NULL,
   enabled TINYINT DEFAULT '1',
+  `phone` varchar(20) DEFAULT NULL,
   creation_dt timestamp NOT NULL DEFAULT current_timestamp,
   updated_dt timestamp DEFAULT NULL
 );

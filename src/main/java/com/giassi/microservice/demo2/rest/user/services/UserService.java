@@ -78,7 +78,7 @@ public class UserService {
             throw new InvalidUserDataException();
         }
 
-        // create the new user
+        // create the new user account - not all the user information required
         User user = new User();
         user.setUsername(createUserAccountDTO.getUsername());
         user.setName(createUserAccountDTO.getName());
@@ -99,39 +99,41 @@ public class UserService {
     }
 
     @Transactional
-    public User createUser(CreateOrUpdateUserDTO createOrUpdateUserDTO) {
-        if (createOrUpdateUserDTO == null) {
+    public User createUser(CreateOrUpdateUserDTO createUserDTO) {
+        if (createUserDTO == null) {
             throw new InvalidUserDataException();
         }
 
         // check if the username has not been registered
-        User userByUsername = getUserByUsername(createOrUpdateUserDTO.getUsername());
+        User userByUsername = getUserByUsername(createUserDTO.getUsername());
         if (userByUsername != null) {
             log.error(String.format("The username %s it's already in use from another user with ID = %s",
-                    createOrUpdateUserDTO.getUsername(), userByUsername.getId()));
+                    createUserDTO.getUsername(), userByUsername.getId()));
             throw new InvalidUserDataException();
         }
 
         // check if the email has not been registered
-        User userByEmail = getUserByEmail(createOrUpdateUserDTO.getEmail());
+        User userByEmail = getUserByEmail(createUserDTO.getEmail());
         if (userByEmail != null) {
             log.error(String.format("The email %s it's already in use from another user with ID = %s",
-                    createOrUpdateUserDTO.getEmail(), userByEmail.getId()));
+                    createUserDTO.getEmail(), userByEmail.getId()));
             throw new InvalidUserDataException();
         }
 
         // create the new user
         User user = new User();
-        user.setUsername(createOrUpdateUserDTO.getUsername());
-        user.setName(createOrUpdateUserDTO.getName());
-        user.setSurname(createOrUpdateUserDTO.getSurname());
-        user.setEmail(createOrUpdateUserDTO.getEmail());
+        user.setUsername(createUserDTO.getUsername());
+        user.setName(createUserDTO.getName());
+        user.setSurname(createUserDTO.getSurname());
+        user.setEmail(createUserDTO.getEmail());
         user.setEnabled(true);
 
-        Gender gender = getValidGender(createOrUpdateUserDTO.getGender());
+        Gender gender = getValidGender(createUserDTO.getGender());
         user.setGender(gender);
 
         user.setCreationDt(LocalDateTime.now());
+
+        user.setPhone(createUserDTO.getPhone());
 
         User userCreated = userRepository.save(user);
         log.info(String.format("User %s has been created.", user.getId()));
@@ -185,6 +187,8 @@ public class UserService {
 
         Gender gender = getValidGender(updateUserDTO.getGender());
         user.setGender(gender);
+
+        user.setPhone(updateUserDTO.getPhone());
 
         user.setUpdatedDt(LocalDateTime.now());
 

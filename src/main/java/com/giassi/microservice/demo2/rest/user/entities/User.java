@@ -41,4 +41,7 @@ public class User {
     @Column(name="enabled")
     private boolean enabled;
 
+    @Column(name="phone", nullable = true)
+    private String phone;
+
 }
