@@ -12,6 +12,7 @@ public class UserDTO {
             this.name = user.getName();
             this.surname = user.getSurname();
             this.email = user.getEmail();
+            this.gender = user.getGender().name();
         }
     }
 
@@ -19,5 +20,6 @@ public class UserDTO {
     private String name;
     private String surname;
     private String email;
+    private String gender;
 
 }

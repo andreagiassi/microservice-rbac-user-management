@@ -2,8 +2,10 @@ package com.giassi.microservice.demo2.rest.user.services;
 
 import com.giassi.microservice.demo2.rest.user.RestUserDTO;
 import com.giassi.microservice.demo2.rest.user.dtos.UserDTO;
+import com.giassi.microservice.demo2.rest.user.entities.Gender;
 import com.giassi.microservice.demo2.rest.user.entities.User;
 import com.giassi.microservice.demo2.rest.user.exceptions.InvalidUserDataException;
+import com.giassi.microservice.demo2.rest.user.exceptions.InvalidUserGenderException;
 import com.giassi.microservice.demo2.rest.user.exceptions.InvalidUserIdentifierException;
 import com.giassi.microservice.demo2.rest.user.exceptions.UserNotFoundException;
 import com.giassi.microservice.demo2.rest.user.repositories.UserRepository;
@@ -60,6 +62,10 @@ public class UserService {
         user.setName(createUserDTO.getName());
         user.setSurname(createUserDTO.getSurname());
         user.setEmail(createUserDTO.getEmail());
+
+        Gender gender = getValidGender(createUserDTO.getGender());
+        user.setGender(gender);
+
         user.setCreationDt(LocalDateTime.now());
 
         return userRepository.save(user);
@@ -90,9 +96,23 @@ public class UserService {
         user.setName(updateUserDTO.getName());
         user.setSurname(updateUserDTO.getSurname());
         user.setEmail(updateUserDTO.getEmail());
+
+        Gender gender = getValidGender(updateUserDTO.getGender());
+        user.setGender(gender);
+
         user.setUpdatedDt(LocalDateTime.now());
 
         return userRepository.save(user);
+    }
+
+    private Gender getValidGender(String genderName) {
+        Gender gender;
+        try {
+            gender = Gender.valueOf(genderName);
+        } catch(Exception ex) {
+            throw new InvalidUserGenderException();
+        }
+        return gender;
     }
 
     public Iterable<User> getUserList() {

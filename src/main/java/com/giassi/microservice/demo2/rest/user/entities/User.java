@@ -31,4 +31,8 @@ public class User {
     @Basic
     private java.time.LocalDateTime updatedDt;
 
+    @Enumerated
+    @Column(columnDefinition = "tinyint")
+    private Gender gender;
+
 }

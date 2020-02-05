@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `name` varchar(255) DEFAULT NULL,
   `surname` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL UNIQUE,
+  gender TINYINT DEFAULT NULL,
   creation_dt timestamp NOT NULL DEFAULT current_timestamp,
   updated_dt timestamp DEFAULT NULL
 );
