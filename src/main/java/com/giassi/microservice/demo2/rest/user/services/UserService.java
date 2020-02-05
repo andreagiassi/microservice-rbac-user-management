@@ -9,6 +9,7 @@ import com.giassi.microservice.demo2.rest.user.exceptions.InvalidUserGenderExcep
 import com.giassi.microservice.demo2.rest.user.exceptions.InvalidUserIdentifierException;
 import com.giassi.microservice.demo2.rest.user.exceptions.UserNotFoundException;
 import com.giassi.microservice.demo2.rest.user.repositories.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class UserService {
 
     @Autowired
@@ -42,6 +44,13 @@ public class UserService {
         throw new InvalidUserIdentifierException();
     }
 
+    public User getUserByUsername(String username) {
+        if (username == null) {
+            throw new InvalidUserDataException();
+        }
+        return userRepository.findByUsername(username);
+    }
+
     public User getUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
@@ -52,13 +61,25 @@ public class UserService {
             throw new InvalidUserDataException();
         }
 
-        // check if the email has not been registered
-        User userEmail = getUserByEmail(createUserDTO.getEmail());
-        if (userEmail != null) {
+        // check if the username has not been registered
+        User userByUsername = getUserByUsername(createUserDTO.getUsername());
+        if (userByUsername != null) {
+            log.error(String.format("The username %s it's already in use from another user with ID = %s",
+                    createUserDTO.getUsername(), userByUsername.getId()));
             throw new InvalidUserDataException();
         }
 
+        // check if the email has not been registered
+        User userByEmail = getUserByEmail(createUserDTO.getEmail());
+        if (userByEmail != null) {
+            log.error(String.format("The email %s it's already in use from another user with ID = %s",
+                    createUserDTO.getEmail(), userByEmail.getId()));
+            throw new InvalidUserDataException();
+        }
+
+        // create the new user
         User user = new User();
+        user.setUsername(createUserDTO.getUsername());
         user.setName(createUserDTO.getName());
         user.setSurname(createUserDTO.getSurname());
         user.setEmail(createUserDTO.getEmail());
@@ -69,7 +90,10 @@ public class UserService {
 
         user.setCreationDt(LocalDateTime.now());
 
-        return userRepository.save(user);
+        User userCreated = userRepository.save(user);
+        log.info(String.format("User %s has been created.", user.getId()));
+
+        return userCreated;
     }
 
     @Transactional
@@ -87,13 +111,30 @@ public class UserService {
         }
         User user = userOpt.get();
 
+        // check if the username has not been registered
+        User userByUsername = getUserByUsername(updateUserDTO.getUsername());
+        if (userByUsername != null) {
+            // check if the user's id is different than the actual user
+            if (!user.getId().equals(userByUsername.getId())) {
+                log.error(String.format("The username %s it's already in use from another user with ID = %s",
+                        updateUserDTO.getUsername(), userByUsername.getId()));
+                throw new InvalidUserDataException();
+            }
+        }
+
         // check if the new email has not been registered yet
         User userEmail = getUserByEmail(updateUserDTO.getEmail());
         if (userEmail != null) {
-            throw new InvalidUserDataException();
+            // check if the user's email is different than the actual user
+            if (!user.getId().equals(userEmail.getId())) {
+                log.error(String.format("The email %s it's already in use from another user with ID = %s",
+                        updateUserDTO.getEmail(), userEmail.getId()));
+                throw new InvalidUserDataException();
+            }
         }
 
-        // update the user data
+        // update the user
+        user.setUsername(updateUserDTO.getUsername());
         user.setName(updateUserDTO.getName());
         user.setSurname(updateUserDTO.getSurname());
         user.setEmail(updateUserDTO.getEmail());
@@ -104,7 +145,10 @@ public class UserService {
 
         user.setUpdatedDt(LocalDateTime.now());
 
-        return userRepository.save(user);
+        User userUpdated =  userRepository.save(user);
+        log.info(String.format("User %s has been updated.", user.getId()));
+
+        return userUpdated;
     }
 
     private Gender getValidGender(String genderName) {
@@ -127,11 +171,12 @@ public class UserService {
             throw new InvalidUserIdentifierException();
         }
 
-        if (userRepository.existsById(id)) {
-            userRepository.deleteById(id);
-        } else {
+        if (!userRepository.existsById(id)) {
             throw new UserNotFoundException();
         }
+        userRepository.deleteById(id);
+
+        log.info(String.format("User %s has been deleted.", id));
     }
 
 }

@@ -6,6 +6,24 @@
 	},
 	"item": [
 		{
+			"name": "get user list presentation",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8090/users",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "get single user",
 			"request": {
 				"method": "GET",
@@ -38,7 +56,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"John\",\n    \"surname\": \"Green\",\n    \"email\": \"john.green@gmail.com\",\n    \"gender\": \"MALE\"\n}",
+					"raw": "{\n    \"username\": \"john\",\n    \"name\": \"John\",\n    \"surname\": \"Green\",\n    \"email\": \"john@gmail.com\",\n    \"enabled\": true,\n    \"gender\": \"MALE\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -72,7 +90,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": \"1\",\n    \"name\": \"Andrea\",\n    \"surname\": \"Giassi\",\n    \"email\": \"ytfytfytft@gmail.com\",\n    \"enabled\": \"false\",\n    \"gender\": \"MALE\"\n}",
+					"raw": "{\n    \"id\": \"1\",\n    \"username\": \"andrea\",\n    \"name\": \"Andrea\",\n    \"surname\": \"Giassi\",\n    \"email\": \"test@gmail.com\",\n    \"enabled\": \"true\",\n    \"gender\": \"MALE\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -88,24 +106,6 @@
 					"path": [
 						"users",
 						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "get user list presentation",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8090/users",
-					"host": [
-						"localhost"
-					],
-					"port": "8090",
-					"path": [
-						"users"
 					]
 				}
 			},
