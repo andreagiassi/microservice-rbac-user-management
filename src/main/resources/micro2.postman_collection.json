@@ -56,7 +56,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\": \"john\",\n    \"name\": \"John\",\n    \"surname\": \"Green\",\n    \"email\": \"john@gmail.com\",\n    \"enabled\": true,\n    \"gender\": \"MALE\",\n    \"phone\" : \"+35322442266\"\n}",
+					"raw": "{\n    \"username\": \"john\",\n    \"name\": \"John\",\n    \"surname\": \"Green\",\n    \"email\": \"john.green@gmail.com\",\n    \"enabled\": true,\n    \"gender\": \"MALE\",\n    \"phone\" : \"+35322442266\",\n    \"roleId\" : \"1\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -125,7 +125,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": \"1\",\n    \"username\": \"andrea\",\n    \"name\": \"Andrea\",\n    \"surname\": \"Giassi\",\n    \"email\": \"test@gmail.com\",\n    \"enabled\": \"true\",\n    \"gender\": \"MALE\",\n    \"phone\" : \"+35311442266\"\n}",
+					"raw": "{\n    \"id\": \"1\",\n    \"username\": \"andrea\",\n    \"name\": \"Andrea\",\n    \"surname\": \"Giassi\",\n    \"email\": \"test@gmail.com\",\n    \"enabled\": \"true\",\n    \"gender\": \"MALE\",\n    \"phone\" : \"+35311442266\",\n    \"roleId\" : \"2\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"

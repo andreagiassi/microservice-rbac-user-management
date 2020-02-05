@@ -4,11 +4,10 @@ import com.giassi.microservice.demo2.rest.user.dtos.CreateOrUpdateUserDTO;
 import com.giassi.microservice.demo2.rest.user.dtos.CreateUserAccountDTO;
 import com.giassi.microservice.demo2.rest.user.dtos.UserDTO;
 import com.giassi.microservice.demo2.rest.user.entities.Gender;
+import com.giassi.microservice.demo2.rest.user.entities.Role;
 import com.giassi.microservice.demo2.rest.user.entities.User;
-import com.giassi.microservice.demo2.rest.user.exceptions.InvalidUserDataException;
-import com.giassi.microservice.demo2.rest.user.exceptions.InvalidUserGenderException;
-import com.giassi.microservice.demo2.rest.user.exceptions.InvalidUserIdentifierException;
-import com.giassi.microservice.demo2.rest.user.exceptions.UserNotFoundException;
+import com.giassi.microservice.demo2.rest.user.exceptions.*;
+import com.giassi.microservice.demo2.rest.user.repositories.RoleRepository;
 import com.giassi.microservice.demo2.rest.user.repositories.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +25,9 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private RoleRepository roleRepository;
 
     public List<UserDTO> getUserPresentationList() {
         ArrayList<UserDTO> listDto = new ArrayList<>();
@@ -90,6 +92,8 @@ public class UserService {
         Gender gender = getValidGender(createUserAccountDTO.getGender());
         user.setGender(gender);
 
+        setUserRole(user, Role.USER);
+
         user.setCreationDt(LocalDateTime.now());
 
         User userCreated = userRepository.save(user);
@@ -135,10 +139,22 @@ public class UserService {
 
         user.setPhone(createUserDTO.getPhone());
 
+        // set the role
+        Role role = roleRepository.findById(createUserDTO.getRoleId());
+        user.setRole(role);
+
         User userCreated = userRepository.save(user);
         log.info(String.format("User %s has been created.", user.getId()));
 
         return userCreated;
+    }
+
+    public void setUserRole(User user, long roleId) {
+        Role role = roleRepository.findById(roleId);
+        if (role == null) {
+            throw new RoleNotFoundException();
+        }
+        user.setRole(role);
     }
 
     @Transactional
@@ -189,6 +205,10 @@ public class UserService {
         user.setGender(gender);
 
         user.setPhone(updateUserDTO.getPhone());
+
+        // set the role
+        Role role = roleRepository.findById(updateUserDTO.getRoleId());
+        user.setRole(role);
 
         user.setUpdatedDt(LocalDateTime.now());
 

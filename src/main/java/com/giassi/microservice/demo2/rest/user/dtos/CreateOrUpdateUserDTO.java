@@ -15,5 +15,6 @@ public class CreateOrUpdateUserDTO {
     private boolean enabled;
     private String gender;
     private String phone;
+    private long roleId;
 
 }

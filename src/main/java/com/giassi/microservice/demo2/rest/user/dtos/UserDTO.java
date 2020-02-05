@@ -16,6 +16,11 @@ public class UserDTO {
             this.enabled = user.isEnabled();
             this.gender = user.getGender().name();
             this.phone = user.getPhone();
+
+            // role, if set
+            if (user.getRole() != null) {
+                roleDTO = new RoleDTO(user.getRole());
+            }
         }
     }
 
@@ -27,5 +32,8 @@ public class UserDTO {
     private boolean enabled;
     private String gender;
     private String phone;
+
+    // role information
+    private RoleDTO roleDTO;
 
 }
