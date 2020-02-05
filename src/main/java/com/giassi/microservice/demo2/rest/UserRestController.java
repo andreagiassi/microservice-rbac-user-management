@@ -1,6 +1,7 @@
 package com.giassi.microservice.demo2.rest;
 
-import com.giassi.microservice.demo2.rest.user.RestUserDTO;
+import com.giassi.microservice.demo2.rest.user.dtos.CreateOrUpdateUserDTO;
+import com.giassi.microservice.demo2.rest.user.dtos.CreateUserAccountDTO;
 import com.giassi.microservice.demo2.rest.user.dtos.UserDTO;
 import com.giassi.microservice.demo2.rest.user.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,14 @@ public class UserRestController {
     }
 
     @PostMapping
-    public ResponseEntity<UserDTO> createUser(@RequestBody RestUserDTO createUserDTO) {
-        return ResponseEntity.ok(new UserDTO(userService.createUser(createUserDTO)));
+    public ResponseEntity<UserDTO> createUser(@RequestBody CreateOrUpdateUserDTO createOrUpdateUserDTO) {
+        return ResponseEntity.ok(new UserDTO(userService.createUser(createOrUpdateUserDTO)));
+    }
+
+    // quick account creation (no all the user information are required)
+    @PostMapping("/quickAccount")
+    public ResponseEntity<UserDTO> createQuickUserAccount(@RequestBody CreateUserAccountDTO createUserAccountDTO) {
+        return ResponseEntity.ok(new UserDTO(userService.createNewUserAccount(createUserAccountDTO)));
     }
 
     @GetMapping("/{id}")
@@ -32,7 +39,7 @@ public class UserRestController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserDTO> updateUser(@PathVariable("id") Long id, @RequestBody RestUserDTO updateUserDTO) {
+    public ResponseEntity<UserDTO> updateUser(@PathVariable("id") Long id, @RequestBody CreateOrUpdateUserDTO updateUserDTO) {
         return ResponseEntity.ok(new UserDTO(userService.updateUser(id, updateUserDTO)));
     }
 

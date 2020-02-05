@@ -77,6 +77,41 @@
 			"response": []
 		},
 		{
+			"name": "quickAccount",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"john\",\n    \"name\": \"John\",\n    \"surname\": \"Green\",\n    \"email\": \"john@gmail.com\",\n    \"gender\": \"MALE\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8090/users/quickAccount",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"users",
+						"quickAccount"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "update user",
 			"request": {
 				"method": "PUT",

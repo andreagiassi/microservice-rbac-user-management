@@ -1,15 +1,17 @@
-package com.giassi.microservice.demo2.rest.user;
+package com.giassi.microservice.demo2.rest.user.dtos;
 
 import lombok.Data;
 
+/**
+ * DTO to create a new user account
+ */
 @Data
-public class RestUserDTO {
+public class CreateUserAccountDTO {
 
     private String username;
     private String name;
     private String surname;
     private String email;
-    private boolean enabled;
     private String gender;
 
 }
