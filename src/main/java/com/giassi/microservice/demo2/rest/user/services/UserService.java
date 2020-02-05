@@ -62,6 +62,7 @@ public class UserService {
         user.setName(createUserDTO.getName());
         user.setSurname(createUserDTO.getSurname());
         user.setEmail(createUserDTO.getEmail());
+        user.setEnabled(true);
 
         Gender gender = getValidGender(createUserDTO.getGender());
         user.setGender(gender);
@@ -96,6 +97,7 @@ public class UserService {
         user.setName(updateUserDTO.getName());
         user.setSurname(updateUserDTO.getSurname());
         user.setEmail(updateUserDTO.getEmail());
+        user.setEnabled(updateUserDTO.isEnabled());
 
         Gender gender = getValidGender(updateUserDTO.getGender());
         user.setGender(gender);

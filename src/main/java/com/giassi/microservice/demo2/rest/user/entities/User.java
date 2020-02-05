@@ -35,4 +35,7 @@ public class User {
     @Column(columnDefinition = "tinyint")
     private Gender gender;
 
+    @Column(name="enabled")
+    private boolean enabled;
+
 }

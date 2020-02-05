@@ -72,7 +72,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": \"1\",\n    \"name\": \"Andrea\",\n    \"surname\": \"Giassi\",\n    \"email\": \"ytfytfytft@gmail.com\",\n    \"gender\": \"MALE\"\n}",
+					"raw": "{\n    \"id\": \"1\",\n    \"name\": \"Andrea\",\n    \"surname\": \"Giassi\",\n    \"email\": \"ytfytfytft@gmail.com\",\n    \"enabled\": \"false\",\n    \"gender\": \"MALE\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
