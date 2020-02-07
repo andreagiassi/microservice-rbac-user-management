@@ -1,6 +1,6 @@
-package com.giassi.microservice.demo2.rest.user.dtos;
+package com.giassi.microservice.demo2.rest.users.dtos;
 
-import com.giassi.microservice.demo2.rest.user.entities.Role;
+import com.giassi.microservice.demo2.rest.users.entities.Role;
 import lombok.Data;
 
 @Data

@@ -1,4 +1,4 @@
-package com.giassi.microservice.demo2.rest.user.exceptions;
+package com.giassi.microservice.demo2.rest.users.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

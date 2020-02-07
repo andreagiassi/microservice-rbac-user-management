@@ -1,4 +1,4 @@
-package com.giassi.microservice.demo2.rest.user.entities;
+package com.giassi.microservice.demo2.rest.users.entities;
 
 public enum Gender {
 

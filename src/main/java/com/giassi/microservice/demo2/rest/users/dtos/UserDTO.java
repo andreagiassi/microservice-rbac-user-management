@@ -1,7 +1,9 @@
-package com.giassi.microservice.demo2.rest.user.dtos;
+package com.giassi.microservice.demo2.rest.users.dtos;
 
-import com.giassi.microservice.demo2.rest.user.entities.User;
+import com.giassi.microservice.demo2.rest.users.entities.User;
 import lombok.Data;
+
+import java.time.LocalDateTime;
 
 @Data
 public class UserDTO {
@@ -16,6 +18,8 @@ public class UserDTO {
             this.enabled = user.isEnabled();
             this.gender = user.getGender().name();
             this.phone = user.getPhone();
+            this.creationDt = user.getCreationDt();
+            this.updatedDt = user.getUpdatedDt();
 
             // role, if set
             if (user.getRole() != null) {
@@ -32,6 +36,8 @@ public class UserDTO {
     private boolean enabled;
     private String gender;
     private String phone;
+    private LocalDateTime creationDt;
+    private LocalDateTime updatedDt;
 
     // role information
     private RoleDTO roleDTO;

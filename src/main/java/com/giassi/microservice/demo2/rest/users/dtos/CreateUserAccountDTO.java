@@ -1,4 +1,4 @@
-package com.giassi.microservice.demo2.rest.user.dtos;
+package com.giassi.microservice.demo2.rest.users.dtos;
 
 import lombok.Data;
 

@@ -1,14 +1,14 @@
-package com.giassi.microservice.demo2.rest.user.services;
+package com.giassi.microservice.demo2.rest.users.services;
 
-import com.giassi.microservice.demo2.rest.user.dtos.CreateOrUpdateUserDTO;
-import com.giassi.microservice.demo2.rest.user.dtos.CreateUserAccountDTO;
-import com.giassi.microservice.demo2.rest.user.dtos.UserDTO;
-import com.giassi.microservice.demo2.rest.user.entities.Gender;
-import com.giassi.microservice.demo2.rest.user.entities.Role;
-import com.giassi.microservice.demo2.rest.user.entities.User;
-import com.giassi.microservice.demo2.rest.user.exceptions.*;
-import com.giassi.microservice.demo2.rest.user.repositories.RoleRepository;
-import com.giassi.microservice.demo2.rest.user.repositories.UserRepository;
+import com.giassi.microservice.demo2.rest.users.dtos.CreateOrUpdateUserDTO;
+import com.giassi.microservice.demo2.rest.users.dtos.CreateUserAccountDTO;
+import com.giassi.microservice.demo2.rest.users.dtos.UserDTO;
+import com.giassi.microservice.demo2.rest.users.entities.Gender;
+import com.giassi.microservice.demo2.rest.users.entities.Role;
+import com.giassi.microservice.demo2.rest.users.entities.User;
+import com.giassi.microservice.demo2.rest.users.exceptions.*;
+import com.giassi.microservice.demo2.rest.users.repositories.RoleRepository;
+import com.giassi.microservice.demo2.rest.users.repositories.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
