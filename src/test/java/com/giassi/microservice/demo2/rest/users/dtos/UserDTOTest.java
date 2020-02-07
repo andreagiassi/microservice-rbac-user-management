@@ -14,7 +14,6 @@ public class UserDTOTest {
 
     @Test
     public void userDTOTestConstructor() {
-
         User user = new User();
         user.setId(1L);
         user.setUsername("testUsername");
@@ -55,6 +54,5 @@ public class UserDTOTest {
         assertEquals(role.getId(), roleTest.getId());
         assertEquals(role.getRole(), roleTest.getRole());
     }
-
 
 }

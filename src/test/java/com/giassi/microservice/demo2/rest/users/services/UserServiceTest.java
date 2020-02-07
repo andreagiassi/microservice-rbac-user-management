@@ -15,13 +15,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import static com.giassi.microservice.demo2.rest.users.services.UserTestHelper.getUserDataForTest;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.BDDMockito.given;
@@ -29,10 +28,6 @@ import static org.mockito.BDDMockito.given;
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceTest {
 
-    @Autowired
-    private TestEntityManager entityManager;
-
-    // mocking UserRepository and RoleRepository
     @Mock
     private UserRepository userRepository;
 
@@ -44,7 +39,7 @@ public class UserServiceTest {
     private UserService userService;
 
     @Test
-    public void given_existing_set_of_user_when_getUserPresentationList_return_list() {
+    public void given_existing_set_of_users_when_getUserPresentationList_return_list() {
         User user1 = getUserDataForTest(1L, "andrea", "Andrea",
                 "Giassi", "andrea.test@gmail.com", "+3531122334455");
         User user2= getUserDataForTest(2L, "marco", "Marco",
@@ -52,10 +47,7 @@ public class UserServiceTest {
         User user3 = getUserDataForTest(3L, "francesco", "Francesco",
                 "Verdi", "francesco.test@gmail.com", "+3531122334477");
 
-        List<User> list =  new ArrayList<>();
-        list.add(user1);
-        list.add(user2);
-        list.add(user3);
+        List<User> list = Arrays.asList(user1, user2, user3);
 
         given(userService.getUserList()).willReturn(list);
 
@@ -97,6 +89,7 @@ public class UserServiceTest {
     @Test(expected = InvalidUserIdentifierException.class)
     public void given_not_existing_user_when_getUserById_throw_exception() {
         Long userId = 2L;
+
         given(userRepository.findById(userId)).willReturn(Optional.empty());
 
         userService.getUserById(userId);
@@ -165,12 +158,12 @@ public class UserServiceTest {
 
         given(userRepository.findByUsername("andrea")).willReturn(userDataForTest);
 
-        CreateUserAccountDTO createUserAccountDTO = new CreateUserAccountDTO();
-        createUserAccountDTO.setName("Andrea");
-        createUserAccountDTO.setSurname("Giassi");
-        createUserAccountDTO.setEmail("andrea.test@gmail.com");
-        createUserAccountDTO.setGender("MALE");
-        createUserAccountDTO.setUsername("andrea");
+        CreateUserAccountDTO createUserAccountDTO = CreateUserAccountDTO.builder()
+                .name("Andrea")
+                .surname("Giassi")
+                .email("andrea.test@gmail.com")
+                .gender("MALE")
+                .username("andrea").build();
 
         userService.createNewUserAccount(createUserAccountDTO);
     }
@@ -182,12 +175,13 @@ public class UserServiceTest {
 
         given(userRepository.findByEmail("andrea.test@gmail.com")).willReturn(userDataForTest);
 
-        CreateUserAccountDTO createUserAccountDTO = new CreateUserAccountDTO();
-        createUserAccountDTO.setName("Marco");
-        createUserAccountDTO.setSurname("Rossi");
-        createUserAccountDTO.setEmail("andrea.test@gmail.com"); // existing email
-        createUserAccountDTO.setGender("MALE");
-        createUserAccountDTO.setUsername("marco");
+        // existing email
+        CreateUserAccountDTO createUserAccountDTO = CreateUserAccountDTO.builder()
+                .name("Marco")
+                .surname("Rossi")
+                .email("andrea.test@gmail.com")
+                .gender("MALE")
+                .username("marco").build();
 
         userService.createNewUserAccount(createUserAccountDTO);
     }
@@ -218,8 +212,7 @@ public class UserServiceTest {
 
     @Test(expected = InvalidUserDataException.class)
     public void given_already_registered_username_when_createUser_throw_InvalidUserDataException() {
-        CreateOrUpdateUserDTO createOrUpdateUserDTO = new CreateOrUpdateUserDTO();
-        createOrUpdateUserDTO.setUsername("andrea");
+        CreateOrUpdateUserDTO createOrUpdateUserDTO = CreateOrUpdateUserDTO.builder().username("andrea").build();
 
         User userDataForTest = getUserDataForTest(1L, "andrea", "Andrea",
                 "Giassi", "andrea.test@gmail.com", "+3531122334455");
@@ -231,15 +224,15 @@ public class UserServiceTest {
 
     @Test(expected = InvalidUserDataException.class)
     public void given_already_registered_email_when_createUser_throw_InvalidUserDataException() {
-        CreateOrUpdateUserDTO createOrUpdateUserDTO = new CreateOrUpdateUserDTO();
-        createOrUpdateUserDTO.setName("Marco");
-        createOrUpdateUserDTO.setSurname("Rossi");
-        createOrUpdateUserDTO.setEmail("andrea.test@gmail.com"); // existing email
-        createOrUpdateUserDTO.setGender("MALE");
-        createOrUpdateUserDTO.setUsername("marco");
-        createOrUpdateUserDTO.setPhone("+3531122334466");
-        createOrUpdateUserDTO.setEnabled(true);
-        createOrUpdateUserDTO.setRoleId(1L);
+        // existing email
+        CreateOrUpdateUserDTO createOrUpdateUserDTO = CreateOrUpdateUserDTO.builder().name("Marco")
+                .surname("Rossi")
+                .email("andrea.test@gmail.com")
+                .gender("MALE")
+                .username("marco")
+                .phone("+3531122334466")
+                .enabled(true)
+                .roleId(1L).build();
 
         User userDataForTest = getUserDataForTest(1L, "andrea", "Andrea",
                 "Giassi", "andrea.test@gmail.com", "+3531122334455");
@@ -256,20 +249,17 @@ public class UserServiceTest {
 
     @Test
     public void given_valid_gender_string_when_getValidGender_return_Gender() {
-        // here we're testing both values: male and female
-
         // male
-        Gender genderMale = userService.getValidGender("MALE");
+        Gender maleGender = userService.getValidGender("MALE");
 
-        assertNotNull(genderMale);
-        assertEquals(1L , genderMale.getGender());
-
+        assertNotNull(maleGender);
+        assertEquals(1L , maleGender.getGender());
 
         // female
-        Gender genderFemale = userService.getValidGender("FEMALE");
+        Gender femaleGender = userService.getValidGender("FEMALE");
 
-        assertNotNull(genderFemale);
-        assertEquals(2L , genderFemale.getGender());
+        assertNotNull(femaleGender);
+        assertEquals(2L , femaleGender.getGender());
     }
 
     @Test(expected = InvalidUserIdentifierException.class)
@@ -280,27 +270,6 @@ public class UserServiceTest {
     @Test(expected = UserNotFoundException.class)
     public void given_not_existing_userId_when_deleteUserById_throw_UserNotFoundException() {
         userService.deleteUserById(1L);
-    }
-
-    // create a test user data
-    public User getUserDataForTest(Long id, String username,
-                                   String name, String surname, String email, String phone) {
-        User user = new User();
-
-        user.setId(id);
-        user.setUsername(username);
-        user.setName(name);
-        user.setSurname(surname);
-        user.setEmail(email);
-        user.setEnabled(true);
-        user.setGender(Gender.MALE);
-        user.setPhone(phone);
-
-        user.setCreationDt(LocalDateTime.of(2020, 2, 1, 12, 30));
-        user.setUpdatedDt(LocalDateTime.of(2020, 2, 1, 16, 45));
-
-        user.setRole(new Role(Role.USER, "USER"));
-        return user;
     }
 
 }

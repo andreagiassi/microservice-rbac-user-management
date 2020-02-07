@@ -1,11 +1,17 @@
 package com.giassi.microservice.demo2.rest.users.dtos;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
- * Create User DTO
+ * Modify the User data DTO
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class CreateOrUpdateUserDTO {
 
     private String username;
