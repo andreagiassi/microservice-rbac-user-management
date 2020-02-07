@@ -55,6 +55,9 @@ public class UserService {
     }
 
     public User getUserByEmail(String email) {
+        if (email == null) {
+            throw new InvalidUserEmailException();
+        }
         return userRepository.findByEmail(email);
     }
 
@@ -218,7 +221,7 @@ public class UserService {
         return userUpdated;
     }
 
-    private Gender getValidGender(String genderName) {
+    public Gender getValidGender(String genderName) {
         Gender gender;
         try {
             gender = Gender.valueOf(genderName);
