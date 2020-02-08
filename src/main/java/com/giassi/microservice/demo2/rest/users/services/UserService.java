@@ -201,13 +201,14 @@ public class UserService {
         user.setUsername(updateUserDTO.getUsername());
         user.setName(updateUserDTO.getName());
         user.setSurname(updateUserDTO.getSurname());
-        user.setEmail(updateUserDTO.getEmail());
-        user.setEnabled(updateUserDTO.isEnabled());
 
         Gender gender = getValidGender(updateUserDTO.getGender());
         user.setGender(gender);
 
+        user.setEmail(updateUserDTO.getEmail());
         user.setPhone(updateUserDTO.getPhone());
+
+        user.setEnabled(updateUserDTO.isEnabled());
 
         // set the role
         Role role = roleRepository.findById(updateUserDTO.getRoleId());
