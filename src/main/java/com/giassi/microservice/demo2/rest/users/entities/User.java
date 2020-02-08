@@ -35,6 +35,9 @@ public class User {
     @Column(name="enabled")
     private boolean enabled;
 
+    @Column(name="note")
+    private String note;
+
     @Basic
     private java.time.LocalDateTime creationDt;
 

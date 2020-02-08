@@ -23,6 +23,8 @@ public class UserDTO {
 
             this.enabled = user.isEnabled();
 
+            this.note = user.getNote();
+
             this.creationDt = user.getCreationDt();
             this.updatedDt = user.getUpdatedDt();
 
@@ -43,6 +45,9 @@ public class UserDTO {
     private String phone;
 
     private boolean enabled;
+
+    private String note;
+
     private LocalDateTime creationDt;
     private LocalDateTime updatedDt;
 

@@ -144,10 +144,11 @@ public class UserService {
         user.setName(createUserDTO.getName());
         user.setSurname(createUserDTO.getSurname());
 
-        user.setEnabled(true);
-
         Gender gender = getValidGender(createUserDTO.getGender());
         user.setGender(gender);
+
+        user.setEnabled(true);
+        user.setNote(createUserDTO.getNote());
 
         user.setCreationDt(LocalDateTime.now());
 
@@ -235,6 +236,7 @@ public class UserService {
         user.getContact().setPhone(updateUserDTO.getPhone());
 
         user.setEnabled(updateUserDTO.isEnabled());
+        user.setNote(updateUserDTO.getNote());
 
         // set the role
         Role role = roleRepository.findById(updateUserDTO.getRoleId());

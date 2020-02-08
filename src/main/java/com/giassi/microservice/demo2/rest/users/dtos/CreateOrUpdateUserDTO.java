@@ -21,6 +21,8 @@ public class CreateOrUpdateUserDTO {
 
     private boolean enabled;
 
+    private String note;
+
     private String email;
     private String phone;
 

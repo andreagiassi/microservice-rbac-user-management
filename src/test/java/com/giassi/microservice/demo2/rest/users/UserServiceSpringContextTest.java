@@ -60,6 +60,7 @@ public class UserServiceSpringContextTest {
         createOrUpdateUserDTO.setUsername("john");
         createOrUpdateUserDTO.setPhone("+3531122334499");
         createOrUpdateUserDTO.setRoleId(Role.ADMINISTRATOR);
+        createOrUpdateUserDTO.setNote("test note");
 
         User createdUser = userService.createUser(createOrUpdateUserDTO);
 
@@ -71,6 +72,7 @@ public class UserServiceSpringContextTest {
         assertEquals("john", createdUser.getUsername());
         assertEquals("+3531122334499", createdUser.getContact().getPhone());
         assertEquals("ADMINISTRATOR", createdUser.getRole().getRole());
+        assertEquals("test note", createdUser.getNote());
     }
 
     @Test
@@ -83,17 +85,19 @@ public class UserServiceSpringContextTest {
         createOrUpdateUserDTO.setUsername("andrea");
         createOrUpdateUserDTO.setPhone("+35344335522"); // update the phone number
         createOrUpdateUserDTO.setRoleId(Role.ADMINISTRATOR);
+        createOrUpdateUserDTO.setNote("update phone number note");
 
-        User createdUser = userService.updateUser(1L, createOrUpdateUserDTO);
+        User updatedUser = userService.updateUser(1L, createOrUpdateUserDTO);
 
-        assertNotNull(createdUser);
-        assertEquals("Andrea", createdUser.getName());
-        assertEquals("Giassi", createdUser.getSurname());
-        assertEquals("andrea.test@gmail.com", createdUser.getContact().getEmail());
-        assertEquals("MALE", createdUser.getGender().name());
-        assertEquals("andrea", createdUser.getUsername());
-        assertEquals("+35344335522", createdUser.getContact().getPhone());
-        assertEquals("ADMINISTRATOR", createdUser.getRole().getRole());
+        assertNotNull(updatedUser);
+        assertEquals("Andrea", updatedUser.getName());
+        assertEquals("Giassi", updatedUser.getSurname());
+        assertEquals("andrea.test@gmail.com", updatedUser.getContact().getEmail());
+        assertEquals("MALE", updatedUser.getGender().name());
+        assertEquals("andrea", updatedUser.getUsername());
+        assertEquals("+35344335522", updatedUser.getContact().getPhone());
+        assertEquals("ADMINISTRATOR", updatedUser.getRole().getRole());
+        assertEquals("update phone number note", updatedUser.getNote());
     }
 
 }
