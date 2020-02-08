@@ -16,10 +16,13 @@ public class UserDTO {
             this.surname = user.getSurname();
             this.gender = user.getGender().name();
 
-            this.email = user.getContact().getEmail();
-            this.phone = user.getContact().getPhone();
+            if (user.getContact() != null) {
+                this.email = user.getContact().getEmail();
+                this.phone = user.getContact().getPhone();
+            }
 
             this.enabled = user.isEnabled();
+
             this.creationDt = user.getCreationDt();
             this.updatedDt = user.getUpdatedDt();
 

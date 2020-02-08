@@ -25,12 +25,12 @@ public class User {
     @Column(name="surname", nullable = false)
     private String surname;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private Contact contact;
-
     @Enumerated
     @Column(columnDefinition = "tinyint")
     private Gender gender;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Contact contact;
 
     @Column(name="enabled")
     private boolean enabled;
