@@ -34,10 +34,12 @@ public class UserDTO {
     private String username;
     private String name;
     private String surname;
-    private String email;
-    private boolean enabled;
     private String gender;
+
+    private String email;
     private String phone;
+
+    private boolean enabled;
     private LocalDateTime creationDt;
     private LocalDateTime updatedDt;
 
