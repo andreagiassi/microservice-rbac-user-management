@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Creational DTO to create a new user account with a minimum set of required data
+ * Support the creation of a new user account with a minimum set of required data
  */
 @Data
 @NoArgsConstructor
