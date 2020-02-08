@@ -14,8 +14,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Role {
 
-    public static long USER = 1;
-    public static long ADMINISTRATOR = 2;
+    public static final long USER = 1;
+    public static final long ADMINISTRATOR = 2;
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO, generator="native")
