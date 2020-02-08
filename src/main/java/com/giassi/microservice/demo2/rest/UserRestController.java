@@ -27,9 +27,9 @@ public class UserRestController {
         return ResponseEntity.ok(new UserDTO(userService.createUser(createOrUpdateUserDTO)));
     }
 
-    // quick account creation (no all the user information are required)
+    // quick account creation: no all the user information are required
     @PostMapping("/quickAccount")
-    public ResponseEntity<UserDTO> createQuickUserAccount(@RequestBody CreateUserAccountDTO createUserAccountDTO) {
+    public ResponseEntity<UserDTO> createNewUserAccount(@RequestBody CreateUserAccountDTO createUserAccountDTO) {
         return ResponseEntity.ok(new UserDTO(userService.createNewUserAccount(createUserAccountDTO)));
     }
 

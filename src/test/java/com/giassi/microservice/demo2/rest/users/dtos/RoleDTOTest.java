@@ -9,9 +9,7 @@ public class RoleDTOTest {
 
     @Test
     public void testRoleDTOConstructor() {
-        Role role = new Role();
-        role.setId(1l);
-        role.setRole("USER");
+        Role role = new Role(1L, "USER");
 
         RoleDTO roleDTO = new RoleDTO(role);
 

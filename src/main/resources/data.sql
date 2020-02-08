@@ -1,8 +1,8 @@
 
 DELETE FROM roles;
 
-INSERT INTO roles(id, role) VALUES (1, 'User');
-INSERT INTO roles(id, role) VALUES (2, 'Administrator');
+INSERT INTO roles(id, role) VALUES (1, 'USER');
+INSERT INTO roles(id, role) VALUES (2, 'ADMINISTRATOR');
 
 DELETE FROM users;
 
