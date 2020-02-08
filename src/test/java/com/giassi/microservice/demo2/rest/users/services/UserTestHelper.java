@@ -1,5 +1,6 @@
 package com.giassi.microservice.demo2.rest.users.services;
 
+import com.giassi.microservice.demo2.rest.users.entities.Contact;
 import com.giassi.microservice.demo2.rest.users.entities.Gender;
 import com.giassi.microservice.demo2.rest.users.entities.Role;
 import com.giassi.microservice.demo2.rest.users.entities.User;
@@ -18,8 +19,11 @@ public class UserTestHelper {
         user.setSurname(surname);
         user.setGender(Gender.MALE);
 
-        user.setEmail(email);
-        user.setPhone(phone);
+        Contact contact = new Contact();
+        contact.setEmail(email);
+        contact.setPhone(phone);
+
+        user.setContact(contact);
 
         user.setEnabled(true);
 

@@ -45,7 +45,7 @@ public class UserServiceSpringContextTest {
         assertNotNull(createdUser);
         assertEquals("Marco", createdUser.getName());
         assertEquals("Rossi", createdUser.getSurname());
-        assertEquals("marco.test@gmail.com", createdUser.getEmail());
+        assertEquals("marco.test@gmail.com", createdUser.getContact().getEmail());
         assertEquals("MALE", createdUser.getGender().name());
         assertEquals("marco", createdUser.getUsername());
     }
@@ -66,10 +66,10 @@ public class UserServiceSpringContextTest {
         assertNotNull(createdUser);
         assertEquals("John", createdUser.getName());
         assertEquals("Rossi", createdUser.getSurname());
-        assertEquals("john.test@gmail.com", createdUser.getEmail());
+        assertEquals("john.test@gmail.com", createdUser.getContact().getEmail());
         assertEquals("MALE", createdUser.getGender().name());
         assertEquals("john", createdUser.getUsername());
-        assertEquals("+3531122334499", createdUser.getPhone());
+        assertEquals("+3531122334499", createdUser.getContact().getPhone());
         assertEquals("ADMINISTRATOR", createdUser.getRole().getRole());
     }
 
@@ -89,10 +89,10 @@ public class UserServiceSpringContextTest {
         assertNotNull(createdUser);
         assertEquals("Andrea", createdUser.getName());
         assertEquals("Giassi", createdUser.getSurname());
-        assertEquals("andrea.test@gmail.com", createdUser.getEmail());
+        assertEquals("andrea.test@gmail.com", createdUser.getContact().getEmail());
         assertEquals("MALE", createdUser.getGender().name());
         assertEquals("andrea", createdUser.getUsername());
-        assertEquals("+35344335522", createdUser.getPhone());
+        assertEquals("+35344335522", createdUser.getContact().getPhone());
         assertEquals("ADMINISTRATOR", createdUser.getRole().getRole());
     }
 

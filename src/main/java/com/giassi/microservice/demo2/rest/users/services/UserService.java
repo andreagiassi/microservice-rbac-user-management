@@ -3,10 +3,12 @@ package com.giassi.microservice.demo2.rest.users.services;
 import com.giassi.microservice.demo2.rest.users.dtos.CreateOrUpdateUserDTO;
 import com.giassi.microservice.demo2.rest.users.dtos.CreateUserAccountDTO;
 import com.giassi.microservice.demo2.rest.users.dtos.UserDTO;
+import com.giassi.microservice.demo2.rest.users.entities.Contact;
 import com.giassi.microservice.demo2.rest.users.entities.Gender;
 import com.giassi.microservice.demo2.rest.users.entities.Role;
 import com.giassi.microservice.demo2.rest.users.entities.User;
 import com.giassi.microservice.demo2.rest.users.exceptions.*;
+import com.giassi.microservice.demo2.rest.users.repositories.ContactRepository;
 import com.giassi.microservice.demo2.rest.users.repositories.RoleRepository;
 import com.giassi.microservice.demo2.rest.users.repositories.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +27,9 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private ContactRepository contactRepository;
 
     @Autowired
     private RoleRepository roleRepository;
@@ -83,12 +88,11 @@ public class UserService {
             throw new InvalidUserDataException();
         }
 
-        // create the new user account - not all the user information required
+        // create the new user account: not all the user information required
         User user = new User();
         user.setUsername(createUserAccountDTO.getUsername());
         user.setName(createUserAccountDTO.getName());
         user.setSurname(createUserAccountDTO.getSurname());
-        user.setEmail(createUserAccountDTO.getEmail());
 
         user.setEnabled(true);
 
@@ -100,6 +104,13 @@ public class UserService {
         user.setCreationDt(LocalDateTime.now());
 
         User userCreated = userRepository.save(user);
+
+        // contact
+        Contact contact = new Contact();
+        contact.setEmail(createUserAccountDTO.getEmail());
+
+        addContactOnUser(userCreated, contact);
+
         log.info(String.format("User %s has been created.", user.getId()));
 
         return userCreated;
@@ -132,7 +143,7 @@ public class UserService {
         user.setUsername(createUserDTO.getUsername());
         user.setName(createUserDTO.getName());
         user.setSurname(createUserDTO.getSurname());
-        user.setEmail(createUserDTO.getEmail());
+
         user.setEnabled(true);
 
         Gender gender = getValidGender(createUserDTO.getGender());
@@ -140,16 +151,31 @@ public class UserService {
 
         user.setCreationDt(LocalDateTime.now());
 
-        user.setPhone(createUserDTO.getPhone());
-
         // set the role
         Role role = roleRepository.findById(createUserDTO.getRoleId());
         user.setRole(role);
 
         User userCreated = userRepository.save(user);
+
+        // contact
+        Contact contact = new Contact();
+        contact.setEmail(createUserDTO.getEmail());
+        contact.setPhone(createUserDTO.getPhone());
+
+        addContactOnUser(userCreated, contact);
+
         log.info(String.format("User %s has been created.", user.getId()));
 
         return userCreated;
+    }
+
+    public User addContactOnUser(User user, Contact contact) {
+        contact.setUser(user);
+        user.setContact(contact);
+
+        log.info(String.format("Contact information added on User %s .", user.getId()));
+
+        return userRepository.save(user);
     }
 
     public void setUserRole(User user, long roleId) {
@@ -205,8 +231,8 @@ public class UserService {
         Gender gender = getValidGender(updateUserDTO.getGender());
         user.setGender(gender);
 
-        user.setEmail(updateUserDTO.getEmail());
-        user.setPhone(updateUserDTO.getPhone());
+        user.getContact().setEmail(updateUserDTO.getEmail());
+        user.getContact().setPhone(updateUserDTO.getPhone());
 
         user.setEnabled(updateUserDTO.isEnabled());
 

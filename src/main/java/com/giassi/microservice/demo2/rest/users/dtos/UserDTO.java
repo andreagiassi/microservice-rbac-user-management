@@ -9,15 +9,15 @@ import java.time.LocalDateTime;
 public class UserDTO {
 
     public UserDTO(User user) {
-        if (user !=null) {
+        if (user != null) {
             this.id = user.getId();
             this.username = user.getUsername();
             this.name = user.getName();
             this.surname = user.getSurname();
             this.gender = user.getGender().name();
 
-            this.email = user.getEmail();
-            this.phone = user.getPhone();
+            this.email = user.getContact().getEmail();
+            this.phone = user.getContact().getPhone();
 
             this.enabled = user.isEnabled();
             this.creationDt = user.getCreationDt();

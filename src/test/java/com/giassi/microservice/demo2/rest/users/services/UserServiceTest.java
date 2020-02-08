@@ -83,8 +83,8 @@ public class UserServiceTest {
         assertEquals("andrea", user.getUsername());
         assertEquals("Andrea", user.getName());
         assertEquals("Giassi", user.getSurname());
-        assertEquals("andrea.test@gmail.com", user.getEmail());
-        assertEquals("+3531122334455", user.getPhone());
+        assertEquals("andrea.test@gmail.com", user.getContact().getEmail());
+        assertEquals("+3531122334455", user.getContact().getPhone());
     }
 
     @Test(expected = UserNotFoundException.class)
@@ -120,8 +120,8 @@ public class UserServiceTest {
         assertEquals("andrea", user.getUsername());
         assertEquals("Andrea", user.getName());
         assertEquals("Giassi", user.getSurname());
-        assertEquals("andrea.test@gmail.com", user.getEmail());
-        assertEquals("+3531122334455", user.getPhone());
+        assertEquals("andrea.test@gmail.com", user.getContact().getEmail());
+        assertEquals("+3531122334455", user.getContact().getPhone());
     }
 
     @Test
@@ -138,8 +138,8 @@ public class UserServiceTest {
         assertEquals("andrea", user.getUsername());
         assertEquals("Andrea", user.getName());
         assertEquals("Giassi", user.getSurname());
-        assertEquals("andrea.test@gmail.com", user.getEmail());
-        assertEquals("+3531122334455", user.getPhone());
+        assertEquals("andrea.test@gmail.com", user.getContact().getEmail());
+        assertEquals("+3531122334455", user.getContact().getPhone());
     }
 
     @Test(expected = InvalidEmailException.class)

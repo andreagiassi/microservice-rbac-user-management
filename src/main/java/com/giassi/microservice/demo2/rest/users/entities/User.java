@@ -25,11 +25,8 @@ public class User {
     @Column(name="surname", nullable = false)
     private String surname;
 
-    @Column(name="email", nullable = false)
-    private String email;
-
-    @Column(name="phone")
-    private String phone;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Contact contact;
 
     @Enumerated
     @Column(columnDefinition = "tinyint")
