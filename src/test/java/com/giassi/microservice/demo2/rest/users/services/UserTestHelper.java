@@ -10,17 +10,18 @@ public class UserTestHelper {
 
     // create a test user data
     public static User getUserDataForTest(Long id, String username, String name, String surname, String email,
-                                          String phone)
-    {
+                                          String phone) {
         User user = new User();
         user.setId(id);
         user.setUsername(username);
         user.setName(name);
         user.setSurname(surname);
-        user.setEmail(email);
-        user.setEnabled(true);
         user.setGender(Gender.MALE);
+
+        user.setEmail(email);
         user.setPhone(phone);
+
+        user.setEnabled(true);
 
         user.setCreationDt(LocalDateTime.of(2020, 2, 1, 12, 30));
         user.setUpdatedDt(LocalDateTime.of(2020, 2, 1, 16, 45));

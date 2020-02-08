@@ -14,10 +14,12 @@ public class UserDTO {
             this.username = user.getUsername();
             this.name = user.getName();
             this.surname = user.getSurname();
-            this.email = user.getEmail();
-            this.enabled = user.isEnabled();
             this.gender = user.getGender().name();
+
+            this.email = user.getEmail();
             this.phone = user.getPhone();
+
+            this.enabled = user.isEnabled();
             this.creationDt = user.getCreationDt();
             this.updatedDt = user.getUpdatedDt();
 

@@ -17,10 +17,13 @@ public class CreateOrUpdateUserDTO {
     private String username;
     private String name;
     private String surname;
-    private String email;
-    private boolean enabled;
     private String gender;
+
+    private boolean enabled;
+
+    private String email;
     private String phone;
+
     private long roleId;
 
 }

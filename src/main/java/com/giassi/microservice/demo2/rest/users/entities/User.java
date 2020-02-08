@@ -28,11 +28,8 @@ public class User {
     @Column(name="email", nullable = false)
     private String email;
 
-    @Basic
-    private java.time.LocalDateTime creationDt;
-
-    @Basic
-    private java.time.LocalDateTime updatedDt;
+    @Column(name="phone", nullable = true)
+    private String phone;
 
     @Enumerated
     @Column(columnDefinition = "tinyint")
@@ -41,8 +38,11 @@ public class User {
     @Column(name="enabled")
     private boolean enabled;
 
-    @Column(name="phone", nullable = true)
-    private String phone;
+    @Basic
+    private java.time.LocalDateTime creationDt;
+
+    @Basic
+    private java.time.LocalDateTime updatedDt;
 
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="role_id")

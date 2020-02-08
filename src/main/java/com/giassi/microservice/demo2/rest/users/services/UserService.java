@@ -44,19 +44,19 @@ public class UserService {
         if (userOpt.isPresent()) {
             return userOpt.get();
         }
-        throw new InvalidUserIdentifierException();
+        throw new UserNotFoundException();
     }
 
     public User getUserByUsername(String username) {
         if (username == null) {
-            throw new InvalidUserDataException();
+            throw new InvalidUsernameException();
         }
         return userRepository.findByUsername(username);
     }
 
     public User getUserByEmail(String email) {
         if (email == null) {
-            throw new InvalidUserEmailException();
+            throw new InvalidEmailException();
         }
         return userRepository.findByEmail(email);
     }
@@ -226,7 +226,7 @@ public class UserService {
         try {
             gender = Gender.valueOf(genderName);
         } catch(Exception ex) {
-            throw new InvalidUserGenderException();
+            throw new InvalidGenderException();
         }
         return gender;
     }

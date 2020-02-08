@@ -87,7 +87,7 @@ public class UserServiceTest {
         assertEquals("+3531122334455", user.getPhone());
     }
 
-    @Test(expected = InvalidUserIdentifierException.class)
+    @Test(expected = UserNotFoundException.class)
     public void given_not_existing_user_when_getUserById_throw_exception() {
         Long userId = 2L;
 
@@ -101,7 +101,7 @@ public class UserServiceTest {
         userService.getUserById(null);
     }
 
-    @Test(expected = InvalidUserDataException.class)
+    @Test(expected = InvalidUsernameException.class)
     public void given_null_username_when_getUserByUsername_return_user() {
         userService.getUserByUsername(null);
     }
@@ -142,7 +142,7 @@ public class UserServiceTest {
         assertEquals("+3531122334455", user.getPhone());
     }
 
-    @Test(expected = InvalidUserEmailException.class)
+    @Test(expected = InvalidEmailException.class)
     public void given_invalid_email_getUserByEmail_throw_InvalidUserEmailException() {
         User user = userService.getUserByEmail(null);
     }
@@ -244,7 +244,7 @@ public class UserServiceTest {
         userService.createUser(createOrUpdateUserDTO);
     }
 
-    @Test(expected = InvalidUserGenderException.class)
+    @Test(expected = InvalidGenderException.class)
     public void given_invalid_gender_string_when_getValidGender_throw_InvalidUserGenderException() {
         userService.getValidGender("WRONG_GENDER");
     }
