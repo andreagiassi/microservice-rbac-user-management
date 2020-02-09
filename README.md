@@ -5,7 +5,7 @@ This microservice project has been created in February 2020 from Andrea Giassi.
 
 Andrea he's an italian Agile professional and Software Engineer actives in web systems and services.
 Since 2002, Andrea is working in the IT market for several different companies and start ups and it has contributed
- to the success of several companies and products.
+ to the success of several solutions and products.
 
 Connect and discover more here:
 https://www.linkedin.com/in/andreagiassi/
