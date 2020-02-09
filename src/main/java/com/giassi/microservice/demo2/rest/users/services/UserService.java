@@ -97,6 +97,7 @@ public class UserService {
 
         user.setEnabled(true);
 
+        // set gender
         Gender gender = getValidGender(createUserAccountDTO.getGender());
         user.setGender(gender);
 
@@ -106,14 +107,19 @@ public class UserService {
 
         User userCreated = userRepository.save(user);
 
-        // contact
+        // set contact
         Contact contact = new Contact();
         contact.setEmail(createUserAccountDTO.getEmail());
 
         addContactOnUser(userCreated, contact);
 
-        log.info(String.format("User %s has been created.", user.getId()));
+        // set address
+        Address address = new Address();
+        addAddressOnUser(userCreated, address);
 
+        userCreated = userRepository.save(userCreated);
+
+        log.info(String.format("User %s has been created.", userCreated.getId()));
         return userCreated;
     }
 
@@ -139,12 +145,13 @@ public class UserService {
             throw new InvalidUserDataException();
         }
 
-        // create the new user
+        // create the user
         User user = new User();
         user.setUsername(createUserDTO.getUsername());
         user.setName(createUserDTO.getName());
         user.setSurname(createUserDTO.getSurname());
 
+        // set gender
         Gender gender = getValidGender(createUserDTO.getGender());
         user.setGender(gender);
 
@@ -159,34 +166,40 @@ public class UserService {
 
         User userCreated = userRepository.save(user);
 
-        // contact
+        // set contact
         Contact contact = new Contact();
         contact.setEmail(createUserDTO.getEmail());
         contact.setPhone(createUserDTO.getPhone());
 
         addContactOnUser(userCreated, contact);
 
-        log.info(String.format("User %s has been created.", user.getId()));
+        // set address
+        Address address = new Address();
+        address.setAddress(createUserDTO.getAddress());
+        address.setCity(createUserDTO.getCity());
+        address.setCountry(createUserDTO.getCountry());
+        address.setZipCode(createUserDTO.getZipCode());
 
+        addAddressOnUser(userCreated, address);
+
+        userCreated = userRepository.save(userCreated);
+
+        log.info(String.format("User %s has been created.", userCreated.getId()));
         return userCreated;
     }
 
-    public User addContactOnUser(User user, Contact contact) {
+    public void addContactOnUser(User user, Contact contact) {
         contact.setUser(user);
         user.setContact(contact);
 
-        log.info(String.format("Contact information added on User %s .", user.getId()));
-
-        return userRepository.save(user);
+        log.debug(String.format("Contact information set on User %s .", user.getId()));
     }
 
-    public User addAddressOnUser(User user, Address address) {
+    public void addAddressOnUser(User user, Address address) {
         address.setUser(user);
         user.setAddress(address);
 
-        log.info(String.format("Address information added on User %s .", user.getId()));
-
-        return userRepository.save(user);
+        log.debug(String.format("Address information set on User %s .", user.getId()));
     }
 
     public void setUserRole(User user, long roleId) {
@@ -239,11 +252,9 @@ public class UserService {
         user.setName(updateUserDTO.getName());
         user.setSurname(updateUserDTO.getSurname());
 
+        // set gender
         Gender gender = getValidGender(updateUserDTO.getGender());
         user.setGender(gender);
-
-        user.getContact().setEmail(updateUserDTO.getEmail());
-        user.getContact().setPhone(updateUserDTO.getPhone());
 
         user.setEnabled(updateUserDTO.isEnabled());
         user.setNote(updateUserDTO.getNote());
@@ -252,7 +263,23 @@ public class UserService {
         Role role = roleRepository.findById(updateUserDTO.getRoleId());
         user.setRole(role);
 
+        // set contact
+        user.getContact().setEmail(updateUserDTO.getEmail());
+        user.getContact().setPhone(updateUserDTO.getPhone());
+
         user.setUpdatedDt(LocalDateTime.now());
+
+        // set address
+        Address address = user.getAddress();
+        if (address == null) {
+            address = new Address();
+        }
+        address.setAddress(updateUserDTO.getAddress());
+        address.setCity(updateUserDTO.getCity());
+        address.setCountry(updateUserDTO.getCountry());
+        address.setZipCode(updateUserDTO.getZipCode());
+
+        addAddressOnUser(user, address);
 
         User userUpdated =  userRepository.save(user);
         log.info(String.format("User %s has been updated.", user.getId()));
@@ -284,7 +311,6 @@ public class UserService {
             throw new UserNotFoundException();
         }
         userRepository.deleteById(id);
-
         log.info(String.format("User %s has been deleted.", id));
     }
 

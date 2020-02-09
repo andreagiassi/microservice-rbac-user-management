@@ -61,6 +61,11 @@ public class UserServiceSpringContextTest {
         createOrUpdateUserDTO.setPhone("+3531122334499");
         createOrUpdateUserDTO.setRoleId(Role.ADMINISTRATOR);
         createOrUpdateUserDTO.setNote("test note");
+        // set address
+        createOrUpdateUserDTO.setAddress("via Frescobaldi 123");
+        createOrUpdateUserDTO.setCity("Trieste");
+        createOrUpdateUserDTO.setCountry("Italy");
+        createOrUpdateUserDTO.setZipCode("34100");
 
         User createdUser = userService.createUser(createOrUpdateUserDTO);
 
@@ -73,6 +78,11 @@ public class UserServiceSpringContextTest {
         assertEquals("+3531122334499", createdUser.getContact().getPhone());
         assertEquals("ADMINISTRATOR", createdUser.getRole().getRole());
         assertEquals("test note", createdUser.getNote());
+        // check on address
+        assertEquals("via Frescobaldi 123" , createdUser.getAddress().getAddress());
+        assertEquals("Trieste", createdUser.getAddress().getCity());
+        assertEquals("Italy", createdUser.getAddress().getCountry());
+        assertEquals("34100", createdUser.getAddress().getZipCode());
     }
 
     @Test
@@ -86,6 +96,11 @@ public class UserServiceSpringContextTest {
         createOrUpdateUserDTO.setPhone("+35344335522"); // update the phone number
         createOrUpdateUserDTO.setRoleId(Role.ADMINISTRATOR);
         createOrUpdateUserDTO.setNote("update phone number note");
+        // set address
+        createOrUpdateUserDTO.setAddress("via Frescobaldi 123");
+        createOrUpdateUserDTO.setCity("Trieste");
+        createOrUpdateUserDTO.setCountry("Italy");
+        createOrUpdateUserDTO.setZipCode("34100");
 
         User updatedUser = userService.updateUser(1L, createOrUpdateUserDTO);
 
@@ -93,11 +108,16 @@ public class UserServiceSpringContextTest {
         assertEquals("Andrea", updatedUser.getName());
         assertEquals("Giassi", updatedUser.getSurname());
         assertEquals("andrea.test@gmail.com", updatedUser.getContact().getEmail());
-        assertEquals("MALE", updatedUser.getGender().name());
         assertEquals("andrea", updatedUser.getUsername());
+        assertEquals("MALE", updatedUser.getGender().name());
         assertEquals("+35344335522", updatedUser.getContact().getPhone());
         assertEquals("ADMINISTRATOR", updatedUser.getRole().getRole());
         assertEquals("update phone number note", updatedUser.getNote());
+        // check on address
+        assertEquals("via Frescobaldi 123" , updatedUser.getAddress().getAddress());
+        assertEquals("Trieste", updatedUser.getAddress().getCity());
+        assertEquals("Italy", updatedUser.getAddress().getCountry());
+        assertEquals("34100", updatedUser.getAddress().getZipCode());
     }
 
 }

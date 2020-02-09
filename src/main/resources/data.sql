@@ -1,5 +1,7 @@
 
 DELETE FROM roles;
+DELETE FROM contacts;
+DELETE FROM addresses;
 
 INSERT INTO roles(id, role) VALUES (1, 'USER');
 INSERT INTO roles(id, role) VALUES (2, 'ADMINISTRATOR');
@@ -24,6 +26,6 @@ INSERT INTO contacts(user_id, email, phone) VALUES (6, 'paul.ludwing@gmail.com',
 INSERT INTO contacts(user_id, email, phone) VALUES (7, 'jennifer.red@gmail.com', NULL);
 INSERT INTO contacts(user_id, email, phone) VALUES (8, 'karina.yellow@gmail.com', NULL);
 
-insert into addresses(user_id, address, city, country, zip_code) values (1,"Via roma 2","Trieste","Italy","34100");
-insert into addresses(user_id, address, city, country, zip_code) values (2,"Via filzi 2","Florence","Italy","50100");
-insert into addresses(user_id, address, city, country, zip_code) values (7,"Piazza grande 12","Venice","Italy","30100");
+insert into addresses(user_id, address, city, country, zip_code) values (2,'Via filzi 2', 'Florence', 'Italy', '50100');
+insert into addresses(user_id, address, city, country, zip_code) values (7,'Piazza grande 12', 'Venice', 'Italy', '30100');
+insert into addresses(user_id, address, city, country, zip_code) values (8,'Via roma 2', 'Trieste', 'Italy', '34100');

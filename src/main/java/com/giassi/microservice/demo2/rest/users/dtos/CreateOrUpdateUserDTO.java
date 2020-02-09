@@ -21,11 +21,18 @@ public class CreateOrUpdateUserDTO {
 
     private boolean enabled;
 
+    private long roleId;
+
     private String note;
 
+    // contact information
     private String email;
     private String phone;
 
-    private long roleId;
+    // address information
+    private String address;
+    private String city;
+    private String country;
+    private String zipCode;
 
 }

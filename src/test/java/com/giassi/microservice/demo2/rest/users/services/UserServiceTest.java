@@ -342,6 +342,7 @@ public class UserServiceTest {
                 .phone("+3539988776655")
                 .enabled(true)
                 .roleId(1L)
+                .address("via roma 3").city("Rome").country("Italy").zipCode("00100")
                 .build();
 
         User userDataForTest = getUserDataForTest(1L, "andrea", "Andrea",
