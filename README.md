@@ -20,6 +20,9 @@ The project support the CRUD operation on an User entity on a MySql database and
 * Spring Boot REST apis: that exposing the services
 * MySql 8.0 database: that is storing/retrieving the information
 
+The code has been tested using JUnit and Mockito, H2 in memory database and some standard libraries for the integration
+tests.
+
 #### Spring Boot Microservice
 The microservice code is based on Java 8 and the popular Spring Boot 2 framework.
 
