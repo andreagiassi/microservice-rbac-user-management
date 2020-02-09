@@ -3,11 +3,9 @@ package com.giassi.microservice.demo2.rest.users.services;
 import com.giassi.microservice.demo2.rest.users.dtos.CreateOrUpdateUserDTO;
 import com.giassi.microservice.demo2.rest.users.dtos.CreateUserAccountDTO;
 import com.giassi.microservice.demo2.rest.users.dtos.UserDTO;
-import com.giassi.microservice.demo2.rest.users.entities.Contact;
-import com.giassi.microservice.demo2.rest.users.entities.Gender;
-import com.giassi.microservice.demo2.rest.users.entities.Role;
-import com.giassi.microservice.demo2.rest.users.entities.User;
+import com.giassi.microservice.demo2.rest.users.entities.*;
 import com.giassi.microservice.demo2.rest.users.exceptions.*;
+import com.giassi.microservice.demo2.rest.users.repositories.AddressRepository;
 import com.giassi.microservice.demo2.rest.users.repositories.ContactRepository;
 import com.giassi.microservice.demo2.rest.users.repositories.RoleRepository;
 import com.giassi.microservice.demo2.rest.users.repositories.UserRepository;
@@ -30,6 +28,9 @@ public class UserService {
 
     @Autowired
     private ContactRepository contactRepository;
+
+    @Autowired
+    private AddressRepository addressRepository;
 
     @Autowired
     private RoleRepository roleRepository;
@@ -175,6 +176,15 @@ public class UserService {
         user.setContact(contact);
 
         log.info(String.format("Contact information added on User %s .", user.getId()));
+
+        return userRepository.save(user);
+    }
+
+    public User addAddressOnUser(User user, Address address) {
+        address.setUser(user);
+        user.setAddress(address);
+
+        log.info(String.format("Address information added on User %s .", user.getId()));
 
         return userRepository.save(user);
     }

@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS contacts;
+DROP TABLE IF EXISTS addresses;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS roles;
 
@@ -22,9 +23,17 @@ CREATE TABLE `users` (
 );
 
 CREATE TABLE `contacts` (
-  `id` BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  user_id BIGINT(20) NOT NULL,
+  user_id BIGINT(20) NOT NULL PRIMARY KEY,
   `email` varchar(255) NOT NULL UNIQUE,
   `phone` varchar(20) DEFAULT NULL,
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE `addresses` (
+  user_id BIGINT(20) NOT NULL PRIMARY KEY,
+  `address` varchar(255) NOT NULL UNIQUE,
+  `city` varchar(20) DEFAULT NULL,
+  `country` varchar(20) DEFAULT NULL,
+  `zip_code` varchar(20) DEFAULT NULL,
   FOREIGN KEY (user_id) REFERENCES users(id)
 );

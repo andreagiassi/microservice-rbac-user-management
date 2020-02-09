@@ -32,6 +32,10 @@ public class UserDTO {
             if (user.getRole() != null) {
                 roleDTO = new RoleDTO(user.getRole());
             }
+            // address, if set
+            if (user.getAddress() != null) {
+                addressDTO = new AddressDTO(user.getAddress());
+            }
         }
     }
 
@@ -51,7 +55,8 @@ public class UserDTO {
     private LocalDateTime creationDt;
     private LocalDateTime updatedDt;
 
-    // role information
+    // additional information
     private RoleDTO roleDTO;
+    private AddressDTO addressDTO;
 
 }

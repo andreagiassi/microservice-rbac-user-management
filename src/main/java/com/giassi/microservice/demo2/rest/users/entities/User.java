@@ -32,6 +32,9 @@ public class User {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Contact contact;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Address address;
+
     @Column(name="enabled")
     private boolean enabled;
 

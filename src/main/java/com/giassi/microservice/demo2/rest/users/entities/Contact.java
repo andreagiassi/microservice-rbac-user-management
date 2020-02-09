@@ -14,8 +14,8 @@ import javax.persistence.*;
 public class Contact {
 
     @Id
-    @Column(name="id")
-    private Long id;
+    @Column(name="user_id")
+    private Long userId;
 
     @Column(name="email", nullable = false)
     private String email;
