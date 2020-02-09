@@ -22,7 +22,7 @@ Ex.: docker inspect 73e5
 
 - Change targeted IP's database in the application.properties file with the identified new one, example:
 
-spring.datasource.url=jdbc:mysql://172.18.0.2:3306/reports?useSSL=false&allowPublicKeyRetrieval=true
+spring.datasource.url=jdbc:mysql://172.18.0.2:3306/users?useSSL=false&allowPublicKeyRetrieval=true
 
 in my case the new database IP is 172.18.0.2 .
 

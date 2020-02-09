@@ -36,7 +36,7 @@ This architectural component has a specific Docker image and the services expose
 The database must to be created using the simple db.sql script included one time,
  once the docker image will be created.
 
-* db_create.sql: create the empty database "reports" . 
+* db_create.sql: create the empty database "users" . 
 
 For more information related the Docker deploy read the file Note.txt.
 
