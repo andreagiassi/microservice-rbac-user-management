@@ -114,7 +114,7 @@ public class UserServiceSpringContextTest {
         assertEquals("ADMINISTRATOR", updatedUser.getRole().getRole());
         assertEquals("update phone number note", updatedUser.getNote());
         // check on address
-        assertEquals("via Frescobaldi 123" , updatedUser.getAddress().getAddress());
+        assertEquals("via Frescobaldi 123", updatedUser.getAddress().getAddress());
         assertEquals("Trieste", updatedUser.getAddress().getCity());
         assertEquals("Italy", updatedUser.getAddress().getCountry());
         assertEquals("34100", updatedUser.getAddress().getZipCode());

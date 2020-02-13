@@ -10,8 +10,7 @@ import java.time.LocalDateTime;
 public class UserTestHelper {
 
     // create a test user data
-    public static User getUserDataForTest(Long id, String username, String name, String surname, String email,
-                                          String phone) {
+    public static User getUserTestData(Long id, String username, String name, String surname, String email, String phone) {
         User user = new User();
         user.setId(id);
         user.setUsername(username);

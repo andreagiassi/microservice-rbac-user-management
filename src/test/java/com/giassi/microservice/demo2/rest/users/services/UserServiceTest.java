@@ -20,7 +20,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static com.giassi.microservice.demo2.rest.users.services.UserTestHelper.getUserDataForTest;
+import static com.giassi.microservice.demo2.rest.users.services.UserTestHelper.getUserTestData;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.BDDMockito.given;
@@ -40,11 +40,11 @@ public class UserServiceTest {
 
     @Test
     public void given_existing_users_when_getUserPresentationList_return_validList() {
-        User user1 = getUserDataForTest(1L, "andrea", "Andrea",
+        User user1 = getUserTestData(1L, "andrea", "Andrea",
                 "Giassi", "andrea.test@gmail.com", "+3531122334455");
-        User user2= getUserDataForTest(2L, "marco", "Marco",
+        User user2= getUserTestData(2L, "marco", "Marco",
                 "Rossi", "marco.test@gmail.com", "+3531122334466");
-        User user3 = getUserDataForTest(3L, "francesco", "Francesco",
+        User user3 = getUserTestData(3L, "francesco", "Francesco",
                 "Verdi", "francesco.test@gmail.com", "+3531122334477");
 
         List<User> list = Arrays.asList(user1, user2, user3);
@@ -71,7 +71,7 @@ public class UserServiceTest {
     public void given_existing_user_when_getUserById_returnUser() {
         Long userId = 1L;
 
-        User user = getUserDataForTest(userId, "andrea", "Andrea",
+        User user = getUserTestData(userId, "andrea", "Andrea",
                 "Giassi", "andrea.test@gmail.com", "+3531122334455");
 
         given(userRepository.findById(userId)).willReturn(Optional.of(user));
@@ -108,7 +108,7 @@ public class UserServiceTest {
 
     @Test
     public void given_existing_username_when_getUserByUsername_return_user() {
-        User userDataForTest = getUserDataForTest(1L, "andrea", "Andrea",
+        User userDataForTest = getUserTestData(1L, "andrea", "Andrea",
                 "Giassi", "andrea.test@gmail.com", "+3531122334455");
 
         given(userRepository.findByUsername("andrea")).willReturn(userDataForTest);
@@ -126,7 +126,7 @@ public class UserServiceTest {
 
     @Test
     public void given_existing_email_when_getUserByEmail_return_user() {
-        User userDataForTest = getUserDataForTest(1L, "andrea", "Andrea",
+        User userDataForTest = getUserTestData(1L, "andrea", "Andrea",
             "Giassi", "andrea.test@gmail.com", "+3531122334455");
 
         given(userRepository.findByEmail("andrea.test@gmail.com")).willReturn(userDataForTest);
@@ -154,7 +154,7 @@ public class UserServiceTest {
 
     @Test(expected = InvalidUserDataException.class)
     public void given_already_existing_username_when_createNewUserAccount_throw_InvalidUserDataException() {
-        User userDataForTest = getUserDataForTest(1L, "andrea", "Andrea",
+        User userDataForTest = getUserTestData(1L, "andrea", "Andrea",
                 "Giassi", "andrea.test@gmail.com", "+3531122334455");
 
         given(userRepository.findByUsername("andrea")).willReturn(userDataForTest);
@@ -171,7 +171,7 @@ public class UserServiceTest {
 
     @Test(expected = InvalidUserDataException.class)
     public void given_existing_email_when_createNewUserAccount_throw_InvalidUserDataException() {
-        User userDataForTest = getUserDataForTest(1L, "andrea", "Andrea",
+        User userDataForTest = getUserTestData(1L, "andrea", "Andrea",
                 "Giassi", "andrea.test@gmail.com", "+3531122334455");
 
         given(userRepository.findByEmail("andrea.test@gmail.com")).willReturn(userDataForTest);
@@ -189,7 +189,7 @@ public class UserServiceTest {
 
     @Test(expected = RoleNotFoundException.class)
     public void given_null_when_setUserRole_throw_RoleNotFoundException() {
-        User userDataForTest = getUserDataForTest(1L, "andrea", "Andrea",
+        User userDataForTest = getUserTestData(1L, "andrea", "Andrea",
                 "Giassi", "andrea.test@gmail.com", "+3531122334455");
 
         // role doesn't exists
@@ -198,7 +198,7 @@ public class UserServiceTest {
 
     @Test
     public void given_valid_role_id_when_setUserRole_throw_RoleNotFoundException() {
-        User userDataForTest = getUserDataForTest(1L, "andrea", "Andrea",
+        User userDataForTest = getUserTestData(1L, "andrea", "Andrea",
                 "Giassi", "andrea.test@gmail.com", "+3531122334455");
 
         given(roleRepository.findById(1L)).willReturn(new Role(1L, "USER"));
@@ -215,7 +215,7 @@ public class UserServiceTest {
     public void given_already_registered_username_when_createUser_throw_InvalidUserDataException() {
         CreateOrUpdateUserDTO createOrUpdateUserDTO = CreateOrUpdateUserDTO.builder().username("andrea").build();
 
-        User userDataForTest = getUserDataForTest(1L, "andrea", "Andrea",
+        User userDataForTest = getUserTestData(1L, "andrea", "Andrea",
                 "Giassi", "andrea.test@gmail.com", "+3531122334455");
 
         given(userRepository.findByUsername("andrea")).willReturn(userDataForTest);
@@ -236,7 +236,7 @@ public class UserServiceTest {
                 .enabled(true)
                 .roleId(1L).build();
 
-        User userDataForTest = getUserDataForTest(1L, "andrea", "Andrea",
+        User userDataForTest = getUserTestData(1L, "andrea", "Andrea",
                 "Giassi", "andrea.test@gmail.com", "+3531122334455");
 
         given(userRepository.findByEmail("andrea.test@gmail.com")).willReturn(userDataForTest);
@@ -294,9 +294,9 @@ public class UserServiceTest {
                 .roleId(1L)
                 .build();
 
-        User userDataForTest = getUserDataForTest(1L, "andrea", "Andrea",
+        User userDataForTest = getUserTestData(1L, "andrea", "Andrea",
                 "Giassi", "andrea.test@gmail.com", "+3531122334455");
-        User userDataForTest2 = getUserDataForTest(2L, "andrea", "Marco",
+        User userDataForTest2 = getUserTestData(2L, "andrea", "Marco",
                 "Rossi", "marco.test@gmail.com", "+3531122334466");
 
         given(userRepository.findById(2L)).willReturn(Optional.of(userDataForTest2));
@@ -319,9 +319,9 @@ public class UserServiceTest {
                 .roleId(1L)
                 .build();
 
-        User userDataForTest = getUserDataForTest(1L, "andrea", "Andrea",
+        User userDataForTest = getUserTestData(1L, "andrea", "Andrea",
                 "Giassi", "andrea.test@gmail.com", "+3531122334455");
-        User userDataForTest2 = getUserDataForTest(2L, "marco", "Marco",
+        User userDataForTest2 = getUserTestData(2L, "marco", "Marco",
                 "Rossi", "marco.test@gmail.com", "+3531122334466");
 
         given(userRepository.findById(2L)).willReturn(Optional.of(userDataForTest2));
@@ -345,7 +345,7 @@ public class UserServiceTest {
                 .address("via roma 3").city("Rome").country("Italy").zipCode("00100")
                 .build();
 
-        User userDataForTest = getUserDataForTest(1L, "andrea", "Andrea",
+        User userDataForTest = getUserTestData(1L, "andrea", "Andrea",
                 "Giassi", "andrea.test@gmail.com", "+3531122334455");
 
         given(userRepository.findById(1L)).willReturn(Optional.of(userDataForTest));

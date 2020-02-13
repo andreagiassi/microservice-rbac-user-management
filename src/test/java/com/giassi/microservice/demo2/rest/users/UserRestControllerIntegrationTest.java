@@ -37,11 +37,11 @@ public class UserRestControllerIntegrationTest {
 
     @Test
     public void getUserPresentationList() throws Exception {
-        UserDTO user1 = new UserDTO(UserTestHelper.getUserDataForTest(1L, "andrea", "Andrea",
+        UserDTO user1 = new UserDTO(UserTestHelper.getUserTestData(1L, "andrea", "Andrea",
                 "Giassi", "andrea.test@gmail.com", "+3531122334455"));
-        UserDTO user2 = new UserDTO(UserTestHelper.getUserDataForTest(2L, "marco", "Marco",
+        UserDTO user2 = new UserDTO(UserTestHelper.getUserTestData(2L, "marco", "Marco",
                 "Verdi", "marco.test@gmail.com", "+3531122334466"));
-        UserDTO user3 = new UserDTO(UserTestHelper.getUserDataForTest(3L, "franco", "Franco",
+        UserDTO user3 = new UserDTO(UserTestHelper.getUserTestData(3L, "franco", "Franco",
                 "Rossi", "franco.test@gmail.com", "+3531122334477"));
 
         List<UserDTO> userList = Arrays.asList(user1, user2, user3);
@@ -58,7 +58,7 @@ public class UserRestControllerIntegrationTest {
 
     @Test
     public void getUserById() throws Exception {
-        User user1 = UserTestHelper.getUserDataForTest(1L, "andrea", "Andrea",
+        User user1 = UserTestHelper.getUserTestData(1L, "andrea", "Andrea",
                 "Giassi", "andrea.test@gmail.com", "+3531122334455");
 
         given(userService.getUserById(1L)).willReturn(user1);
