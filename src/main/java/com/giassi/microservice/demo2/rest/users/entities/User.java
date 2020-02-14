@@ -1,6 +1,7 @@
 package com.giassi.microservice.demo2.rest.users.entities;
 
 import lombok.Data;
+import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="users")
 @Data
+@ToString
 public class User {
 
     @Id
