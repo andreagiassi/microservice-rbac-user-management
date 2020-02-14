@@ -1,9 +1,6 @@
 package com.giassi.microservice.demo2.rest.users;
 
-import com.giassi.microservice.demo2.rest.users.dtos.AddressDTO;
-import com.giassi.microservice.demo2.rest.users.dtos.CreateOrUpdateUserDTO;
-import com.giassi.microservice.demo2.rest.users.dtos.RoleDTO;
-import com.giassi.microservice.demo2.rest.users.dtos.UserDTO;
+import com.giassi.microservice.demo2.rest.users.dtos.*;
 import com.giassi.microservice.demo2.rest.users.entities.Role;
 import com.giassi.microservice.demo2.rest.users.services.UserService;
 import org.junit.Test;
@@ -94,6 +91,37 @@ public class UserRestControllerTest {
         assertEquals("Dublin", addressDTO.getCity());
         assertEquals("Ireland", addressDTO.getCountry());
         assertEquals("47335", addressDTO.getZipCode());
+
+        // delete the created user
+        userService.deleteUserById(userDTO.getId());
+    }
+
+    @Test
+    public void test_createNewUserAccount() {
+        // test the create quick account
+        CreateUserAccountDTO quickAccount = CreateUserAccountDTO.builder()
+                .username("test1")
+                .name("Marco")
+                .surname("Blu")
+                .gender("MALE")
+                .email("marco.blu@gmail.com")
+                .build();
+
+        String userQuickAccountURL = "/users/quickAccount";
+
+        HttpEntity<CreateUserAccountDTO> request = new HttpEntity<>(quickAccount);
+        ResponseEntity<UserDTO> response = restTemplate.postForEntity(userQuickAccountURL, request, UserDTO.class);
+
+        assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
+
+        UserDTO userDTO = response.getBody();
+
+        assertNotNull(userDTO);
+        assertEquals("test1", userDTO.getUsername());
+        assertEquals("Marco", userDTO.getName());
+        assertEquals("Blu", userDTO.getSurname());
+        assertEquals("MALE", userDTO.getGender());
+        assertEquals("marco.blu@gmail.com", userDTO.getEmail());
 
         // delete the created user
         userService.deleteUserById(userDTO.getId());
