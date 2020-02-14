@@ -67,7 +67,12 @@ public class UserRestControllerTest {
         URI uri = URI.create("/users");
 
         HttpEntity<CreateOrUpdateUserDTO> request = new HttpEntity<>(createOrUpdateUserDTO);
-        UserDTO userDTO = restTemplate.postForObject(uri, request, UserDTO.class);
+        ResponseEntity<UserDTO> response = restTemplate.postForEntity(uri, request, UserDTO.class);
+
+        assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
+
+        UserDTO userDTO = response.getBody();
+        assertNotNull(userDTO);
 
         assertNotNull(userDTO);
         assertEquals("test1", userDTO.getUsername());
