@@ -2,6 +2,8 @@ package com.giassi.microservice.demo2.rest.users;
 
 import com.giassi.microservice.demo2.rest.users.dtos.*;
 import com.giassi.microservice.demo2.rest.users.entities.Role;
+import com.giassi.microservice.demo2.rest.users.entities.User;
+import com.giassi.microservice.demo2.rest.users.repositories.UserRepository;
 import com.giassi.microservice.demo2.rest.users.services.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.net.URI;
+import java.util.Optional;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
@@ -29,6 +32,9 @@ public class UserRestControllerTest {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    UserRepository userRepository;
 
     @Test
     public void test_getUserById() {
@@ -52,14 +58,14 @@ public class UserRestControllerTest {
     @Test
     public void test_createUser() {
         CreateOrUpdateUserDTO createOrUpdateUserDTO = CreateOrUpdateUserDTO.builder()
-               .username("test1")
-               .name("Marco")
+               .username("frank")
+               .name("Frank")
                .surname("Blu")
                .gender("MALE")
                .enabled(true)
                .roleId(Role.USER)
-               .note("created for test1")
-               .email("marco.blu@gmail.com")
+               .note("created for test")
+               .email("frank.blu@gmail.com")
                .phone("+3531194334455")
                .address("dark road 1")
                .city("Dublin")
@@ -77,8 +83,8 @@ public class UserRestControllerTest {
         assertNotNull(userDTO);
 
         assertNotNull(userDTO);
-        assertEquals("test1", userDTO.getUsername());
-        assertEquals("Marco", userDTO.getName());
+        assertEquals("frank", userDTO.getUsername());
+        assertEquals("Frank", userDTO.getName());
         assertEquals("Blu", userDTO.getSurname());
         assertEquals("MALE", userDTO.getGender());
 
@@ -88,8 +94,8 @@ public class UserRestControllerTest {
         assertEquals("USER", roleDTO.getRole());
 
         assertEquals(true, userDTO.isEnabled());
-        assertEquals("created for test1", userDTO.getNote());
-        assertEquals("marco.blu@gmail.com", userDTO.getEmail());
+        assertEquals("created for test", userDTO.getNote());
+        assertEquals("frank.blu@gmail.com", userDTO.getEmail());
         assertEquals("+3531194334455", userDTO.getPhone());
 
         assertNotNull(userDTO.getAddressDTO());
@@ -107,11 +113,11 @@ public class UserRestControllerTest {
     public void test_createNewUserAccount() {
         // create a new user using the quick account endpoint
         CreateUserAccountDTO quickAccount = CreateUserAccountDTO.builder()
-                .username("test1")
+                .username("violet")
                 .name("Marco")
-                .surname("Blu")
+                .surname("Violet")
                 .gender("MALE")
-                .email("marco.blu@gmail.com")
+                .email("marco.violet@gmail.com")
                 .build();
 
         String userQuickAccountURL = "/users/quickAccount";
@@ -124,11 +130,11 @@ public class UserRestControllerTest {
         UserDTO userDTO = response.getBody();
 
         assertNotNull(userDTO);
-        assertEquals("test1", userDTO.getUsername());
+        assertEquals("violet", userDTO.getUsername());
         assertEquals("Marco", userDTO.getName());
-        assertEquals("Blu", userDTO.getSurname());
+        assertEquals("Violet", userDTO.getSurname());
         assertEquals("MALE", userDTO.getGender());
-        assertEquals("marco.blu@gmail.com", userDTO.getEmail());
+        assertEquals("marco.violet@gmail.com", userDTO.getEmail());
 
         // delete the created user
         userService.deleteUserById(userDTO.getId());
@@ -136,17 +142,17 @@ public class UserRestControllerTest {
 
     @Test
     public void test_updateUser() {
-        Long userId = 1L;
+        Long userId = 2L;
         URI uri = URI.create("/users/" + userId);
 
         CreateOrUpdateUserDTO createOrUpdateUserDTO = CreateOrUpdateUserDTO.builder()
                 .username("test1")
                 .name("Marco")
-                .surname("Blu")
+                .surname("Rossi")
                 .gender("MALE")
                 .enabled(true)
                 .roleId(Role.USER)
-                .note("created for test1")
+                .note("updated for test")
                 .email("marco.blu@gmail.com")
                 .phone("+3531194334455")
                 .address("dark road 1")
@@ -163,17 +169,38 @@ public class UserRestControllerTest {
 
         assertEquals("test1", userDTO.getUsername());
         assertEquals("Marco", userDTO.getName());
-        assertEquals("Blu", userDTO.getSurname());
+        assertEquals("Rossi", userDTO.getSurname());
         assertEquals("MALE", userDTO.getGender());
         assertEquals("marco.blu@gmail.com", userDTO.getEmail());
-
-        // delete the created user
-        userService.deleteUserById(userDTO.getId());
     }
 
-/*    @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable("id") Long id) {
-        userService.deleteUserById(id);
-    }*/
+    @Test
+    public void test_deleteUser() {
+        // create a new user to test the deletion
+        CreateUserAccountDTO quickAccount = CreateUserAccountDTO.builder()
+                .username("anna")
+                .name("Anna")
+                .surname("Verdi")
+                .gender("FEMALE")
+                .email("anna.verdi@gmail.com")
+                .build();
+
+        String userQuickAccountURL = "/users/quickAccount";
+        HttpEntity<CreateUserAccountDTO> request = new HttpEntity<>(quickAccount);
+        ResponseEntity<UserDTO> response = restTemplate.postForEntity(userQuickAccountURL, request, UserDTO.class);
+
+        assertThat(response.getStatusCode(), equalTo(HttpStatus.CREATED));
+        UserDTO userDTO = response.getBody();
+
+        assertNotNull(userDTO);
+
+        // call the delete endpoint
+        String deleteUserURL = "/users/" + userDTO.getId();
+        restTemplate.delete(deleteUserURL);
+
+        // retrieve the not existing user
+        Optional<User> userOpt = userRepository.findById(userDTO.getId());
+        assertFalse(userOpt.isPresent());
+    }
 
 }
