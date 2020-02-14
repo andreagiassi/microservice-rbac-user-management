@@ -69,7 +69,7 @@ public class UserRestControllerTest {
         HttpEntity<CreateOrUpdateUserDTO> request = new HttpEntity<>(createOrUpdateUserDTO);
         ResponseEntity<UserDTO> response = restTemplate.postForEntity(uri, request, UserDTO.class);
 
-        assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
+        assertThat(response.getStatusCode(), equalTo(HttpStatus.CREATED));
 
         UserDTO userDTO = response.getBody();
         assertNotNull(userDTO);
@@ -117,7 +117,7 @@ public class UserRestControllerTest {
         HttpEntity<CreateUserAccountDTO> request = new HttpEntity<>(quickAccount);
         ResponseEntity<UserDTO> response = restTemplate.postForEntity(userQuickAccountURL, request, UserDTO.class);
 
-        assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
+        assertThat(response.getStatusCode(), equalTo(HttpStatus.CREATED));
 
         UserDTO userDTO = response.getBody();
 
@@ -132,6 +132,31 @@ public class UserRestControllerTest {
         userService.deleteUserById(userDTO.getId());
     }
 
+//    @PutMapping("/{id}")
+//    public ResponseEntity<UserDTO> updateUser(@PathVariable("id") Long id, @RequestBody CreateOrUpdateUserDTO updateUserDTO) {
+//        return ResponseEntity.ok(new UserDTO(userService.updateUser(id, updateUserDTO)));
+//    }
 
+/*    @Test
+    public void tesT_updateUser() {
+
+        CreateOrUpdateUserDTO createOrUpdateUserDTO = CreateOrUpdateUserDTO.builder()
+                .username("test1")
+                .name("Marco")
+                .surname("Blu")
+                .gender("MALE")
+                .enabled(true)
+                .roleId(Role.USER)
+                .note("created for test1")
+                .email("marco.blu@gmail.com")
+                .phone("+3531194334455")
+                .address("dark road 1")
+                .city("Dublin")
+                .country("Ireland")
+                .zipCode("47335").build();
+
+
+
+    }*/
 
 }
