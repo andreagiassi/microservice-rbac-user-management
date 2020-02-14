@@ -98,7 +98,7 @@ public class UserRestControllerTest {
 
     @Test
     public void test_createNewUserAccount() {
-        // test the create quick account
+        // create a new user using the quick account endpoint
         CreateUserAccountDTO quickAccount = CreateUserAccountDTO.builder()
                 .username("test1")
                 .name("Marco")
@@ -126,5 +126,7 @@ public class UserRestControllerTest {
         // delete the created user
         userService.deleteUserById(userDTO.getId());
     }
+
+
 
 }
