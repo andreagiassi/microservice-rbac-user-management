@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -16,6 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.net.URI;
 
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
@@ -132,13 +134,10 @@ public class UserRestControllerTest {
         userService.deleteUserById(userDTO.getId());
     }
 
-//    @PutMapping("/{id}")
-//    public ResponseEntity<UserDTO> updateUser(@PathVariable("id") Long id, @RequestBody CreateOrUpdateUserDTO updateUserDTO) {
-//        return ResponseEntity.ok(new UserDTO(userService.updateUser(id, updateUserDTO)));
-//    }
-
-/*    @Test
-    public void tesT_updateUser() {
+    @Test
+    public void test_updateUser() {
+        Long userId = 1L;
+        URI uri = URI.create("/users/" + userId);
 
         CreateOrUpdateUserDTO createOrUpdateUserDTO = CreateOrUpdateUserDTO.builder()
                 .username("test1")
@@ -155,8 +154,26 @@ public class UserRestControllerTest {
                 .country("Ireland")
                 .zipCode("47335").build();
 
+        HttpEntity<CreateOrUpdateUserDTO> request = new HttpEntity<>(createOrUpdateUserDTO);
+        ResponseEntity<UserDTO> response = restTemplate.exchange(uri, HttpMethod.PUT, request, UserDTO.class);
 
+        assertThat(response.getStatusCode(), is(HttpStatus.CREATED));
 
+        UserDTO userDTO = response.getBody();
+
+        assertEquals("test1", userDTO.getUsername());
+        assertEquals("Marco", userDTO.getName());
+        assertEquals("Blu", userDTO.getSurname());
+        assertEquals("MALE", userDTO.getGender());
+        assertEquals("marco.blu@gmail.com", userDTO.getEmail());
+
+        // delete the created user
+        userService.deleteUserById(userDTO.getId());
+    }
+
+/*    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable("id") Long id) {
+        userService.deleteUserById(id);
     }*/
 
 }

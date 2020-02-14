@@ -41,7 +41,7 @@ public class UserRestController {
 
     @PutMapping("/{id}")
     public ResponseEntity<UserDTO> updateUser(@PathVariable("id") Long id, @RequestBody CreateOrUpdateUserDTO updateUserDTO) {
-        return ResponseEntity.ok(new UserDTO(userService.updateUser(id, updateUserDTO)));
+        return new ResponseEntity(new UserDTO(userService.updateUser(id, updateUserDTO)), null, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
