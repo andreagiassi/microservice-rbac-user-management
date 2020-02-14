@@ -4,6 +4,7 @@ import com.giassi.microservice.demo2.rest.users.dtos.CreateOrUpdateUserDTO;
 import com.giassi.microservice.demo2.rest.users.dtos.CreateUserAccountDTO;
 import com.giassi.microservice.demo2.rest.users.entities.Role;
 import com.giassi.microservice.demo2.rest.users.entities.User;
+import com.giassi.microservice.demo2.rest.users.exceptions.UserNotFoundException;
 import com.giassi.microservice.demo2.rest.users.services.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -118,6 +119,15 @@ public class UserServiceSpringContextTest {
         assertEquals("Trieste", updatedUser.getAddress().getCity());
         assertEquals("Italy", updatedUser.getAddress().getCountry());
         assertEquals("34100", updatedUser.getAddress().getZipCode());
+    }
+
+    @Test(expected = UserNotFoundException.class)
+    public void given_valid_user_when_deleteUserById_user_deleted() {
+        Long userId= 1L;
+        userService.deleteUserById(userId);
+
+        // throw an UserNotFoundException
+        User user = userService.getUserById(userId);
     }
 
 }
