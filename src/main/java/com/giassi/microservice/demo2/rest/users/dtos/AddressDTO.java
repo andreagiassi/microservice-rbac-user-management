@@ -6,6 +6,10 @@ import lombok.Data;
 @Data
 public class AddressDTO {
 
+    public AddressDTO() {
+        // empty constructor
+    }
+
     public AddressDTO(Address address) {
         if (address != null) {
             this.address = address.getAddress();

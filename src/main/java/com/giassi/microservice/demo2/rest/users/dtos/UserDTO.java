@@ -8,6 +8,10 @@ import java.time.LocalDateTime;
 @Data
 public class UserDTO {
 
+    public UserDTO() {
+        // empty constructor
+    }
+
     public UserDTO(User user) {
         if (user != null) {
             this.id = user.getId();
