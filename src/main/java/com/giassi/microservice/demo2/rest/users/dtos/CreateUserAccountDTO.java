@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 /**
  * Support the creation of a new user account with a minimum set of required data
  */
@@ -12,7 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CreateUserAccountDTO {
+public class CreateUserAccountDTO implements Serializable {
 
     private String username;
     private String name;

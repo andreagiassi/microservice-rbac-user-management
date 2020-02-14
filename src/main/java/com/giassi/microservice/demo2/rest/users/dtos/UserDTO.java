@@ -3,10 +3,11 @@ package com.giassi.microservice.demo2.rest.users.dtos;
 import com.giassi.microservice.demo2.rest.users.entities.User;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
-public class UserDTO {
+public class UserDTO implements Serializable {
 
     public UserDTO() {
         // empty constructor

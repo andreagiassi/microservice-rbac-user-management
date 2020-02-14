@@ -3,8 +3,10 @@ package com.giassi.microservice.demo2.rest.users.dtos;
 import com.giassi.microservice.demo2.rest.users.entities.Role;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class RoleDTO {
+public class RoleDTO implements Serializable {
 
     public RoleDTO() {
         // empty constructor

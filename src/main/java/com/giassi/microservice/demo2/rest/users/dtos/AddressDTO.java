@@ -3,8 +3,10 @@ package com.giassi.microservice.demo2.rest.users.dtos;
 import com.giassi.microservice.demo2.rest.users.entities.Address;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class AddressDTO {
+public class AddressDTO implements Serializable {
 
     public AddressDTO() {
         // empty constructor

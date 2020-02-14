@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 /**
  * Modify the User data DTO
  */
@@ -12,7 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CreateOrUpdateUserDTO {
+public class CreateOrUpdateUserDTO implements Serializable {
 
     private String username;
     private String name;
