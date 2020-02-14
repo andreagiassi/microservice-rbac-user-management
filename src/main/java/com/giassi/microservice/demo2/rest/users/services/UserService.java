@@ -291,7 +291,7 @@ public class UserService {
         Gender gender;
         try {
             gender = Gender.valueOf(genderName);
-        } catch(Exception ex) {
+        } catch(IllegalArgumentException ex) {
             throw new InvalidGenderException();
         }
         return gender;
