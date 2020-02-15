@@ -246,19 +246,19 @@ public class UserServiceTest {
 
     @Test(expected = InvalidGenderException.class)
     public void given_invalid_gender_string_when_getValidGender_throw_InvalidUserGenderException() {
-        userService.getValidGender("WRONG_GENDER");
+        Gender.getValidGender("WRONG_GENDER");
     }
 
     @Test
     public void given_valid_gender_strings_when_getValidGender_return_Gender() {
         // male
-        Gender maleGender = userService.getValidGender("MALE");
+        Gender maleGender = Gender.getValidGender("MALE");
 
         assertNotNull(maleGender);
         assertEquals(1L , maleGender.getGender());
 
         // female
-        Gender femaleGender = userService.getValidGender("FEMALE");
+        Gender femaleGender = Gender.getValidGender("FEMALE");
 
         assertNotNull(femaleGender);
         assertEquals(2L , femaleGender.getGender());

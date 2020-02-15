@@ -73,32 +73,18 @@ public class UserService {
             throw new InvalidUserDataException();
         }
 
-        // check if the username has not been registered
-        User userByUsername = getUserByUsername(createUserAccountDTO.getUsername());
-        if (userByUsername != null) {
-            log.error(String.format("The username %s it's already in use from another user with ID = %s",
-                    createUserAccountDTO.getUsername(), userByUsername.getId()));
-            throw new InvalidUserDataException();
-        }
-
-        // check if the email has not been registered
-        User userByEmail = getUserByEmail(createUserAccountDTO.getEmail());
-        if (userByEmail != null) {
-            log.error(String.format("The email %s it's already in use from another user with ID = %s",
-                    createUserAccountDTO.getEmail(), userByEmail.getId()));
-            throw new InvalidUserDataException();
-        }
+        checkIfUsernameNotUsed(createUserAccountDTO.getUsername());
+        checkIfEmailNotUsed(createUserAccountDTO.getEmail());
 
         // create the new user account: not all the user information required
         User user = new User();
         user.setUsername(createUserAccountDTO.getUsername());
         user.setName(createUserAccountDTO.getName());
         user.setSurname(createUserAccountDTO.getSurname());
-
         user.setEnabled(true);
 
         // set gender
-        Gender gender = getValidGender(createUserAccountDTO.getGender());
+        Gender gender = Gender.getValidGender(createUserAccountDTO.getGender());
         user.setGender(gender);
 
         setUserRole(user, Role.USER);
@@ -113,14 +99,33 @@ public class UserService {
 
         addContactOnUser(userCreated, contact);
 
-        // set address
-        Address address = new Address();
-        addAddressOnUser(userCreated, address);
+        // set an empty address
+        addAddressOnUser(userCreated, new Address());
 
         userCreated = userRepository.save(userCreated);
 
         log.info(String.format("User %s has been created.", userCreated.getId()));
         return userCreated;
+    }
+
+    // check if the username has not been registered
+    public void checkIfUsernameNotUsed(String username) {
+        User userByUsername = getUserByUsername(username);
+            if (userByUsername != null) {
+            log.error(String.format("The username %s it's already in use from another user with ID = %s",
+                    userByUsername.getUsername(), userByUsername.getId()));
+            throw new InvalidUserDataException();
+        }
+    }
+
+    // check if the email has not been registered
+    public void checkIfEmailNotUsed(String email) {
+        User userByEmail = getUserByEmail(email);
+        if (userByEmail != null) {
+            log.error(String.format("The email %s it's already in use from another user with ID = %s",
+                    userByEmail.getContact().getEmail(), userByEmail.getId()));
+            throw new InvalidUserDataException();
+        }
     }
 
     @Transactional
@@ -129,21 +134,8 @@ public class UserService {
             throw new InvalidUserDataException();
         }
 
-        // check if the username has not been registered
-        User userByUsername = getUserByUsername(createUserDTO.getUsername());
-        if (userByUsername != null) {
-            log.error(String.format("The username %s it's already in use from another user with ID = %s",
-                    createUserDTO.getUsername(), userByUsername.getId()));
-            throw new InvalidUserDataException();
-        }
-
-        // check if the email has not been registered
-        User userByEmail = getUserByEmail(createUserDTO.getEmail());
-        if (userByEmail != null) {
-            log.error(String.format("The email %s it's already in use from another user with ID = %s",
-                    createUserDTO.getEmail(), userByEmail.getId()));
-            throw new InvalidUserDataException();
-        }
+        checkIfUsernameNotUsed(createUserDTO.getUsername());
+        checkIfEmailNotUsed(createUserDTO.getEmail());
 
         // create the user
         User user = new User();
@@ -152,7 +144,7 @@ public class UserService {
         user.setSurname(createUserDTO.getSurname());
 
         // set gender
-        Gender gender = getValidGender(createUserDTO.getGender());
+        Gender gender = Gender.getValidGender(createUserDTO.getGender());
         user.setGender(gender);
 
         user.setEnabled(true);
@@ -253,7 +245,7 @@ public class UserService {
         user.setSurname(updateUserDTO.getSurname());
 
         // set gender
-        Gender gender = getValidGender(updateUserDTO.getGender());
+        Gender gender = Gender.getValidGender(updateUserDTO.getGender());
         user.setGender(gender);
 
         user.setEnabled(updateUserDTO.isEnabled());
@@ -285,16 +277,6 @@ public class UserService {
         log.info(String.format("User %s has been updated.", user.getId()));
 
         return userUpdated;
-    }
-
-    public Gender getValidGender(String genderName) {
-        Gender gender;
-        try {
-            gender = Gender.valueOf(genderName);
-        } catch(IllegalArgumentException ex) {
-            throw new InvalidGenderException();
-        }
-        return gender;
     }
 
     public Iterable<User> getUserList() {
