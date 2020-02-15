@@ -53,7 +53,21 @@ public class UserRestControllerIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(content()
                 .contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$[0].name").value("Andrea"));
+                .andExpect(jsonPath("$[0].name").value("Andrea"))
+                .andExpect(jsonPath("$[0].surname").value("Giassi"))
+                .andExpect(jsonPath("$[0].email").value("andrea.test@gmail.com"))
+                .andExpect(jsonPath("$[0].username").value("andrea"))
+                .andExpect(jsonPath("$[0].phone").value("+3531122334455"))
+                .andExpect(jsonPath("$[1].name").value("Marco"))
+                .andExpect(jsonPath("$[1].surname").value("Verdi"))
+                .andExpect(jsonPath("$[1].email").value("marco.test@gmail.com"))
+                .andExpect(jsonPath("$[1].username").value("marco"))
+                .andExpect(jsonPath("$[1].phone").value("+3531122334466"))
+                .andExpect(jsonPath("$[2].name").value("Franco"))
+                .andExpect(jsonPath("$[2].surname").value("Rossi"))
+                .andExpect(jsonPath("$[2].email").value("franco.test@gmail.com"))
+                .andExpect(jsonPath("$[2].username").value("franco"))
+                .andExpect(jsonPath("$[2].phone").value("+3531122334477"));
     }
 
     @Test
@@ -70,7 +84,11 @@ public class UserRestControllerIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(content()
                         .contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("name").value("Andrea"));
+                .andExpect(jsonPath("name").value("Andrea"))
+                .andExpect(jsonPath("surname").value("Giassi"))
+                .andExpect(jsonPath("email").value("andrea.test@gmail.com"))
+                .andExpect(jsonPath("username").value("andrea"))
+                .andExpect(jsonPath("phone").value("+3531122334455"));
     }
 
 }
