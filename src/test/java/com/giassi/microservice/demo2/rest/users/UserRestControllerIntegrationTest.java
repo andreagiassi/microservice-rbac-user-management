@@ -73,24 +73,4 @@ public class UserRestControllerIntegrationTest {
                 .andExpect(jsonPath("name").value("Andrea"));
     }
 
-/*    @Test
-    public void postQuickAccount() throws Exception {
-        // create the quick account request
-        CreateUserAccountDTO createUserAccountDTO = new CreateUserAccountDTO();
-        createUserAccountDTO.setName("Haydn");
-        createUserAccountDTO.setSurname("Rossi");
-        createUserAccountDTO.setUsername("haydn.rossi");
-        createUserAccountDTO.setGender(Gender.MALE.name());
-        createUserAccountDTO.setEmail("haydn.test@gmail.com");
-
-        String jsonContent = mapper.writeValueAsString(createUserAccountDTO);
-
-        mvc.perform(MockMvcRequestBuilders.post("/users/quickAccount")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(jsonContent)
-        ).andExpect(status().isOk())
-         .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-         .andExpect(jsonPath("$.name").value("Andrea"));
-    }*/
-
 }
