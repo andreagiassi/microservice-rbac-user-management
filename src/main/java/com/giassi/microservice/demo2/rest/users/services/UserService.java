@@ -44,25 +44,25 @@ public class UserService {
 
     public User getUserById(Long id) {
         if (id == null) {
-            throw new InvalidUserIdentifierException();
+            throw new InvalidUserIdentifierException("Id cannot be null");
         }
         Optional<User> userOpt = userRepository.findById(id);
         if (userOpt.isPresent()) {
             return userOpt.get();
         }
-        throw new UserNotFoundException();
+        throw new UserNotFoundException(String.format("User not found for Id = %s", id));
     }
 
     public User getUserByUsername(String username) {
         if (username == null) {
-            throw new InvalidUsernameException();
+            throw new InvalidUsernameException("username cannot be null");
         }
         return userRepository.findByUsername(username);
     }
 
     public User getUserByEmail(String email) {
         if (email == null) {
-            throw new InvalidEmailException();
+            throw new InvalidEmailException("email cannot be null");
         }
         return userRepository.findByEmail(email);
     }
@@ -70,7 +70,7 @@ public class UserService {
     @Transactional
     public User createNewUserAccount(CreateUserAccountDTO createUserAccountDTO) {
         if (createUserAccountDTO == null) {
-            throw new InvalidUserDataException();
+            throw new InvalidUserDataException("User account data cannot be null");
         }
 
         checkIfUsernameNotUsed(createUserAccountDTO.getUsername());
@@ -112,9 +112,10 @@ public class UserService {
     public void checkIfUsernameNotUsed(String username) {
         User userByUsername = getUserByUsername(username);
             if (userByUsername != null) {
-            log.error(String.format("The username %s it's already in use from another user with ID = %s",
-                    userByUsername.getUsername(), userByUsername.getId()));
-            throw new InvalidUserDataException();
+                String msg = String.format("The username %s it's already in use from another user with ID = %s",
+                        userByUsername.getUsername(), userByUsername.getId());
+                log.error(msg);
+            throw new InvalidUserDataException(msg);
         }
     }
 
@@ -122,16 +123,17 @@ public class UserService {
     public void checkIfEmailNotUsed(String email) {
         User userByEmail = getUserByEmail(email);
         if (userByEmail != null) {
-            log.error(String.format("The email %s it's already in use from another user with ID = %s",
-                    userByEmail.getContact().getEmail(), userByEmail.getId()));
-            throw new InvalidUserDataException();
+            String msg = String.format("The email %s it's already in use from another user with ID = %s",
+                    userByEmail.getContact().getEmail(), userByEmail.getId());
+            log.error(msg);
+            throw new InvalidUserDataException(msg);
         }
     }
 
     @Transactional
     public User createUser(CreateOrUpdateUserDTO createUserDTO) {
         if (createUserDTO == null) {
-            throw new InvalidUserDataException();
+            throw new InvalidUserDataException("User account data cannot be null");
         }
 
         checkIfUsernameNotUsed(createUserDTO.getUsername());
@@ -197,7 +199,7 @@ public class UserService {
     public void setUserRole(User user, long roleId) {
         Role role = roleRepository.findById(roleId);
         if (role == null) {
-            throw new RoleNotFoundException();
+            throw new RoleNotFoundException("Role cannot be null");
         }
         user.setRole(role);
     }
@@ -205,15 +207,15 @@ public class UserService {
     @Transactional
     public User updateUser(Long id, CreateOrUpdateUserDTO updateUserDTO) {
         if (id == null) {
-            throw new InvalidUserIdentifierException();
+            throw new InvalidUserIdentifierException("Id cannot be null");
         }
         if (updateUserDTO == null) {
-            throw new InvalidUserDataException();
+            throw new InvalidUserDataException("User account data cannot be null");
         }
 
         Optional<User> userOpt = userRepository.findById(id);
         if (!userOpt.isPresent()) {
-            throw new UserNotFoundException();
+            throw new UserNotFoundException(String.format("The user with Id = %s doesn't exists", id));
         }
         User user = userOpt.get();
 
@@ -222,9 +224,10 @@ public class UserService {
         if (userByUsername != null) {
             // check if the user's id is different than the actual user
             if (!user.getId().equals(userByUsername.getId())) {
-                log.error(String.format("The username %s it's already in use from another user with ID = %s",
-                        updateUserDTO.getUsername(), userByUsername.getId()));
-                throw new InvalidUserDataException();
+                String msg = String.format("The username %s it's already in use from another user with ID = %s",
+                        updateUserDTO.getUsername(), userByUsername.getId());
+                log.error(msg);
+                throw new InvalidUserDataException(msg);
             }
         }
 
@@ -233,9 +236,10 @@ public class UserService {
         if (userEmail != null) {
             // check if the user's email is different than the actual user
             if (!user.getId().equals(userEmail.getId())) {
-                log.error(String.format("The email %s it's already in use from another user with ID = %s",
-                        updateUserDTO.getEmail(), userEmail.getId()));
-                throw new InvalidUserDataException();
+                String msg = String.format("The email %s it's already in use from another user with ID = %s",
+                        updateUserDTO.getEmail(), userEmail.getId());
+                log.error(msg);
+                throw new InvalidUserDataException(msg);
             }
         }
 
@@ -286,11 +290,11 @@ public class UserService {
     @Transactional
     public void deleteUserById(Long id) {
         if (id == null) {
-            throw new InvalidUserIdentifierException();
+            throw new InvalidUserIdentifierException("Id cannot be null");
         }
 
         if (!userRepository.existsById(id)) {
-            throw new UserNotFoundException();
+            throw new UserNotFoundException(String.format("User not found with Id = %s", id));
         }
         userRepository.deleteById(id);
         log.info(String.format("User %s has been deleted.", id));
