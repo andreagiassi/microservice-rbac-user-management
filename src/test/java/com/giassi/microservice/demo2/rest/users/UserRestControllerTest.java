@@ -142,20 +142,39 @@ public class UserRestControllerTest {
 
     @Test
     public void test_updateUser() {
-        Long userId = 2L;
+        // create a new user to update
+        CreateUserAccountDTO quickAccount = CreateUserAccountDTO.builder()
+                .username("anna")
+                .name("Anna")
+                .surname("Verdi")
+                .gender("FEMALE")
+                .email("anna.verdi@gmail.com")
+                .build();
+
+        String userQuickAccountURL = "/users/quickAccount";
+        HttpEntity<CreateUserAccountDTO> requestCreate = new HttpEntity<>(quickAccount);
+        ResponseEntity<UserDTO> responseCreate = restTemplate.postForEntity(userQuickAccountURL, requestCreate, UserDTO.class);
+
+        assertThat(responseCreate.getStatusCode(), equalTo(HttpStatus.CREATED));
+        UserDTO userDTO = responseCreate.getBody();
+
+        assertNotNull(userDTO);
+
+        // test the update
+        Long userId = userDTO.getId();
         URI uri = URI.create("/users/" + userId);
 
         CreateOrUpdateUserDTO createOrUpdateUserDTO = CreateOrUpdateUserDTO.builder()
-                .username("test1")
-                .name("Marco")
-                .surname("Rossi")
-                .gender("MALE")
+                .username("anna")
+                .name("Anna")
+                .surname("Verdi")
+                .gender("FEMALE")
                 .enabled(true)
                 .roleId(Role.USER)
                 .note("updated for test")
-                .email("marco.blu@gmail.com")
+                .email("anna.verdi@gmail.com")
                 .phone("+3531194334455")
-                .address("dark road 1")
+                .address("The sunny road 15")
                 .city("Dublin")
                 .country("Ireland")
                 .zipCode("47335").build();
@@ -165,13 +184,32 @@ public class UserRestControllerTest {
 
         assertThat(response.getStatusCode(), is(HttpStatus.CREATED));
 
-        UserDTO userDTO = response.getBody();
+        UserDTO userUpdatedDTO = response.getBody();
 
-        assertEquals("test1", userDTO.getUsername());
-        assertEquals("Marco", userDTO.getName());
-        assertEquals("Rossi", userDTO.getSurname());
-        assertEquals("MALE", userDTO.getGender());
-        assertEquals("marco.blu@gmail.com", userDTO.getEmail());
+        assertEquals("anna", userUpdatedDTO.getUsername());
+        assertEquals("Anna", userUpdatedDTO.getName());
+        assertEquals("Verdi", userUpdatedDTO.getSurname());
+        assertEquals("FEMALE", userUpdatedDTO.getGender());
+        assertEquals(true, userUpdatedDTO.isEnabled());
+
+        // role
+        assertNotNull(userUpdatedDTO.getRoleDTO());
+        assertEquals("USER", userUpdatedDTO.getRoleDTO().getRole());
+
+        assertEquals("updated for test", userUpdatedDTO.getNote());
+        assertEquals("anna.verdi@gmail.com", userUpdatedDTO.getEmail());
+        assertEquals("+3531194334455", userUpdatedDTO.getPhone());
+        assertEquals("anna.verdi@gmail.com", userUpdatedDTO.getEmail());
+
+        // address
+        assertNotNull(userUpdatedDTO.getAddressDTO());
+        assertEquals("The sunny road 15", userUpdatedDTO.getAddressDTO().getAddress());
+        assertEquals("Dublin", userUpdatedDTO.getAddressDTO().getCity());
+        assertEquals("Ireland", userUpdatedDTO.getAddressDTO().getCountry());
+        assertEquals("47335", userUpdatedDTO.getAddressDTO().getZipCode());
+
+        // delete the user
+        userService.deleteUserById(userUpdatedDTO.getId());
     }
 
     @Test
@@ -198,7 +236,7 @@ public class UserRestControllerTest {
         String deleteUserURL = "/users/" + userDTO.getId();
         restTemplate.delete(deleteUserURL);
 
-        // retrieve the not existing user
+        // retrieve a not existing user must to be empty response
         Optional<User> userOpt = userRepository.findById(userDTO.getId());
         assertFalse(userOpt.isPresent());
     }
