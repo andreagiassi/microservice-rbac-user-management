@@ -21,9 +21,11 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.giassi.microservice.demo2.rest.users.services.UserTestHelper.getUserTestData;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.anyObject;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceTest {
@@ -188,7 +190,7 @@ public class UserServiceTest {
     }
 
     @Test(expected = RoleNotFoundException.class)
-    public void given_null_when_setUserRole_throw_RoleNotFoundException() {
+    public void given_invalidRole_when_setUserRole_throw_RoleNotFoundException() {
         User userDataForTest = getUserTestData(1L, "andrea", "Andrea",
                 "Giassi", "andrea.test@gmail.com", "+3531122334455");
 
@@ -204,6 +206,17 @@ public class UserServiceTest {
         given(roleRepository.findById(1L)).willReturn(new Role(1L, "USER"));
 
         userService.setUserRole(userDataForTest, 1);
+
+        assertNotNull(userDataForTest);
+        assertEquals(Long.valueOf(1L) , userDataForTest.getRole().getId());
+        assertEquals("andrea", userDataForTest.getUsername());
+        assertEquals("Andrea", userDataForTest.getName());
+        assertEquals("Giassi", userDataForTest.getSurname());
+        assertTrue(userDataForTest.isEnabled());
+
+        assertNotNull(userDataForTest.getContact());
+        assertEquals("andrea.test@gmail.com", userDataForTest.getContact().getEmail());
+        assertEquals("+3531122334455", userDataForTest.getContact().getPhone());
     }
 
     @Test(expected = InvalidUserDataException.class)
@@ -351,6 +364,8 @@ public class UserServiceTest {
         given(userRepository.findById(1L)).willReturn(Optional.of(userDataForTest));
 
         userService.updateUser(1L, createOrUpdateUserDTO);
+
+        verify(userRepository, times(1)).save(anyObject());
     }
 
     @Test(expected = InvalidUserIdentifierException.class)
