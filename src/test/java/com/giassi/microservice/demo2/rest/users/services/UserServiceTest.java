@@ -13,6 +13,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -22,7 +23,6 @@ import java.util.Optional;
 
 import static com.giassi.microservice.demo2.rest.users.services.UserTestHelper.getUserTestData;
 import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.anyObject;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -364,8 +364,7 @@ public class UserServiceTest {
         given(userRepository.findById(1L)).willReturn(Optional.of(userDataForTest));
 
         userService.updateUser(1L, createOrUpdateUserDTO);
-
-        verify(userRepository, times(1)).save(anyObject());
+        verify(userRepository, times(1)).save(Mockito.any(User.class));
     }
 
     @Test(expected = InvalidUserIdentifierException.class)

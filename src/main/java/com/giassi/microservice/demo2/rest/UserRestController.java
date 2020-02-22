@@ -3,6 +3,7 @@ package com.giassi.microservice.demo2.rest;
 import com.giassi.microservice.demo2.rest.users.dtos.CreateOrUpdateUserDTO;
 import com.giassi.microservice.demo2.rest.users.dtos.CreateUserAccountDTO;
 import com.giassi.microservice.demo2.rest.users.dtos.UserDTO;
+import com.giassi.microservice.demo2.rest.users.dtos.UserListDTO;
 import com.giassi.microservice.demo2.rest.users.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,8 +20,11 @@ public class UserRestController {
     private UserService userService;
 
     @GetMapping
-    public ResponseEntity<List<UserDTO>> getUserPresentationList() {
-        return ResponseEntity.ok(userService.getUserPresentationList());
+    public ResponseEntity<UserListDTO> getUserPresentationList() {
+        List<UserDTO> list = userService.getUserPresentationList();
+        UserListDTO userListDTO = new UserListDTO();
+        list.stream().forEach(e -> userListDTO.getUserList().add(e));
+        return ResponseEntity.ok(userListDTO);
     }
 
     @PostMapping
