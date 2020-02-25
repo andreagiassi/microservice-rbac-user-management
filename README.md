@@ -32,6 +32,8 @@ Using Swagger the REST apis are also easy to manage throw the included Swagger d
 This architectural component has a specific Docker image and the services exposed
  from the microservice are available on the port 8090 .
 
+The deploy of the two architectural components is using now the docker network definition.
+
 #### Database
 The database must to be created using the simple db.sql script included one time,
  once the docker image will be created.
