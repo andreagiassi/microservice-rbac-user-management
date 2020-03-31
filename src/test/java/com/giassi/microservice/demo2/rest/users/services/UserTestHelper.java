@@ -14,6 +14,7 @@ public class UserTestHelper {
         User user = new User();
         user.setId(id);
         user.setUsername(username);
+        user.setPassword("123");
         user.setName(name);
         user.setSurname(surname);
         user.setGender(Gender.MALE);

@@ -40,6 +40,7 @@ public class UserServiceSpringContextTest {
         createUserAccountDTO.setEmail("marco.test@gmail.com");
         createUserAccountDTO.setGender("MALE");
         createUserAccountDTO.setUsername("marco");
+        createUserAccountDTO.setPassword("123");
 
         User createdUser = userService.createNewUserAccount(createUserAccountDTO);
 
@@ -49,6 +50,7 @@ public class UserServiceSpringContextTest {
         assertEquals("marco.test@gmail.com", createdUser.getContact().getEmail());
         assertEquals("MALE", createdUser.getGender().name());
         assertEquals("marco", createdUser.getUsername());
+        assertEquals("123", createdUser.getPassword());
     }
 
     @Test
@@ -59,6 +61,7 @@ public class UserServiceSpringContextTest {
         createOrUpdateUserDTO.setEmail("john.test@gmail.com");
         createOrUpdateUserDTO.setGender("MALE");
         createOrUpdateUserDTO.setUsername("john");
+        createOrUpdateUserDTO.setPassword("123");
         createOrUpdateUserDTO.setPhone("+3531122334499");
         createOrUpdateUserDTO.setRoleId(Role.ADMINISTRATOR);
         createOrUpdateUserDTO.setNote("test note");
@@ -76,6 +79,7 @@ public class UserServiceSpringContextTest {
         assertEquals("john.test@gmail.com", createdUser.getContact().getEmail());
         assertEquals("MALE", createdUser.getGender().name());
         assertEquals("john", createdUser.getUsername());
+        assertEquals("123", createdUser.getPassword());
         assertEquals("+3531122334499", createdUser.getContact().getPhone());
         assertEquals("ADMINISTRATOR", createdUser.getRole().getRole());
         assertEquals("test note", createdUser.getNote());
@@ -94,6 +98,7 @@ public class UserServiceSpringContextTest {
         createOrUpdateUserDTO.setEmail("andrea.test@gmail.com");
         createOrUpdateUserDTO.setGender("MALE");
         createOrUpdateUserDTO.setUsername("andrea");
+        createOrUpdateUserDTO.setPassword("123");
         createOrUpdateUserDTO.setPhone("+35344335522"); // update the phone number
         createOrUpdateUserDTO.setRoleId(Role.ADMINISTRATOR);
         createOrUpdateUserDTO.setNote("update phone number note");
@@ -110,6 +115,7 @@ public class UserServiceSpringContextTest {
         assertEquals("Giassi", updatedUser.getSurname());
         assertEquals("andrea.test@gmail.com", updatedUser.getContact().getEmail());
         assertEquals("andrea", updatedUser.getUsername());
+        assertEquals("123", updatedUser.getPassword());
         assertEquals("MALE", updatedUser.getGender().name());
         assertEquals("+35344335522", updatedUser.getContact().getPhone());
         assertEquals("ADMINISTRATOR", updatedUser.getRole().getRole());

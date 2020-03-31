@@ -17,6 +17,8 @@ import java.io.Serializable;
 public class CreateUserAccountDTO implements Serializable {
 
     private String username;
+    private String password;
+
     private String name;
     private String surname;
     private String email;

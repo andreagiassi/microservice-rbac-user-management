@@ -181,6 +181,7 @@ public class UserServiceTest {
         // existing email
         CreateUserAccountDTO createUserAccountDTO = CreateUserAccountDTO.builder()
                 .name("Marco")
+                .password("123")
                 .surname("Rossi")
                 .email("andrea.test@gmail.com")
                 .gender("MALE")
@@ -327,6 +328,7 @@ public class UserServiceTest {
                 .email("andrea.test@gmail.com")
                 .gender("MALE")
                 .username("marco")
+                .password("123")
                 .phone("+3531122334466")
                 .enabled(true)
                 .roleId(1L)
@@ -352,6 +354,7 @@ public class UserServiceTest {
                 .email("andrea.test@gmail.com")
                 .gender("MALE")
                 .username("andrea")
+                .password("123")
                 .phone("+3539988776655")
                 .enabled(true)
                 .roleId(1L)

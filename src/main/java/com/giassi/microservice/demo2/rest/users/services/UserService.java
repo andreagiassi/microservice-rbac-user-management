@@ -74,11 +74,13 @@ public class UserService {
         }
 
         checkIfUsernameNotUsed(createUserAccountDTO.getUsername());
+        checkIfPasswordWellFormed(createUserAccountDTO.getPassword());
         checkIfEmailNotUsed(createUserAccountDTO.getEmail());
 
         // create the new user account: not all the user information required
         User user = new User();
         user.setUsername(createUserAccountDTO.getUsername());
+        user.setPassword(createUserAccountDTO.getPassword());
         user.setName(createUserAccountDTO.getName());
         user.setSurname(createUserAccountDTO.getSurname());
         user.setEnabled(true);
@@ -130,6 +132,15 @@ public class UserService {
         }
     }
 
+    // check if password is respecting the necessary rules to be considered valid
+    public void checkIfPasswordWellFormed(String password) {
+        if ((password == null) || ("".equals(password))) {
+            throw new InvalidUserDataException("Password cannot be null or empty");
+        }
+
+        // TODO: other additional rules/check using regular expression
+    }
+
     @Transactional
     public User createUser(CreateOrUpdateUserDTO createUserDTO) {
         if (createUserDTO == null) {
@@ -138,10 +149,13 @@ public class UserService {
 
         checkIfUsernameNotUsed(createUserDTO.getUsername());
         checkIfEmailNotUsed(createUserDTO.getEmail());
+        checkIfPasswordWellFormed(createUserDTO.getPassword());
 
         // create the user
         User user = new User();
         user.setUsername(createUserDTO.getUsername());
+        user.setPassword(createUserDTO.getPassword());
+
         user.setName(createUserDTO.getName());
         user.setSurname(createUserDTO.getSurname());
 
@@ -231,6 +245,8 @@ public class UserService {
             }
         }
 
+        checkIfPasswordWellFormed(updateUserDTO.getPassword());
+
         // check if the new email has not been registered yet
         User userEmail = getUserByEmail(updateUserDTO.getEmail());
         if (userEmail != null) {
@@ -245,6 +261,7 @@ public class UserService {
 
         // update the user
         user.setUsername(updateUserDTO.getUsername());
+        user.setPassword(updateUserDTO.getPassword());
         user.setName(updateUserDTO.getName());
         user.setSurname(updateUserDTO.getSurname());
 
