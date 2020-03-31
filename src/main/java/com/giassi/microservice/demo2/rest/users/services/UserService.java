@@ -35,6 +35,12 @@ public class UserService {
     @Autowired
     private RoleRepository roleRepository;
 
+    public UserService() {
+        passwordValidator = new PasswordValidator();
+    }
+
+    private PasswordValidator passwordValidator;
+
     public List<UserDTO> getUserPresentationList() {
         ArrayList<UserDTO> listDto = new ArrayList<>();
         Iterable<User> list = getUserList();
@@ -74,7 +80,7 @@ public class UserService {
         }
 
         checkIfUsernameNotUsed(createUserAccountDTO.getUsername());
-        checkIfPasswordWellFormed(createUserAccountDTO.getPassword());
+        passwordValidator.checkPassword(createUserAccountDTO.getPassword());
         checkIfEmailNotUsed(createUserAccountDTO.getEmail());
 
         // create the new user account: not all the user information required
@@ -132,15 +138,6 @@ public class UserService {
         }
     }
 
-    // check if password is respecting the necessary rules to be considered valid
-    public void checkIfPasswordWellFormed(String password) {
-        if ((password == null) || ("".equals(password))) {
-            throw new InvalidUserDataException("Password cannot be null or empty");
-        }
-
-        // TODO: other additional rules/check using regular expression
-    }
-
     @Transactional
     public User createUser(CreateOrUpdateUserDTO createUserDTO) {
         if (createUserDTO == null) {
@@ -149,7 +146,7 @@ public class UserService {
 
         checkIfUsernameNotUsed(createUserDTO.getUsername());
         checkIfEmailNotUsed(createUserDTO.getEmail());
-        checkIfPasswordWellFormed(createUserDTO.getPassword());
+        passwordValidator.checkPassword(createUserDTO.getPassword());
 
         // create the user
         User user = new User();
@@ -245,7 +242,7 @@ public class UserService {
             }
         }
 
-        checkIfPasswordWellFormed(updateUserDTO.getPassword());
+        passwordValidator.checkPassword(updateUserDTO.getPassword());
 
         // check if the new email has not been registered yet
         User userEmail = getUserByEmail(updateUserDTO.getEmail());

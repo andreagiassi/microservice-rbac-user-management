@@ -59,7 +59,7 @@ public class UserRestControllerTest {
     public void test_createUser() {
         CreateOrUpdateUserDTO createOrUpdateUserDTO = CreateOrUpdateUserDTO.builder()
                .username("frank")
-               .password("123")
+               .password("Frank!123")
                .name("Frank")
                .surname("Blu")
                .gender("MALE")
@@ -115,7 +115,7 @@ public class UserRestControllerTest {
         // create a new user using the quick account endpoint
         CreateUserAccountDTO quickAccount = CreateUserAccountDTO.builder()
                 .username("violet")
-                .password("123")
+                .password("Violet!123")
                 .name("Marco")
                 .surname("Violet")
                 .gender("MALE")
@@ -147,7 +147,7 @@ public class UserRestControllerTest {
         // create a new user to update
         CreateUserAccountDTO quickAccount = CreateUserAccountDTO.builder()
                 .username("anna")
-                .password("123")
+                .password("Anna!123")
                 .name("Anna")
                 .surname("Verdi")
                 .gender("FEMALE")
@@ -169,7 +169,7 @@ public class UserRestControllerTest {
 
         CreateOrUpdateUserDTO createOrUpdateUserDTO = CreateOrUpdateUserDTO.builder()
                 .username("anna")
-                .password("456")
+                .password("Anna!123456")
                 .name("Anna")
                 .surname("Verdi")
                 .gender("FEMALE")
@@ -221,7 +221,7 @@ public class UserRestControllerTest {
         // create a new user to test the deletion
         CreateUserAccountDTO quickAccount = CreateUserAccountDTO.builder()
                 .username("anna")
-                .password("123")
+                .password("Anna!123")
                 .name("Anna")
                 .surname("Verdi")
                 .gender("FEMALE")

@@ -8,14 +8,14 @@ INSERT INTO roles(id, role) VALUES (2, 'ADMINISTRATOR');
 
 DELETE FROM users;
 
-INSERT INTO users(id, username, password, name, surname, gender, role_id) VALUES (1, 'andrea', '123', 'Andrea', 'Test', 0, 2);
-INSERT INTO users(id, username, password, name, surname, gender, role_id) VALUES (2, 'mario', '123', 'Mario', 'Rossi', 0, 1);
-INSERT INTO users(id, username, password, name, surname, gender, role_id) VALUES (3, 'stefania', '123', 'Stefania', 'Verdi', 1, 1);
-INSERT INTO users(id, username, password, name, surname, gender, role_id) VALUES (4, 'veronica', '123', 'Veronica', 'Gialli', 1, 1);
-INSERT INTO users(id, username, password, name, surname, gender, role_id) VALUES (5, 'mark', '123', 'Mark', 'Green', 0, 1);
-INSERT INTO users(id, username, password, name, surname, gender, role_id) VALUES (6, 'paul', '123',  'Paul', 'Ludwing', 0, 1);
-INSERT INTO users(id, username, password, name, surname, gender, role_id) VALUES (7, 'jennifer', '123', 'Jennifer', 'Red', 0, 1);
-INSERT INTO users(id, username, password, name, surname, gender, role_id) VALUES (8, 'karina', '123', 'Karina', 'Yellow', 1, 1);
+INSERT INTO users(id, username, password, name, surname, gender, role_id) VALUES (1, 'andrea', 'Andrea!123', 'Andrea', 'Test', 0, 2);
+INSERT INTO users(id, username, password, name, surname, gender, role_id) VALUES (2, 'mario', 'Mario!123', 'Mario', 'Rossi', 0, 1);
+INSERT INTO users(id, username, password, name, surname, gender, role_id) VALUES (3, 'stefania', 'Stefania!123', 'Stefania', 'Verdi', 1, 1);
+INSERT INTO users(id, username, password, name, surname, gender, role_id) VALUES (4, 'veronica', 'Veronica!123', 'Veronica', 'Gialli', 1, 1);
+INSERT INTO users(id, username, password, name, surname, gender, role_id) VALUES (5, 'mark', 'Mark!123', 'Mark', 'Green', 0, 1);
+INSERT INTO users(id, username, password, name, surname, gender, role_id) VALUES (6, 'paul', 'Paul!123', 'Paul', 'Ludwing', 0, 1);
+INSERT INTO users(id, username, password, name, surname, gender, role_id) VALUES (7, 'jennifer', 'Jennifer!123', 'Jennifer', 'Red', 0, 1);
+INSERT INTO users(id, username, password, name, surname, gender, role_id) VALUES (8, 'karina', 'Karina!123', 'Karina', 'Yellow', 1, 1);
 
 INSERT INTO contacts(user_id, email, phone) VALUES (1, 'andrea.test@gmail.com', NULL);
 INSERT INTO contacts(user_id, email, phone) VALUES (2, 'mario.rossi@gmail.com', NULL);
