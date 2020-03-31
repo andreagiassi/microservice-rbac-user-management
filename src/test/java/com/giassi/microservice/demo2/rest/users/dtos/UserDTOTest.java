@@ -35,10 +35,7 @@ public class UserDTOTest {
         LocalDateTime updatedDt = LocalDateTime.of(2020, 2, 1, 16, 45);
         user.setUpdatedDt(updatedDt);
 
-        Role role = new Role();
-        role.setId(Role.ADMINISTRATOR);
-        role.setRole("ADMINISTRATOR");
-
+        Role role = new Role(Role.ADMINISTRATOR, "ADMINISTRATOR");
         user.setRole(role);
 
         UserDTO userDTO = new UserDTO(user);
