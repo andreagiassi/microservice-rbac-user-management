@@ -37,3 +37,12 @@ CREATE TABLE `addresses` (
   `zip_code` varchar(20) DEFAULT NULL,
   FOREIGN KEY (user_id) REFERENCES users(id)
 );
+
+DROP VIEW IF EXISTS enabled_users;
+
+CREATE VIEW enabled_users AS
+SELECT username, roles.role
+FROM users
+INNER JOIN roles on roles.id = users.role_id
+WHERE
+enabled IS TRUE;
