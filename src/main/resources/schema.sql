@@ -41,8 +41,9 @@ CREATE TABLE `addresses` (
 DROP VIEW IF EXISTS enabled_users;
 
 CREATE VIEW enabled_users AS
-SELECT username, roles.role
+SELECT username, roles.role, contacts.email, contacts.phone
 FROM users
 INNER JOIN roles on roles.id = users.role_id
+INNER JOIN contacts on contacts.user_id = users.id
 WHERE
 enabled IS TRUE;
