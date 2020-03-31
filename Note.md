@@ -28,7 +28,7 @@ spring.datasource.url=jdbc:mysql://172.18.0.2:3306/users?useSSL=false&allowPubli
 
 in my case the new database IP is 172.18.0.2 .
 
-- Build the new micro service deploy locally with maven:
+- Build the new micro service deploy file locally with maven:
 
 mvn install -DskipTests
 
@@ -43,9 +43,9 @@ Two additional files has been added:
 * db.cmd as utility to pull down the database image and start it
 
 ---
-New procedure to setup the local development network:
+Setup the local development network
 
-Now the microservice application has been udpated to support a dev-network and there are no needs to
+Now the microservice application has been updated to support a dev-network and there are no needs to
  configure manually the IP address of the database target as above.
  
 To create the dev-network is sufficient launch the Docker's command:
