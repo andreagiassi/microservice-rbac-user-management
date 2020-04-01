@@ -37,10 +37,7 @@ public class UserService {
 
     public UserService() {
         passwordValidator = new PasswordValidator();
-        passwordService = new PasswordService();
     }
-
-    private PasswordService passwordService;
 
     private PasswordValidator passwordValidator;
 
@@ -90,9 +87,9 @@ public class UserService {
         User user = new User();
         user.setUsername(createUserAccountDTO.getUsername());
 
-        String salt = passwordService.getSalt(30);
+        String salt = PasswordService.getSalt(30);
         user.setSalt(salt);
-        user.setPassword(getGeneratedSecurePassword(createUserAccountDTO.getPassword(), salt));
+        user.setPassword(PasswordService.generatePassword(createUserAccountDTO.getPassword(), salt));
 
         user.setName(createUserAccountDTO.getName());
         user.setSurname(createUserAccountDTO.getSurname());
@@ -158,9 +155,9 @@ public class UserService {
         User user = new User();
         user.setUsername(createUserDTO.getUsername());
 
-        String salt = passwordService.getSalt(30);
+        String salt = PasswordService.getSalt(30);
         user.setSalt(salt);
-        user.setPassword(getGeneratedSecurePassword(createUserDTO.getPassword(), salt));
+        user.setPassword(PasswordService.generatePassword(createUserDTO.getPassword(), salt));
 
         user.setName(createUserDTO.getName());
         user.setSurname(createUserDTO.getSurname());
@@ -199,10 +196,6 @@ public class UserService {
 
         log.info(String.format("User %s has been created.", userCreated.getId()));
         return userCreated;
-    }
-
-    public String getGeneratedSecurePassword(String password, String salt) {
-        return passwordService.generatePassword(password, salt);
     }
 
     public void addContactOnUser(User user, Contact contact) {
@@ -272,7 +265,7 @@ public class UserService {
         user.setUsername(updateUserDTO.getUsername());
 
         // using the user's salt to secure the new validated password
-        user.setPassword(getGeneratedSecurePassword(updateUserDTO.getPassword(), user.getSalt()));
+        user.setPassword(PasswordService.generatePassword(updateUserDTO.getPassword(), user.getSalt()));
         user.setName(updateUserDTO.getName());
         user.setSurname(updateUserDTO.getSurname());
 
@@ -305,7 +298,7 @@ public class UserService {
 
         addAddressOnUser(user, address);
 
-        User userUpdated =  userRepository.save(user);
+        User userUpdated = userRepository.save(user);
         log.info(String.format("User %s has been updated.", user.getId()));
 
         return userUpdated;
