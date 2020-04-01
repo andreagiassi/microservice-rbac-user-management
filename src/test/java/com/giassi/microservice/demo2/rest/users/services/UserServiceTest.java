@@ -82,11 +82,11 @@ public class UserServiceTest {
 
         assertNotNull(userRet);
         assertEquals(userId, userRet.getId());
-        assertEquals("andrea", user.getUsername());
-        assertEquals("Andrea", user.getName());
-        assertEquals("Giassi", user.getSurname());
-        assertEquals("andrea.test@gmail.com", user.getContact().getEmail());
-        assertEquals("+3531122334455", user.getContact().getPhone());
+        assertEquals("andrea", userRet.getUsername());
+        assertEquals("Andrea", userRet.getName());
+        assertEquals("Giassi", userRet.getSurname());
+        assertEquals("andrea.test@gmail.com", userRet.getContact().getEmail());
+        assertEquals("+3531122334455", userRet.getContact().getPhone());
     }
 
     @Test(expected = UserNotFoundException.class)
@@ -166,7 +166,9 @@ public class UserServiceTest {
                 .surname("Giassi")
                 .email("andrea.test@gmail.com")
                 .gender("MALE")
-                .username("andrea").build();
+                .username("andrea")
+                .password(UserTestHelper.TEST_DATA_PASSWORD_DECRYPTED)
+                .build();
 
         userService.createNewUserAccount(createUserAccountDTO);
     }
@@ -185,7 +187,9 @@ public class UserServiceTest {
                 .surname("Rossi")
                 .email("andrea.test@gmail.com")
                 .gender("MALE")
-                .username("marco").build();
+                .username("marco")
+                .password(UserTestHelper.TEST_DATA_PASSWORD_DECRYPTED)
+                .build();
 
         userService.createNewUserAccount(createUserAccountDTO);
     }
@@ -328,7 +332,7 @@ public class UserServiceTest {
                 .email("andrea.test@gmail.com")
                 .gender("MALE")
                 .username("marco")
-                .password("Marco!123")
+                .password("Test!123")
                 .phone("+3531122334466")
                 .enabled(true)
                 .roleId(1L)
@@ -354,7 +358,7 @@ public class UserServiceTest {
                 .email("andrea.test@gmail.com")
                 .gender("MALE")
                 .username("andrea")
-                .password("Andrea!123")
+                .password("Test!123")
                 .phone("+3539988776655")
                 .enabled(true)
                 .roleId(1L)

@@ -37,7 +37,10 @@ public class UserService {
 
     public UserService() {
         passwordValidator = new PasswordValidator();
+        passwordService = new PasswordService();
     }
+
+    private PasswordService passwordService;
 
     private PasswordValidator passwordValidator;
 
@@ -86,7 +89,11 @@ public class UserService {
         // create the new user account: not all the user information required
         User user = new User();
         user.setUsername(createUserAccountDTO.getUsername());
-        user.setPassword(createUserAccountDTO.getPassword());
+
+        String salt = passwordService.getSalt(30);
+        user.setSalt(salt);
+        user.setPassword(getGeneratedSecurePassword(createUserAccountDTO.getPassword(), salt));
+
         user.setName(createUserAccountDTO.getName());
         user.setSurname(createUserAccountDTO.getSurname());
         user.setEnabled(true);
@@ -96,7 +103,6 @@ public class UserService {
         user.setGender(gender);
 
         setUserRole(user, Role.USER);
-
         user.setCreationDt(LocalDateTime.now());
 
         User userCreated = userRepository.save(user);
@@ -107,7 +113,7 @@ public class UserService {
 
         addContactOnUser(userCreated, contact);
 
-        // set an empty address
+        // set empty address
         addAddressOnUser(userCreated, new Address());
 
         userCreated = userRepository.save(userCreated);
@@ -151,7 +157,10 @@ public class UserService {
         // create the user
         User user = new User();
         user.setUsername(createUserDTO.getUsername());
-        user.setPassword(createUserDTO.getPassword());
+
+        String salt = passwordService.getSalt(30);
+        user.setSalt(salt);
+        user.setPassword(getGeneratedSecurePassword(createUserDTO.getPassword(), salt));
 
         user.setName(createUserDTO.getName());
         user.setSurname(createUserDTO.getSurname());
@@ -162,7 +171,6 @@ public class UserService {
 
         user.setEnabled(true);
         user.setNote(createUserDTO.getNote());
-
         user.setCreationDt(LocalDateTime.now());
 
         // set the role
@@ -191,6 +199,10 @@ public class UserService {
 
         log.info(String.format("User %s has been created.", userCreated.getId()));
         return userCreated;
+    }
+
+    public String getGeneratedSecurePassword(String password, String salt) {
+        return passwordService.generatePassword(password, salt);
     }
 
     public void addContactOnUser(User user, Contact contact) {
@@ -258,7 +270,9 @@ public class UserService {
 
         // update the user
         user.setUsername(updateUserDTO.getUsername());
-        user.setPassword(updateUserDTO.getPassword());
+
+        // using the user's salt to secure the new validated password
+        user.setPassword(getGeneratedSecurePassword(updateUserDTO.getPassword(), user.getSalt()));
         user.setName(updateUserDTO.getName());
         user.setSurname(updateUserDTO.getSurname());
 

@@ -15,8 +15,10 @@ Goal of the project is to manage a set of users.
 
 The microservice is using Spring Boot 2 and JPA to exposes a small set of REST apis.
 
-The project support the CRUD operation on an User entity on a MySql database and is using
- the Docker technologies with two different containers:
+The project support the basic CRUD operations on an User account and the information are stored on a
+ MySql database.
+ 
+The project is using the Docker technologies with two different containers:
 * Spring Boot REST apis: that exposing the services
 * MySql 8.0 database: that is storing/retrieving the information
 
@@ -57,3 +59,9 @@ http://localhost:8090/swagger-ui.html
 Another alternative is to using an external tool, for example Postman (https://www.postman.com/).
 
 This project contains the export file micro2.postman_collection.json with some configured test calls.
+
+#### Security
+I've followed the blog post below in order to implement an encryption and decryption for the password.
+
+http://www.appsdeveloperblog.com/encrypt-user-password-example-java/
+

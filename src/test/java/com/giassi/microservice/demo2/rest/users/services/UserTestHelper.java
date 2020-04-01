@@ -9,12 +9,20 @@ import java.time.LocalDateTime;
 
 public class UserTestHelper {
 
+    // test data password & salt
+    public static final String TEST_DATA_PASSWORD = "1d/NZaEqNgtEomytAPrwm/+QjmbudLg33oeEk77Xh88=";
+    public static final String TEST_DATA_SALT = "WZeBXmCI9cAz3LyY9Sdllj9l5iPsXC";
+    public static final String TEST_DATA_PASSWORD_DECRYPTED = "Test!123";
+
     // create a test user data
     public static User getUserTestData(Long id, String username, String name, String surname, String email, String phone) {
         User user = new User();
         user.setId(id);
         user.setUsername(username);
-        user.setPassword("123");
+
+        user.setPassword(TEST_DATA_PASSWORD);
+        user.setSalt(TEST_DATA_SALT);
+
         user.setName(name);
         user.setSurname(surname);
         user.setGender(Gender.MALE);

@@ -5,6 +5,7 @@ import com.giassi.microservice.demo2.rest.users.dtos.CreateUserAccountDTO;
 import com.giassi.microservice.demo2.rest.users.entities.Role;
 import com.giassi.microservice.demo2.rest.users.entities.User;
 import com.giassi.microservice.demo2.rest.users.exceptions.UserNotFoundException;
+import com.giassi.microservice.demo2.rest.users.services.PasswordService;
 import com.giassi.microservice.demo2.rest.users.services.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,8 +15,7 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -40,7 +40,7 @@ public class UserServiceSpringContextTest {
         createUserAccountDTO.setEmail("marco.test@gmail.com");
         createUserAccountDTO.setGender("MALE");
         createUserAccountDTO.setUsername("marco");
-        createUserAccountDTO.setPassword("Marco!123");
+        createUserAccountDTO.setPassword("Test!123");
 
         User createdUser = userService.createNewUserAccount(createUserAccountDTO);
 
@@ -50,7 +50,8 @@ public class UserServiceSpringContextTest {
         assertEquals("marco.test@gmail.com", createdUser.getContact().getEmail());
         assertEquals("MALE", createdUser.getGender().name());
         assertEquals("marco", createdUser.getUsername());
-        assertEquals("Marco!123", createdUser.getPassword());
+
+        assertTrue(PasswordService.verifyPassword("Test!123", createdUser.getPassword(), createdUser.getSalt()));
     }
 
     @Test
@@ -61,7 +62,7 @@ public class UserServiceSpringContextTest {
         createOrUpdateUserDTO.setEmail("john.test@gmail.com");
         createOrUpdateUserDTO.setGender("MALE");
         createOrUpdateUserDTO.setUsername("john");
-        createOrUpdateUserDTO.setPassword("John!123");
+        createOrUpdateUserDTO.setPassword("Test!123");
         createOrUpdateUserDTO.setPhone("+3531122334499");
         createOrUpdateUserDTO.setRoleId(Role.ADMINISTRATOR);
         createOrUpdateUserDTO.setNote("test note");
@@ -79,7 +80,9 @@ public class UserServiceSpringContextTest {
         assertEquals("john.test@gmail.com", createdUser.getContact().getEmail());
         assertEquals("MALE", createdUser.getGender().name());
         assertEquals("john", createdUser.getUsername());
-        assertEquals("John!123", createdUser.getPassword());
+
+        assertTrue(PasswordService.verifyPassword("Test!123", createdUser.getPassword(), createdUser.getSalt()));
+
         assertEquals("+3531122334499", createdUser.getContact().getPhone());
         assertEquals("ADMINISTRATOR", createdUser.getRole().getRole());
         assertEquals("test note", createdUser.getNote());
@@ -91,31 +94,32 @@ public class UserServiceSpringContextTest {
     }
 
     @Test
-    public void given_valid_user_date_when_updateUser_return_userUpdated() {
-        CreateOrUpdateUserDTO createOrUpdateUserDTO = new CreateOrUpdateUserDTO();
-        createOrUpdateUserDTO.setName("Andrea");
-        createOrUpdateUserDTO.setSurname("Giassi");
-        createOrUpdateUserDTO.setEmail("andrea.test@gmail.com");
-        createOrUpdateUserDTO.setGender("MALE");
-        createOrUpdateUserDTO.setUsername("andrea");
-        createOrUpdateUserDTO.setPassword("Andrea!123");
-        createOrUpdateUserDTO.setPhone("+35344335522"); // update the phone number
-        createOrUpdateUserDTO.setRoleId(Role.ADMINISTRATOR);
-        createOrUpdateUserDTO.setNote("update phone number note");
+    public void given_valid_user_data_when_updateUser_return_userUpdated() {
+        CreateOrUpdateUserDTO updateUserDTO = new CreateOrUpdateUserDTO();
+        updateUserDTO.setName("Andrea");
+        updateUserDTO.setSurname("Giassi");
+        updateUserDTO.setEmail("andrea.test@gmail.com");
+        updateUserDTO.setGender("MALE");
+        updateUserDTO.setUsername("andrea");
+        updateUserDTO.setPassword("Test!123");
+        updateUserDTO.setPhone("+35344335522"); // update the phone number
+        updateUserDTO.setRoleId(Role.ADMINISTRATOR);
+        updateUserDTO.setNote("update phone number note");
         // set address
-        createOrUpdateUserDTO.setAddress("via Frescobaldi 123");
-        createOrUpdateUserDTO.setCity("Trieste");
-        createOrUpdateUserDTO.setCountry("Italy");
-        createOrUpdateUserDTO.setZipCode("34100");
+        updateUserDTO.setAddress("via Frescobaldi 123");
+        updateUserDTO.setCity("Trieste");
+        updateUserDTO.setCountry("Italy");
+        updateUserDTO.setZipCode("34100");
 
-        User updatedUser = userService.updateUser(1L, createOrUpdateUserDTO);
+        User updatedUser = userService.updateUser(1L, updateUserDTO);
 
         assertNotNull(updatedUser);
         assertEquals("Andrea", updatedUser.getName());
         assertEquals("Giassi", updatedUser.getSurname());
         assertEquals("andrea.test@gmail.com", updatedUser.getContact().getEmail());
         assertEquals("andrea", updatedUser.getUsername());
-        assertEquals("Andrea!123", updatedUser.getPassword());
+        assertEquals("1d/NZaEqNgtEomytAPrwm/+QjmbudLg33oeEk77Xh88=", updatedUser.getPassword());
+        assertEquals("WZeBXmCI9cAz3LyY9Sdllj9l5iPsXC", updatedUser.getSalt());
         assertEquals("MALE", updatedUser.getGender().name());
         assertEquals("+35344335522", updatedUser.getContact().getPhone());
         assertEquals("ADMINISTRATOR", updatedUser.getRole().getRole());
@@ -132,7 +136,7 @@ public class UserServiceSpringContextTest {
         Long userId= 1L;
         userService.deleteUserById(userId);
 
-        // throw an UserNotFoundException
+        // throws an UserNotFoundException
         User user = userService.getUserById(userId);
     }
 
