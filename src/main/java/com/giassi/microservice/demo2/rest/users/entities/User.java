@@ -53,6 +53,9 @@ public class User {
     @Basic
     private java.time.LocalDateTime updatedDt;
 
+    @Basic
+    private java.time.LocalDateTime loginDt;
+
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="role_id")
     private Role role;

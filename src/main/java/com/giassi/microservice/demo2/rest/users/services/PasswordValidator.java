@@ -1,6 +1,7 @@
 package com.giassi.microservice.demo2.rest.users.services;
 
 import com.giassi.microservice.demo2.rest.users.exceptions.InvalidUserDataException;
+import com.google.common.base.Strings;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,7 +20,7 @@ public class PasswordValidator {
 
     // check if password is respecting the necessary rules to be considered valid
     public void checkPassword(String password) {
-        if ((password == null) || ("".equals(password))) {
+        if (Strings.isNullOrEmpty(password)) {
             throw new InvalidUserDataException("Password cannot be null or empty");
         }
 

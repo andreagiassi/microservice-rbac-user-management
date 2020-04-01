@@ -32,6 +32,7 @@ public class UserDTO implements Serializable {
 
             this.creationDt = user.getCreationDt();
             this.updatedDt = user.getUpdatedDt();
+            this.loginDt = user.getLoginDt();
 
             // role, if set
             if (user.getRole() != null) {
@@ -59,6 +60,7 @@ public class UserDTO implements Serializable {
 
     private LocalDateTime creationDt;
     private LocalDateTime updatedDt;
+    private LocalDateTime loginDt;
 
     // additional information
     private RoleDTO roleDTO;

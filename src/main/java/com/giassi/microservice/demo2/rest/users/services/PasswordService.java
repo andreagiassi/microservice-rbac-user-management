@@ -59,8 +59,10 @@ public class PasswordService {
         return newSecurePassword.equalsIgnoreCase(securedPassword);
     }
 
+/*
     public static boolean verifyPassword(String providedPassword, String securedPassword) {
         return verifyPassword(providedPassword, securedPassword, DEFAULT_SALT);
     }
+*/
 
 }

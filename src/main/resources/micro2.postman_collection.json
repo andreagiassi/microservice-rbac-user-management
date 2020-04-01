@@ -66,6 +66,34 @@
 			"response": []
 		},
 		{
+			"name": "login",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8090/login?username=andrea&password=Test!123",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"login"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "andrea"
+						},
+						{
+							"key": "password",
+							"value": "Test!123"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "create user",
 			"request": {
 				"method": "POST",

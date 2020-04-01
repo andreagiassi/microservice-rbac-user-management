@@ -20,6 +20,7 @@ CREATE TABLE `users` (
   `role_id` BIGINT(20) NOT NULL DEFAULT '1',
   creation_dt timestamp NOT NULL DEFAULT current_timestamp,
   updated_dt timestamp DEFAULT current_timestamp,
+  login_dt timestamp NULL,
   note varchar(255) DEFAULT NULL,
   FOREIGN KEY (role_id) REFERENCES roles(id)
 );

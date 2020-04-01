@@ -167,7 +167,7 @@ public class UserServiceTest {
                 .email("andrea.test@gmail.com")
                 .gender("MALE")
                 .username("andrea")
-                .password(UserTestHelper.TEST_DATA_PASSWORD_DECRYPTED)
+                .password(UserTestHelper.TEST_PASSWORD_DECRYPTED)
                 .build();
 
         userService.createNewUserAccount(createUserAccountDTO);
@@ -188,7 +188,7 @@ public class UserServiceTest {
                 .email("andrea.test@gmail.com")
                 .gender("MALE")
                 .username("marco")
-                .password(UserTestHelper.TEST_DATA_PASSWORD_DECRYPTED)
+                .password(UserTestHelper.TEST_PASSWORD_DECRYPTED)
                 .build();
 
         userService.createNewUserAccount(createUserAccountDTO);
@@ -382,6 +382,49 @@ public class UserServiceTest {
     @Test(expected = UserNotFoundException.class)
     public void given_not_existing_userId_when_deleteUserById_throw_UserNotFoundException() {
         userService.deleteUserById(1L);
+    }
+
+    @Test(expected = InvalidLoginException.class)
+    public void given_null_username_and_null_password_when_login_throw_InvalidLoginException() {
+        userService.login(null, null);
+    }
+
+    @Test(expected = InvalidLoginException.class)
+    public void given_null_username_login_when_login_throw_InvalidLoginException() {
+        userService.login(null, "WRONG_PWD");
+    }
+
+    @Test(expected = InvalidLoginException.class)
+    public void given_null_password_login_when_login_throw_InvalidLoginException() {
+        userService.login("WRONG", null);
+    }
+
+    @Test(expected = InvalidLoginException.class)
+    public void given_invalid_login_when_login_throw_InvalidLoginException() {
+        userService.login("WRONG", "WRONG_PWD");
+    }
+
+    @Test
+    public void given_valid_login_when_login_return_user() {
+        User userDataForTest = getUserTestData(1L, "andrea", "Andrea",
+                "Giassi", "andrea.test@gmail.com", "+3531122334455");
+
+        given(userRepository.findByUsername("andrea")).willReturn(userDataForTest);
+
+        User user = userService.login("andrea", UserTestHelper.TEST_PASSWORD_DECRYPTED);
+
+        assertNotNull(user);
+        assertEquals("andrea", user.getUsername());
+    }
+
+    @Test(expected = InvalidLoginException.class)
+    public void given_invalid_login_when_login_return_user() {
+        User userDataForTest = getUserTestData(1L, "andrea", "Andrea",
+                "Giassi", "andrea.test@gmail.com", "+3531122334455");
+
+        given(userRepository.findByUsername("andrea")).willReturn(userDataForTest);
+
+        User user = userService.login("andrea", "WRONG_PWD");
     }
 
 }

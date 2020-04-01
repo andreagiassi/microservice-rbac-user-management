@@ -9,6 +9,7 @@ import com.giassi.microservice.demo2.rest.users.repositories.AddressRepository;
 import com.giassi.microservice.demo2.rest.users.repositories.ContactRepository;
 import com.giassi.microservice.demo2.rest.users.repositories.RoleRepository;
 import com.giassi.microservice.demo2.rest.users.repositories.UserRepository;
+import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -319,6 +320,31 @@ public class UserService {
         }
         userRepository.deleteById(id);
         log.info(String.format("User %s has been deleted.", id));
+    }
+
+    @Transactional
+    public User login(String username, String password) {
+        if ((Strings.isNullOrEmpty(username)) || (Strings.isNullOrEmpty(password))) {
+            throw new InvalidLoginException("Username or Password cannot be null or empty");
+        }
+
+        User user = getUserByUsername(username);
+        if (user == null) {
+        // invalid username
+            throw new InvalidLoginException("Invalid username or password");
+        }
+
+        // check the password
+        if (PasswordService.verifyPassword(password, user.getPassword(), user.getSalt())) {
+            // update the last login timestamp
+            user.setLoginDt(LocalDateTime.now());
+            userRepository.save(user);
+
+            log.info(String.format("Valid login for %s", username));
+        } else {
+            throw new InvalidLoginException("Invalid username or password");
+        }
+        return user;
     }
 
 }

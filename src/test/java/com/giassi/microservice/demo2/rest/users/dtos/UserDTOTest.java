@@ -52,6 +52,7 @@ public class UserDTOTest {
 
         assertEquals(creationDt, userDTO.getCreationDt());
         assertEquals(updatedDt, userDTO.getUpdatedDt());
+        assertEquals(null, userDTO.getLoginDt());
 
         assertNotNull(user.getRole());
 
