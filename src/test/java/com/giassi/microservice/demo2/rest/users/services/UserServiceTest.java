@@ -418,13 +418,25 @@ public class UserServiceTest {
     }
 
     @Test(expected = InvalidLoginException.class)
-    public void given_invalid_login_when_login_return_user() {
+    public void given_invalid_login2_when_login_throw_InvalidLoginException() {
         User userDataForTest = getUserTestData(1L, "andrea", "Andrea",
                 "Giassi", "andrea.test@gmail.com", "+3531122334455");
 
         given(userRepository.findByUsername("andrea")).willReturn(userDataForTest);
 
         User user = userService.login("andrea", "WRONG_PWD");
+    }
+
+    @Test(expected = InvalidLoginException.class)
+    public void given_not_enabled_login_when_login_throw_InvalidLoginException() {
+        User userDataForTest = getUserTestData(1L, "andrea", "Andrea",
+                "Giassi", "andrea.test@gmail.com", "+3531122334455");
+
+        userDataForTest.setEnabled(false);
+
+        given(userRepository.findByUsername("andrea")).willReturn(userDataForTest);
+
+        User user = userService.login("andrea", UserTestHelper.TEST_PASSWORD_DECRYPTED);
     }
 
 }

@@ -330,12 +330,18 @@ public class UserService {
 
         User user = getUserByUsername(username);
         if (user == null) {
-        // invalid username
+            // invalid username
             throw new InvalidLoginException("Invalid username or password");
         }
 
         // check the password
         if (PasswordService.verifyPassword(password, user.getPassword(), user.getSalt())) {
+            // check if the user is enabled
+            if (!user.isEnabled()) {
+                // not enabled
+                throw new InvalidLoginException("User is not enabled");
+            }
+
             // update the last login timestamp
             user.setLoginDt(LocalDateTime.now());
             userRepository.save(user);
