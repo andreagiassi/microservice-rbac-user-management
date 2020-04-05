@@ -9,8 +9,6 @@ import java.time.LocalDateTime;
 
 public class UserTestHelper {
 
-    // test data password & salt
-    public static final String TEST_PASSWORD_ENCRYPTED = "1d/NZaEqNgtEomytAPrwm/+QjmbudLg33oeEk77Xh88=";
     public static final String TEST_PASSWORD_DECRYPTED = "Test!123";
 
     // create a test user data
@@ -19,7 +17,7 @@ public class UserTestHelper {
         user.setId(id);
 
         user.setUsername(username);
-        user.setPassword(TEST_PASSWORD_ENCRYPTED);
+        user.setPassword(EncryptionService.encrypt(TEST_PASSWORD_DECRYPTED, EncryptionService.DEFAULT_SALT));
 
         user.setName(name);
         user.setSurname(surname);
