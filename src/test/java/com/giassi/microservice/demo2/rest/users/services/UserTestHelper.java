@@ -11,7 +11,6 @@ public class UserTestHelper {
 
     // test data password & salt
     public static final String TEST_PASSWORD_ENCRYPTED = "1d/NZaEqNgtEomytAPrwm/+QjmbudLg33oeEk77Xh88=";
-    public static final String TEST_SALT = "WZeBXmCI9cAz3LyY9Sdllj9l5iPsXC";
     public static final String TEST_PASSWORD_DECRYPTED = "Test!123";
 
     // create a test user data
@@ -21,7 +20,6 @@ public class UserTestHelper {
 
         user.setUsername(username);
         user.setPassword(TEST_PASSWORD_ENCRYPTED);
-        user.setSalt(TEST_SALT);
 
         user.setName(name);
         user.setSurname(surname);

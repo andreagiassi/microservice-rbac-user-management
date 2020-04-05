@@ -5,7 +5,7 @@ import com.giassi.microservice.demo2.rest.users.dtos.CreateUserAccountDTO;
 import com.giassi.microservice.demo2.rest.users.entities.Role;
 import com.giassi.microservice.demo2.rest.users.entities.User;
 import com.giassi.microservice.demo2.rest.users.exceptions.UserNotFoundException;
-import com.giassi.microservice.demo2.rest.users.services.PasswordService;
+import com.giassi.microservice.demo2.rest.users.services.EncryptionService;
 import com.giassi.microservice.demo2.rest.users.services.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -51,7 +51,8 @@ public class UserServiceSpringContextTest {
         assertEquals("MALE", createdUser.getGender().name());
         assertEquals("marco", createdUser.getUsername());
 
-        assertTrue(PasswordService.verifyPassword("Test!123", createdUser.getPassword(), createdUser.getSalt()));
+        assertTrue(EncryptionService.isPasswordValid("Test!123", createdUser.getPassword(),
+                EncryptionService.DEFAULT_SALT));
     }
 
     @Test
@@ -81,7 +82,8 @@ public class UserServiceSpringContextTest {
         assertEquals("MALE", createdUser.getGender().name());
         assertEquals("john", createdUser.getUsername());
 
-        assertTrue(PasswordService.verifyPassword("Test!123", createdUser.getPassword(), createdUser.getSalt()));
+        assertTrue(EncryptionService.isPasswordValid("Test!123", createdUser.getPassword(),
+                EncryptionService.DEFAULT_SALT));
 
         assertEquals("+3531122334499", createdUser.getContact().getPhone());
         assertEquals("ADMINISTRATOR", createdUser.getRole().getRole());
@@ -116,10 +118,10 @@ public class UserServiceSpringContextTest {
         assertNotNull(updatedUser);
         assertEquals("Andrea", updatedUser.getName());
         assertEquals("Giassi", updatedUser.getSurname());
+        //
         assertEquals("andrea.test@gmail.com", updatedUser.getContact().getEmail());
         assertEquals("andrea", updatedUser.getUsername());
         assertEquals("1d/NZaEqNgtEomytAPrwm/+QjmbudLg33oeEk77Xh88=", updatedUser.getPassword());
-        assertEquals("WZeBXmCI9cAz3LyY9Sdllj9l5iPsXC", updatedUser.getSalt());
         assertEquals("MALE", updatedUser.getGender().name());
         assertEquals("+35344335522", updatedUser.getContact().getPhone());
         assertEquals("ADMINISTRATOR", updatedUser.getRole().getRole());

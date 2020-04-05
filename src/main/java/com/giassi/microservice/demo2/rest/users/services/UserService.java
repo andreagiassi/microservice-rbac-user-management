@@ -12,6 +12,7 @@ import com.giassi.microservice.demo2.rest.users.repositories.UserRepository;
 import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,6 +36,9 @@ public class UserService {
 
     @Autowired
     private RoleRepository roleRepository;
+
+    @Value("${microservice.security.salt}")
+    private String salt;
 
     public UserService() {
         passwordValidator = new PasswordValidator();
@@ -87,10 +91,7 @@ public class UserService {
         // create the new user account: not all the user information required
         User user = new User();
         user.setUsername(createUserAccountDTO.getUsername());
-
-        String salt = PasswordService.getSalt(30);
-        user.setSalt(salt);
-        user.setPassword(PasswordService.generatePassword(createUserAccountDTO.getPassword(), salt));
+        user.setPassword(EncryptionService.encrypt(createUserAccountDTO.getPassword(), salt));
 
         user.setName(createUserAccountDTO.getName());
         user.setSurname(createUserAccountDTO.getSurname());
@@ -138,7 +139,8 @@ public class UserService {
             String msg = String.format("The email %s it's already in use from another user with ID = %s",
                     userByEmail.getContact().getEmail(), userByEmail.getId());
             log.error(msg);
-            throw new InvalidUserDataException(msg);
+            throw new InvalidUserDataException(String.format("This email %s it's already in use.",
+                    userByEmail.getContact().getEmail()));
         }
     }
 
@@ -155,10 +157,7 @@ public class UserService {
         // create the user
         User user = new User();
         user.setUsername(createUserDTO.getUsername());
-
-        String salt = PasswordService.getSalt(30);
-        user.setSalt(salt);
-        user.setPassword(PasswordService.generatePassword(createUserDTO.getPassword(), salt));
+        user.setPassword(EncryptionService.encrypt(createUserDTO.getPassword(), salt));
 
         user.setName(createUserDTO.getName());
         user.setSurname(createUserDTO.getSurname());
@@ -266,7 +265,7 @@ public class UserService {
         user.setUsername(updateUserDTO.getUsername());
 
         // using the user's salt to secure the new validated password
-        user.setPassword(PasswordService.generatePassword(updateUserDTO.getPassword(), user.getSalt()));
+        user.setPassword(EncryptionService.encrypt(updateUserDTO.getPassword(), salt));
         user.setName(updateUserDTO.getName());
         user.setSurname(updateUserDTO.getSurname());
 
@@ -335,7 +334,7 @@ public class UserService {
         }
 
         // check the password
-        if (PasswordService.verifyPassword(password, user.getPassword(), user.getSalt())) {
+        if (EncryptionService.isPasswordValid(password, user.getPassword(), salt)) {
             // check if the user is enabled
             if (!user.isEnabled()) {
                 // not enabled

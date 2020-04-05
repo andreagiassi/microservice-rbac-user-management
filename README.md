@@ -11,14 +11,18 @@ Connect and discover more here:
 https://www.linkedin.com/in/andreagiassi/
 
 #### Overview
-Goal of the project is to manage a set of users.
+Goal of the project is to offer a set of REST apis in order to manage a set of user's data.
 
-The microservice is using Spring Boot 2 and JPA to exposes a small set of REST apis.
+The microservice is using Spring Boot 2 and JPA to exposes the REST apis and to retrieve and store the information
+on a database.
+
+The idea is to offer a simple microservice to reuse for simple 
+The software is handling account's data, contacts, roles and addresses and offer a simple login endpoint.
 
 The project support the basic CRUD operations on an User account and the information are stored on a
  MySql database.
  
-The project is using the Docker technologies with two different containers:
+The project is thought using the Docker technologies with two different containers:
 * Spring Boot REST apis: that exposing the services
 * MySql 8.0 database: that is storing/retrieving the information
 
@@ -60,8 +64,10 @@ Another alternative is to using an external tool, for example Postman (https://w
 
 This project contains the export file micro2.postman_collection.json with some configured test calls.
 
-#### Security
-I've followed the blog post below in order to implement an encryption and decryption for the password.
+#### Security, encryption and decryption of sensible data
+I've followed the blog post below in order to implement an encryption and decryption method for sensible data such
+ as passwords.
 
 http://www.appsdeveloperblog.com/encrypt-user-password-example-java/
 
+The application.properties file contains the default salt used.

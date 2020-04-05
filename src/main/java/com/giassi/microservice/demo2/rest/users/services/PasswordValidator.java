@@ -26,7 +26,8 @@ public class PasswordValidator {
 
         // check max length
         if (password.length() > MAX_PASSWORD_LENGTH) {
-            throw new InvalidUserDataException("Password is too long: max number of chars is " + MAX_PASSWORD_LENGTH);
+            throw new InvalidUserDataException(String.format("Password is too long: max number of chars is %s",
+                    MAX_PASSWORD_LENGTH));
         }
 
         // Password must to be at least 8 chars, 1 number, 1 upper case, 1 lower case letter, 1 special char, no spaces

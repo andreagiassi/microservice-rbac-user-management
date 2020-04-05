@@ -9,6 +9,7 @@ import com.giassi.microservice.demo2.rest.users.entities.User;
 import com.giassi.microservice.demo2.rest.users.exceptions.*;
 import com.giassi.microservice.demo2.rest.users.repositories.RoleRepository;
 import com.giassi.microservice.demo2.rest.users.repositories.UserRepository;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -16,6 +17,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -38,7 +40,13 @@ public class UserServiceTest {
 
     @Autowired
     @InjectMocks
-    private UserService userService;
+    private UserService userService = new UserService();
+
+    @Before
+    public void setUp() {
+        // using the default salt for test
+        ReflectionTestUtils.setField(userService, "salt", EncryptionService.DEFAULT_SALT);
+    }
 
     @Test
     public void given_existing_users_when_getUserPresentationList_return_validList() {
