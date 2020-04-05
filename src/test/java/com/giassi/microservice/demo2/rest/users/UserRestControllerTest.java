@@ -73,6 +73,7 @@ public class UserRestControllerTest {
                .email("frank.blu@gmail.com")
                .phone("+3531194334455")
                .address("dark road 1")
+               .address2("salt hill")
                .city("Dublin")
                .country("Ireland")
                .zipCode("47335").build();
@@ -106,6 +107,7 @@ public class UserRestControllerTest {
         assertNotNull(userDTO.getAddressDTO());
         AddressDTO addressDTO = userDTO.getAddressDTO();
         assertEquals("dark road 1", addressDTO.getAddress());
+        assertEquals("salt hill", addressDTO.getAddress2());
         assertEquals("Dublin", addressDTO.getCity());
         assertEquals("Ireland", addressDTO.getCountry());
         assertEquals("47335", addressDTO.getZipCode());
@@ -183,6 +185,7 @@ public class UserRestControllerTest {
                 .email("anna.verdi@gmail.com")
                 .phone("+3531194334455")
                 .address("The sunny road 15")
+                .address2("Sunny valley")
                 .city("Dublin")
                 .country("Ireland")
                 .zipCode("47335").build();
@@ -212,6 +215,7 @@ public class UserRestControllerTest {
         // address
         assertNotNull(userUpdatedDTO.getAddressDTO());
         assertEquals("The sunny road 15", userUpdatedDTO.getAddressDTO().getAddress());
+        assertEquals("Sunny valley", userUpdatedDTO.getAddressDTO().getAddress2());
         assertEquals("Dublin", userUpdatedDTO.getAddressDTO().getCity());
         assertEquals("Ireland", userUpdatedDTO.getAddressDTO().getCountry());
         assertEquals("47335", userUpdatedDTO.getAddressDTO().getZipCode());

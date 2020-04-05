@@ -186,6 +186,7 @@ public class UserService {
         // set address
         Address address = new Address();
         address.setAddress(createUserDTO.getAddress());
+        address.setAddress2(createUserDTO.getAddress2());
         address.setCity(createUserDTO.getCity());
         address.setCountry(createUserDTO.getCountry());
         address.setZipCode(createUserDTO.getZipCode());
@@ -292,6 +293,7 @@ public class UserService {
             address = new Address();
         }
         address.setAddress(updateUserDTO.getAddress());
+        address.setAddress2(updateUserDTO.getAddress2());
         address.setCity(updateUserDTO.getCity());
         address.setCountry(updateUserDTO.getCountry());
         address.setZipCode(updateUserDTO.getZipCode());

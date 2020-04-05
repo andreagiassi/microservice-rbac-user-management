@@ -35,6 +35,7 @@ public class CreateOrUpdateUserDTO implements Serializable {
 
     // address information
     private String address;
+    private String address2;
     private String city;
     private String country;
     private String zipCode;

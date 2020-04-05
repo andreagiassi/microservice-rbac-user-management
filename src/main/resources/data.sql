@@ -28,6 +28,6 @@ INSERT INTO contacts(user_id, email, phone) VALUES (6, 'paul.ludwing@gmail.com',
 INSERT INTO contacts(user_id, email, phone) VALUES (7, 'jennifer.red@gmail.com', NULL);
 INSERT INTO contacts(user_id, email, phone) VALUES (8, 'karina.yellow@gmail.com', NULL);
 
-insert into addresses(user_id, address, city, country, zip_code) values (2,'Via Filzi 2', 'Florence', 'Italy', '50100');
-insert into addresses(user_id, address, city, country, zip_code) values (7,'Piazza Grande 12', 'Venice', 'Italy', '30100');
-insert into addresses(user_id, address, city, country, zip_code) values (8,'Via Roma 2', 'Trieste', 'Italy', '34100');
+insert into addresses(user_id, address, address2, city, country, zip_code) values (2, 'Via Filzi 2', 'Borgo Teresiano', 'Florence', 'Italy', '50100');
+insert into addresses(user_id, address, address2, city, country, zip_code) values (7, 'Piazza Grande 12', 'Gran canal', 'Venice', 'Italy', '30100');
+insert into addresses(user_id, address, address2, city, country, zip_code) values (8, 'Via Roma 2', 'Borgo Teresiano', 'Trieste', 'Italy', '34100');

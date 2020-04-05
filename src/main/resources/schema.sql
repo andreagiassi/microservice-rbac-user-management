@@ -34,6 +34,7 @@ CREATE TABLE `contacts` (
 CREATE TABLE `addresses` (
   user_id BIGINT(20) NOT NULL PRIMARY KEY,
   `address` varchar(255) DEFAULT NULL,
+  `address2` varchar(255) DEFAULT NULL,
   `city` varchar(20) DEFAULT NULL,
   `country` varchar(20) DEFAULT NULL,
   `zip_code` varchar(20) DEFAULT NULL,
