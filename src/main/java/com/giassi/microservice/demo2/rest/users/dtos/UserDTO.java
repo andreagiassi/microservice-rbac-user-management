@@ -1,5 +1,6 @@
 package com.giassi.microservice.demo2.rest.users.dtos;
 
+import com.giassi.microservice.demo2.rest.users.entities.Contact;
 import com.giassi.microservice.demo2.rest.users.entities.User;
 import lombok.Data;
 
@@ -21,11 +22,6 @@ public class UserDTO implements Serializable {
             this.surname = user.getSurname();
             this.gender = user.getGender().name();
 
-            if (user.getContact() != null) {
-                this.email = user.getContact().getEmail();
-                this.phone = user.getContact().getPhone();
-            }
-
             this.enabled = user.isEnabled();
 
             this.note = user.getNote();
@@ -34,10 +30,24 @@ public class UserDTO implements Serializable {
             this.updatedDt = user.getUpdatedDt();
             this.loginDt = user.getLoginDt();
 
+            // contact, if set
+            if (user.getContact() != null) {
+                Contact contact = user.getContact();
+
+                this.email = contact.getEmail();
+                this.phone = contact.getPhone();
+                this.skype = contact.getSkype();
+                this.facebook = contact.getFacebook();
+                this.linkedin = contact.getLinkedin();
+                this.website = contact.getWebsite();
+                this.contactNote = contact.getNote();
+            }
+
             // role, if set
             if (user.getRole() != null) {
                 roleDTO = new RoleDTO(user.getRole());
             }
+
             // address, if set
             if (user.getAddress() != null) {
                 addressDTO = new AddressDTO(user.getAddress());
@@ -51,8 +61,14 @@ public class UserDTO implements Serializable {
     private String surname;
     private String gender;
 
+    // contact
     private String email;
     private String phone;
+    private String skype;
+    private String facebook;
+    private String linkedin;
+    private String website;
+    private String contactNote;
 
     private boolean enabled;
 

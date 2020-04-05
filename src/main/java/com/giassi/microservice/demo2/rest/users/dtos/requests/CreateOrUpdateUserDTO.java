@@ -31,7 +31,12 @@ public class CreateOrUpdateUserDTO implements Serializable {
 
     // contact information
     private String email;
-    private String phone;
+    private String mobile;
+    private String skype;
+    private String facebook;
+    private String linkedin;
+    private String website;
+    private String contactNote;
 
     // address information
     private String address;

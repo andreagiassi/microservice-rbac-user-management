@@ -19,14 +19,14 @@ INSERT INTO users(id, username, password, name, surname, gender, role_id) VALUES
 
 UPDATE users SET ENABLED = false WHERE id = 6;
 
-INSERT INTO contacts(user_id, email, phone) VALUES (1, 'andrea.test@gmail.com', NULL);
-INSERT INTO contacts(user_id, email, phone) VALUES (2, 'mario.rossi@gmail.com', NULL);
-INSERT INTO contacts(user_id, email, phone) VALUES (3, 'stefania.verdi@gmail.com', NULL);
-INSERT INTO contacts(user_id, email, phone) VALUES (4, 'veronica.gialli@gmail.com', NULL);
-INSERT INTO contacts(user_id, email, phone) VALUES (5, 'mark.green@gmail.com', NULL);
-INSERT INTO contacts(user_id, email, phone) VALUES (6, 'paul.ludwing@gmail.com', NULL);
-INSERT INTO contacts(user_id, email, phone) VALUES (7, 'jennifer.red@gmail.com', NULL);
-INSERT INTO contacts(user_id, email, phone) VALUES (8, 'karina.yellow@gmail.com', NULL);
+INSERT INTO contacts(user_id, email, phone, note) VALUES (1, 'andrea.test@gmail.com', NULL, NULL);
+INSERT INTO contacts(user_id, email, phone, note) VALUES (2, 'mario.rossi@gmail.com', NULL, 'test contact note on mario rossi');
+INSERT INTO contacts(user_id, email, phone, note) VALUES (3, 'stefania.verdi@gmail.com', NULL, NULL);
+INSERT INTO contacts(user_id, email, phone, note) VALUES (4, 'veronica.gialli@gmail.com', NULL, NULL);
+INSERT INTO contacts(user_id, email, phone, note) VALUES (5, 'mark.green@gmail.com', NULL, NULL);
+INSERT INTO contacts(user_id, email, phone, note) VALUES (6, 'paul.ludwing@gmail.com', NULL, NULL);
+INSERT INTO contacts(user_id, email, phone, note) VALUES (7, 'jennifer.red@gmail.com', NULL, NULL);
+INSERT INTO contacts(user_id, email, phone, note) VALUES (8, 'karina.yellow@gmail.com', NULL, NULL);
 
 insert into addresses(user_id, address, address2, city, country, zip_code) values (2, 'Via Filzi 2', 'Borgo Teresiano', 'Florence', 'Italy', '50100');
 insert into addresses(user_id, address, address2, city, country, zip_code) values (7, 'Piazza Grande 12', 'Gran canal', 'Venice', 'Italy', '30100');

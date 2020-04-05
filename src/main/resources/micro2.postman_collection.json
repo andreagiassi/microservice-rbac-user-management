@@ -175,7 +175,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": \"1\",\n    \"username\": \"andrea\",\n    \"password\": \"Test!123\",\n    \"name\": \"Andrea\",\n    \"surname\": \"Giassi\",\n    \"email\": \"test@gmail.com\",\n    \"enabled\": \"true\",\n    \"gender\": \"MALE\",\n    \"phone\" : \"+35311442266\",\n    \"roleId\" : \"2\",\n    \"note\" : \"changed phone and email for test\",\n    \"address\": \"Via rimini 79\",\n    \"city\": \"Florence\",\n    \"country\": \"Italy\",\n    \"zipCode\": \"50100\"\n}",
+					"raw": "{\n    \"id\": \"1\",\n    \"username\": \"andrea\",\n    \"password\": \"Test!123\",\n    \"name\": \"Andrea\",\n    \"surname\": \"Giassi\",\n    \"email\": \"test@gmail.com\",\n    \"enabled\": \"true\",\n    \"gender\": \"MALE\",\n    \"phone\" : \"+35311442266\",\n    \"roleId\" : \"2\",\n    \"note\" : \"changed phone and email for test\",\n    \"address\": \"Via rimini 79\",\n    \"city\": \"Florence\",\n    \"country\": \"Italy\",\n    \"zipCode\": \"50100\",\n    \"skype\": \"andreaSkype\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"

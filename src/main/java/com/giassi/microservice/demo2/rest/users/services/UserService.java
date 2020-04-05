@@ -179,7 +179,12 @@ public class UserService {
         // set contact
         Contact contact = new Contact();
         contact.setEmail(createUserDTO.getEmail());
-        contact.setPhone(createUserDTO.getPhone());
+        contact.setPhone(createUserDTO.getMobile());
+        contact.setSkype(createUserDTO.getSkype());
+        contact.setFacebook(createUserDTO.getFacebook());
+        contact.setLinkedin(createUserDTO.getLinkedin());
+        contact.setWebsite(createUserDTO.getWebsite());
+        contact.setNote(createUserDTO.getContactNote());
 
         addContactOnUser(userCreated, contact);
 
@@ -281,9 +286,15 @@ public class UserService {
         Role role = roleRepository.findById(updateUserDTO.getRoleId());
         user.setRole(role);
 
-        // set contact
-        user.getContact().setEmail(updateUserDTO.getEmail());
-        user.getContact().setPhone(updateUserDTO.getPhone());
+        // set contact, entity always present
+        Contact contact = user.getContact();
+        contact.setEmail(updateUserDTO.getEmail());
+        contact.setPhone(updateUserDTO.getMobile());
+        contact.setSkype(updateUserDTO.getSkype());
+        contact.setFacebook(updateUserDTO.getFacebook());
+        contact.setLinkedin(updateUserDTO.getLinkedin());
+        contact.setWebsite(updateUserDTO.getWebsite());
+        contact.setNote(updateUserDTO.getContactNote());
 
         user.setUpdatedDt(LocalDateTime.now());
 

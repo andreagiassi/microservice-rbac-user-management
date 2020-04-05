@@ -258,7 +258,7 @@ public class UserServiceTest {
                 .email("andrea.test@gmail.com")
                 .gender("MALE")
                 .username("marco")
-                .phone("+3531122334466")
+                .mobile("+3531122334466")
                 .enabled(true)
                 .roleId(1L).build();
 
@@ -315,7 +315,7 @@ public class UserServiceTest {
                 .email("andrea.test@gmail.com")
                 .gender("MALE")
                 .username("andrea")
-                .phone("+3531122334466")
+                .mobile("+3531122334466")
                 .enabled(true)
                 .roleId(1L)
                 .build();
@@ -341,7 +341,7 @@ public class UserServiceTest {
                 .gender("MALE")
                 .username("marco")
                 .password("Test!123")
-                .phone("+3531122334466")
+                .mobile("+3531122334466")
                 .enabled(true)
                 .roleId(1L)
                 .build();
@@ -367,7 +367,7 @@ public class UserServiceTest {
                 .gender("MALE")
                 .username("andrea")
                 .password("Test!123")
-                .phone("+3539988776655")
+                .mobile("+3539988776655")
                 .enabled(true)
                 .roleId(1L)
                 .address("via roma 3").city("Rome").country("Italy").zipCode("00100")

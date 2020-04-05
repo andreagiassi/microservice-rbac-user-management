@@ -28,6 +28,11 @@ CREATE TABLE `contacts` (
   user_id BIGINT(20) NOT NULL PRIMARY KEY,
   `email` varchar(255) NOT NULL UNIQUE,
   `phone` varchar(20) DEFAULT NULL,
+  skype varchar(255) DEFAULT NULL,
+  facebook varchar(255) DEFAULT NULL,
+  linkedin varchar(255) DEFAULT NULL,
+  website varchar(255) DEFAULT NULL,
+  note varchar(255) DEFAULT NULL,
   FOREIGN KEY (user_id) REFERENCES users(id)
 );
 

@@ -42,7 +42,7 @@ public class LoginRestControllerIntegrationTest {
 
     @Test
     public void test_invalid_login() {
-        // valid formal password but not correct for the given account
+        // use a formal valid password but not correct for the given account
         LoginRequestDTO loginRequest = new LoginRequestDTO("Andrea", "Test!123456");
 
         ResponseEntity<UserDTO> response = restTemplate.postForEntity("/login", loginRequest, UserDTO.class);

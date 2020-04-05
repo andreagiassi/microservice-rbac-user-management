@@ -71,7 +71,8 @@ public class UserRestControllerTest {
                .roleId(Role.USER)
                .note("created for test")
                .email("frank.blu@gmail.com")
-               .phone("+3531194334455")
+               .mobile("+3531194334455")
+                .skype("skype").facebook("facebook").linkedin("linkedin").website("www.test.com").contactNote("Test on contact")
                .address("dark road 1")
                .address2("salt hill")
                .city("Dublin")
@@ -101,8 +102,14 @@ public class UserRestControllerTest {
 
         assertEquals(true, userDTO.isEnabled());
         assertEquals("created for test", userDTO.getNote());
+
         assertEquals("frank.blu@gmail.com", userDTO.getEmail());
         assertEquals("+3531194334455", userDTO.getPhone());
+        assertEquals("skype", userDTO.getSkype());
+        assertEquals("facebook", userDTO.getFacebook());
+        assertEquals("linkedin", userDTO.getLinkedin());
+        assertEquals("www.test.com", userDTO.getWebsite());
+        assertEquals("Test on contact", userDTO.getContactNote());
 
         assertNotNull(userDTO.getAddressDTO());
         AddressDTO addressDTO = userDTO.getAddressDTO();
@@ -183,7 +190,8 @@ public class UserRestControllerTest {
                 .roleId(Role.USER)
                 .note("updated for test")
                 .email("anna.verdi@gmail.com")
-                .phone("+3531194334455")
+                .mobile("+3531194334455")
+                .skype("skype").facebook("facebook").linkedin("linkedin").website("www.test.com").contactNote("Test on contact")
                 .address("The sunny road 15")
                 .address2("Sunny valley")
                 .city("Dublin")
@@ -208,9 +216,15 @@ public class UserRestControllerTest {
         assertEquals("USER", userUpdatedDTO.getRoleDTO().getRole());
 
         assertEquals("updated for test", userUpdatedDTO.getNote());
+
+        // contact
         assertEquals("anna.verdi@gmail.com", userUpdatedDTO.getEmail());
         assertEquals("+3531194334455", userUpdatedDTO.getPhone());
-        assertEquals("anna.verdi@gmail.com", userUpdatedDTO.getEmail());
+        assertEquals("skype", userUpdatedDTO.getSkype());
+        assertEquals("facebook", userUpdatedDTO.getFacebook());
+        assertEquals("linkedin", userUpdatedDTO.getLinkedin());
+        assertEquals("www.test.com", userUpdatedDTO.getWebsite());
+        assertEquals("Test on contact", userUpdatedDTO.getContactNote());
 
         // address
         assertNotNull(userUpdatedDTO.getAddressDTO());
@@ -228,12 +242,12 @@ public class UserRestControllerTest {
     public void test_deleteUser() {
         // create a new user to test the deletion
         CreateUserAccountDTO quickAccount = CreateUserAccountDTO.builder()
-                .username("anna")
-                .password("Anna!123")
-                .name("Anna")
+                .username("anna2")
+                .password("Anna2!123")
+                .name("Anna2")
                 .surname("Verdi")
                 .gender("FEMALE")
-                .email("anna.verdi@gmail.com")
+                .email("anna2.verdi@gmail.com")
                 .build();
 
         String userQuickAccountURL = "/users/quickAccount";

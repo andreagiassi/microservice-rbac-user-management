@@ -26,6 +26,7 @@ public class UserTestHelper {
         Contact contact = new Contact();
         contact.setEmail(email);
         contact.setPhone(phone);
+        // omitted other contact fields
 
         user.setContact(contact);
 

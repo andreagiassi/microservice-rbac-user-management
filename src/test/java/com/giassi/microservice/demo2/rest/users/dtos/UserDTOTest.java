@@ -26,6 +26,11 @@ public class UserDTOTest {
         Contact contact = new Contact();
         contact.setEmail("email");
         contact.setPhone("+3531122334455");
+        contact.setSkype("skype");
+        contact.setFacebook("facebook");
+        contact.setLinkedin("linkedin");
+        contact.setWebsite("www.test.com");
+        contact.setNote("Test note");
 
         user.setContact(contact);
 
@@ -45,8 +50,14 @@ public class UserDTOTest {
         assertEquals(userDTO.getName(), user.getName());
         assertEquals(userDTO.getSurname(), user.getSurname());
 
+        // contact
         assertEquals(userDTO.getEmail(), user.getContact().getEmail());
         assertEquals(userDTO.getPhone(), user.getContact().getPhone());
+        assertEquals(userDTO.getSkype(), user.getContact().getSkype());
+        assertEquals(userDTO.getFacebook(), user.getContact().getFacebook());
+        assertEquals(userDTO.getLinkedin(), user.getContact().getLinkedin());
+        assertEquals(userDTO.getWebsite(), user.getContact().getWebsite());
+        assertEquals(userDTO.getContactNote(), user.getContact().getNote());
 
         assertEquals(userDTO.isEnabled(), user.isEnabled());
 

@@ -64,7 +64,7 @@ public class UserServiceSpringContextTest {
         createOrUpdateUserDTO.setGender("MALE");
         createOrUpdateUserDTO.setUsername("john");
         createOrUpdateUserDTO.setPassword("Test!123");
-        createOrUpdateUserDTO.setPhone("+3531122334499");
+        createOrUpdateUserDTO.setMobile("+3531122334499");
         createOrUpdateUserDTO.setRoleId(Role.ADMINISTRATOR);
         createOrUpdateUserDTO.setNote("test note");
         // set address
@@ -104,7 +104,7 @@ public class UserServiceSpringContextTest {
         updateUserDTO.setGender("MALE");
         updateUserDTO.setUsername("andrea");
         updateUserDTO.setPassword("Test!123");
-        updateUserDTO.setPhone("+35344335522"); // update the phone number
+        updateUserDTO.setMobile("+35344335522"); // update the phone number
         updateUserDTO.setRoleId(Role.ADMINISTRATOR);
         updateUserDTO.setNote("update phone number note");
         // set address
