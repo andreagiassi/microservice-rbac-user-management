@@ -1,7 +1,6 @@
-package com.giassi.microservice.demo2.rest.users.dtos;
+package com.giassi.microservice.demo2.rest.users.dtos.requests;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,15 +12,9 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class CreateUserAccountDTO implements Serializable {
+public class LoginRequestDTO implements Serializable {
 
     private String username;
     private String password;
-
-    private String name;
-    private String surname;
-    private String email;
-    private String gender;
 
 }

@@ -1,4 +1,4 @@
-package com.giassi.microservice.demo2.rest.users.dtos;
+package com.giassi.microservice.demo2.rest.users.dtos.requests;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

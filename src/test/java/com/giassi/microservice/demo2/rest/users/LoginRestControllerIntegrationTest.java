@@ -1,6 +1,7 @@
 package com.giassi.microservice.demo2.rest.users;
 
 import com.giassi.microservice.demo2.rest.users.dtos.UserDTO;
+import com.giassi.microservice.demo2.rest.users.dtos.requests.LoginRequestDTO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,9 @@ public class LoginRestControllerIntegrationTest {
 
     @Test
     public void test_valid_login() {
-        String loginURL = "/login?username=andrea&password=Test!123";
+        LoginRequestDTO loginRequest = new LoginRequestDTO("Andrea", "Test!123");
 
-        ResponseEntity<UserDTO> response = restTemplate.getForEntity(loginURL, UserDTO.class);
+        ResponseEntity<UserDTO> response = restTemplate.postForEntity("/login", loginRequest, UserDTO.class);
 
         assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
 
@@ -42,9 +43,9 @@ public class LoginRestControllerIntegrationTest {
     @Test
     public void test_invalid_login() {
         // valid formal password but not correct for the given account
-        String loginURL = "/login?username=andrea&password=Test!123456";
+        LoginRequestDTO loginRequest = new LoginRequestDTO("Andrea", "Test!123456");
 
-        ResponseEntity<UserDTO> response = restTemplate.getForEntity(loginURL, UserDTO.class);
+        ResponseEntity<UserDTO> response = restTemplate.postForEntity("/login", loginRequest, UserDTO.class);
 
         assertThat(response.getStatusCode(), equalTo(HttpStatus.BAD_REQUEST));
     }

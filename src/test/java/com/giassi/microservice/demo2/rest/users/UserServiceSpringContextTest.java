@@ -1,7 +1,7 @@
 package com.giassi.microservice.demo2.rest.users;
 
-import com.giassi.microservice.demo2.rest.users.dtos.CreateOrUpdateUserDTO;
-import com.giassi.microservice.demo2.rest.users.dtos.CreateUserAccountDTO;
+import com.giassi.microservice.demo2.rest.users.dtos.requests.CreateOrUpdateUserDTO;
+import com.giassi.microservice.demo2.rest.users.dtos.requests.CreateUserAccountDTO;
 import com.giassi.microservice.demo2.rest.users.entities.Role;
 import com.giassi.microservice.demo2.rest.users.entities.User;
 import com.giassi.microservice.demo2.rest.users.exceptions.UserNotFoundException;

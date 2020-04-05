@@ -68,26 +68,25 @@
 		{
 			"name": "login",
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\" : \"Andrea\",\n\t\"password\" : \"Test!123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "localhost:8090/login?username=andrea&password=Test!123",
+					"raw": "localhost:8090/login",
 					"host": [
 						"localhost"
 					],
 					"port": "8090",
 					"path": [
 						"login"
-					],
-					"query": [
-						{
-							"key": "username",
-							"value": "andrea"
-						},
-						{
-							"key": "password",
-							"value": "Test!123"
-						}
 					]
 				}
 			},

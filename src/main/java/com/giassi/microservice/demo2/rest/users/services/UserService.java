@@ -1,8 +1,8 @@
 package com.giassi.microservice.demo2.rest.users.services;
 
-import com.giassi.microservice.demo2.rest.users.dtos.CreateOrUpdateUserDTO;
-import com.giassi.microservice.demo2.rest.users.dtos.CreateUserAccountDTO;
 import com.giassi.microservice.demo2.rest.users.dtos.UserDTO;
+import com.giassi.microservice.demo2.rest.users.dtos.requests.CreateOrUpdateUserDTO;
+import com.giassi.microservice.demo2.rest.users.dtos.requests.CreateUserAccountDTO;
 import com.giassi.microservice.demo2.rest.users.entities.*;
 import com.giassi.microservice.demo2.rest.users.exceptions.*;
 import com.giassi.microservice.demo2.rest.users.repositories.AddressRepository;
@@ -332,6 +332,8 @@ public class UserService {
             // invalid username
             throw new InvalidLoginException("Invalid username or password");
         }
+
+        log.info(String.format("Login request from %s", username));
 
         // check the password
         if (EncryptionService.isPasswordValid(password, user.getPassword(), salt)) {
