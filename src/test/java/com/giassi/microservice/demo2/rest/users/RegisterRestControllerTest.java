@@ -56,7 +56,9 @@ public class RegisterRestControllerTest {
         assertEquals("Marco", userDTO.getName());
         assertEquals("Violet", userDTO.getSurname());
         assertEquals("MALE", userDTO.getGender());
-        assertEquals("marco.violet@gmail.com", userDTO.getEmail());
+
+        assertNotNull(userDTO.getContactDTO());
+        assertEquals("marco.violet@gmail.com", userDTO.getContactDTO().getEmail());
 
         // delete the created user
         userService.deleteUserById(userDTO.getId());

@@ -55,19 +55,19 @@ public class UserRestControllerIntegrationTest {
                 .contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.userList[0].name").value("Andrea"))
                 .andExpect(jsonPath("$.userList[0].surname").value("Giassi"))
-                .andExpect(jsonPath("$.userList[0].email").value("andrea.test@gmail.com"))
+                .andExpect(jsonPath("$.userList[0].contactDTO.email").value("andrea.test@gmail.com"))
                 .andExpect(jsonPath("$.userList[0].username").value("andrea"))
-                .andExpect(jsonPath("$.userList[0].phone").value("+3531122334455"))
+                .andExpect(jsonPath("$.userList[0].contactDTO.phone").value("+3531122334455"))
                 .andExpect(jsonPath("$.userList[1].name").value("Marco"))
                 .andExpect(jsonPath("$.userList[1].surname").value("Verdi"))
-                .andExpect(jsonPath("$.userList[1].email").value("marco.test@gmail.com"))
+                .andExpect(jsonPath("$.userList[1].contactDTO.email").value("marco.test@gmail.com"))
                 .andExpect(jsonPath("$.userList[1].username").value("marco"))
-                .andExpect(jsonPath("$.userList[1].phone").value("+3531122334466"))
+                .andExpect(jsonPath("$.userList[1].contactDTO.phone").value("+3531122334466"))
                 .andExpect(jsonPath("$.userList[2].name").value("Franco"))
                 .andExpect(jsonPath("$.userList[2].surname").value("Rossi"))
-                .andExpect(jsonPath("$.userList[2].email").value("franco.test@gmail.com"))
+                .andExpect(jsonPath("$.userList[2].contactDTO.email").value("franco.test@gmail.com"))
                 .andExpect(jsonPath("$.userList[2].username").value("franco"))
-                .andExpect(jsonPath("$.userList[2].phone").value("+3531122334477"));
+                .andExpect(jsonPath("$.userList[2].contactDTO.phone").value("+3531122334477"));
     }
 
     @Test
@@ -86,9 +86,9 @@ public class UserRestControllerIntegrationTest {
                         .contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("name").value("Andrea"))
                 .andExpect(jsonPath("surname").value("Giassi"))
-                .andExpect(jsonPath("email").value("andrea.test@gmail.com"))
+                .andExpect(jsonPath("contactDTO.email").value("andrea.test@gmail.com"))
                 .andExpect(jsonPath("username").value("andrea"))
-                .andExpect(jsonPath("phone").value("+3531122334455"));
+                .andExpect(jsonPath("contactDTO.phone").value("+3531122334455"));
     }
 
 }

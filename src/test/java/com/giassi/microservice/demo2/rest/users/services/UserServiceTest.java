@@ -73,8 +73,10 @@ public class UserServiceTest {
         assertEquals("marco" , userDTO.getUsername());
         assertEquals("Marco" , userDTO.getName());
         assertEquals("Rossi" , userDTO.getSurname());
-        assertEquals("marco.test@gmail.com" , userDTO.getEmail());
-        assertEquals("+3531122334466" , userDTO.getPhone());
+
+        assertNotNull(userDTO.getContactDTO());
+        assertEquals("marco.test@gmail.com" , userDTO.getContactDTO().getEmail());
+        assertEquals("+3531122334466" , userDTO.getContactDTO().getPhone());
     }
 
     @Test

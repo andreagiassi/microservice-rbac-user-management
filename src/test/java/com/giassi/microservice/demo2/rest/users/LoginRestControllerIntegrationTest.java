@@ -36,7 +36,10 @@ public class LoginRestControllerIntegrationTest {
         assertThat(userDTO.getId(), equalTo(1L));
         assertThat(userDTO.getName(), equalTo("Andrea"));
         assertThat(userDTO.getSurname(), equalTo("Test"));
-        assertThat(userDTO.getEmail(), equalTo("andrea.test@gmail.com"));
+
+        assertNotNull(userDTO.getContactDTO());
+
+        assertThat(userDTO.getContactDTO().getEmail(), equalTo("andrea.test@gmail.com"));
         assertThat(userDTO.isEnabled(), equalTo(true));
     }
 

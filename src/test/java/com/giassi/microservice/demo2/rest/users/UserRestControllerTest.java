@@ -1,6 +1,7 @@
 package com.giassi.microservice.demo2.rest.users;
 
 import com.giassi.microservice.demo2.rest.users.dtos.AddressDTO;
+import com.giassi.microservice.demo2.rest.users.dtos.ContactDTO;
 import com.giassi.microservice.demo2.rest.users.dtos.RoleDTO;
 import com.giassi.microservice.demo2.rest.users.dtos.UserDTO;
 import com.giassi.microservice.demo2.rest.users.dtos.requests.CreateOrUpdateUserDTO;
@@ -55,7 +56,7 @@ public class UserRestControllerTest {
         assertThat(userDTO.getId(), equalTo(1L));
         assertThat(userDTO.getName(), equalTo("Andrea"));
         assertThat(userDTO.getSurname(), equalTo("Test"));
-        assertThat(userDTO.getEmail(), equalTo("andrea.test@gmail.com"));
+        assertThat(userDTO.getContactDTO().getEmail(), equalTo("andrea.test@gmail.com"));
         assertThat(userDTO.isEnabled(), equalTo(true));
     }
 
@@ -103,13 +104,15 @@ public class UserRestControllerTest {
         assertEquals(true, userDTO.isEnabled());
         assertEquals("created for test", userDTO.getNote());
 
-        assertEquals("frank.blu@gmail.com", userDTO.getEmail());
-        assertEquals("+3531194334455", userDTO.getPhone());
-        assertEquals("skype", userDTO.getSkype());
-        assertEquals("facebook", userDTO.getFacebook());
-        assertEquals("linkedin", userDTO.getLinkedin());
-        assertEquals("www.test.com", userDTO.getWebsite());
-        assertEquals("Test on contact", userDTO.getContactNote());
+        ContactDTO contactDTO = userDTO.getContactDTO();
+
+        assertEquals("frank.blu@gmail.com", contactDTO.getEmail());
+        assertEquals("+3531194334455", contactDTO.getPhone());
+        assertEquals("skype", contactDTO.getSkype());
+        assertEquals("facebook", contactDTO.getFacebook());
+        assertEquals("linkedin", contactDTO.getLinkedin());
+        assertEquals("www.test.com", contactDTO.getWebsite());
+        assertEquals("Test on contact", contactDTO.getContactNote());
 
         assertNotNull(userDTO.getAddressDTO());
         AddressDTO addressDTO = userDTO.getAddressDTO();
@@ -186,13 +189,16 @@ public class UserRestControllerTest {
         assertEquals("updated for test", userUpdatedDTO.getNote());
 
         // contact
-        assertEquals("anna.verdi@gmail.com", userUpdatedDTO.getEmail());
-        assertEquals("+3531194334455", userUpdatedDTO.getPhone());
-        assertEquals("skype", userUpdatedDTO.getSkype());
-        assertEquals("facebook", userUpdatedDTO.getFacebook());
-        assertEquals("linkedin", userUpdatedDTO.getLinkedin());
-        assertEquals("www.test.com", userUpdatedDTO.getWebsite());
-        assertEquals("Test on contact", userUpdatedDTO.getContactNote());
+        ContactDTO contactDTO = userUpdatedDTO.getContactDTO();
+        assertNotNull(contactDTO);
+
+        assertEquals("anna.verdi@gmail.com", contactDTO.getEmail());
+        assertEquals("+3531194334455", contactDTO.getPhone());
+        assertEquals("skype", contactDTO.getSkype());
+        assertEquals("facebook", contactDTO.getFacebook());
+        assertEquals("linkedin", contactDTO.getLinkedin());
+        assertEquals("www.test.com", contactDTO.getWebsite());
+        assertEquals("Test on contact", contactDTO.getContactNote());
 
         // address
         assertNotNull(userUpdatedDTO.getAddressDTO());

@@ -23,16 +23,16 @@ public class UserDTOTest {
         user.setEnabled(true);
         user.setGender(Gender.MALE);
 
-        Contact contact = new Contact();
-        contact.setEmail("email");
-        contact.setPhone("+3531122334455");
-        contact.setSkype("skype");
-        contact.setFacebook("facebook");
-        contact.setLinkedin("linkedin");
-        contact.setWebsite("www.test.com");
-        contact.setNote("Test note");
+        Contact contactInput = new Contact();
+        contactInput.setEmail("email");
+        contactInput.setPhone("+3531122334455");
+        contactInput.setSkype("skype");
+        contactInput.setFacebook("facebook");
+        contactInput.setLinkedin("linkedin");
+        contactInput.setWebsite("www.test.com");
+        contactInput.setNote("Test note");
 
-        user.setContact(contact);
+        user.setContact(contactInput);
 
         LocalDateTime creationDt = LocalDateTime.of(2020, 2, 1, 12, 30);
         user.setCreationDt(creationDt);
@@ -51,13 +51,16 @@ public class UserDTOTest {
         assertEquals(userDTO.getSurname(), user.getSurname());
 
         // contact
-        assertEquals(userDTO.getEmail(), user.getContact().getEmail());
-        assertEquals(userDTO.getPhone(), user.getContact().getPhone());
-        assertEquals(userDTO.getSkype(), user.getContact().getSkype());
-        assertEquals(userDTO.getFacebook(), user.getContact().getFacebook());
-        assertEquals(userDTO.getLinkedin(), user.getContact().getLinkedin());
-        assertEquals(userDTO.getWebsite(), user.getContact().getWebsite());
-        assertEquals(userDTO.getContactNote(), user.getContact().getNote());
+        ContactDTO contactDTO = userDTO.getContactDTO();
+        assertNotNull(contactDTO);
+
+        assertEquals(userDTO.getContactDTO().getEmail(), user.getContact().getEmail());
+        assertEquals(userDTO.getContactDTO().getPhone(), user.getContact().getPhone());
+        assertEquals(userDTO.getContactDTO().getSkype(), user.getContact().getSkype());
+        assertEquals(userDTO.getContactDTO().getFacebook(), user.getContact().getFacebook());
+        assertEquals(userDTO.getContactDTO().getLinkedin(), user.getContact().getLinkedin());
+        assertEquals(userDTO.getContactDTO().getWebsite(), user.getContact().getWebsite());
+        assertEquals(userDTO.getContactDTO().getContactNote(), user.getContact().getNote());
 
         assertEquals(userDTO.isEnabled(), user.isEnabled());
 
