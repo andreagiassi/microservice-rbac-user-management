@@ -138,9 +138,9 @@ public class UserRestControllerTest {
                 .email("anna.verdi@gmail.com")
                 .build();
 
-        String userQuickAccountURL = "/users/quickAccount";
+        String registerAccountURL = "/users/register";
         HttpEntity<RegisterUserAccountDTO> requestCreate = new HttpEntity<>(quickAccount);
-        ResponseEntity<UserDTO> responseCreate = restTemplate.postForEntity(userQuickAccountURL, requestCreate, UserDTO.class);
+        ResponseEntity<UserDTO> responseCreate = restTemplate.postForEntity(registerAccountURL, requestCreate, UserDTO.class);
 
         assertThat(responseCreate.getStatusCode(), equalTo(HttpStatus.CREATED));
         UserDTO userDTO = responseCreate.getBody();
@@ -224,9 +224,9 @@ public class UserRestControllerTest {
                 .email("anna2.verdi@gmail.com")
                 .build();
 
-        String userQuickAccountURL = "/users/quickAccount";
+        String registerAccountURL = "/users/register";
         HttpEntity<RegisterUserAccountDTO> request = new HttpEntity<>(quickAccount);
-        ResponseEntity<UserDTO> response = restTemplate.postForEntity(userQuickAccountURL, request, UserDTO.class);
+        ResponseEntity<UserDTO> response = restTemplate.postForEntity(registerAccountURL, request, UserDTO.class);
 
         assertThat(response.getStatusCode(), equalTo(HttpStatus.CREATED));
         UserDTO userDTO = response.getBody();

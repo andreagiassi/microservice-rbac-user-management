@@ -42,7 +42,7 @@ public class RegisterRestControllerTest {
                 .email("marco.violet@gmail.com")
                 .build();
 
-        String userQuickAccountURL = "/users/quickAccount";
+        String userQuickAccountURL = "/users/register";
 
         HttpEntity<RegisterUserAccountDTO> request = new HttpEntity<>(quickAccount);
         ResponseEntity<UserDTO> response = restTemplate.postForEntity(userQuickAccountURL, request, UserDTO.class);
