@@ -161,7 +161,7 @@ public class UserServiceTest {
 
     @Test(expected = InvalidUserDataException.class)
     public void given_null_CreateUserAccountDTO_when_createNewUserAccount_throw_InvalidUserDataException() {
-        userService.createNewUserAccount(null);
+        userService.registerUserAccount(null);
     }
 
     @Test(expected = InvalidUserDataException.class)
@@ -180,7 +180,7 @@ public class UserServiceTest {
                 .password(UserTestHelper.TEST_PASSWORD_DECRYPTED)
                 .build();
 
-        userService.createNewUserAccount(registerUserAccountDTO);
+        userService.registerUserAccount(registerUserAccountDTO);
     }
 
     @Test(expected = InvalidUserDataException.class)
@@ -201,7 +201,7 @@ public class UserServiceTest {
                 .password(UserTestHelper.TEST_PASSWORD_DECRYPTED)
                 .build();
 
-        userService.createNewUserAccount(registerUserAccountDTO);
+        userService.registerUserAccount(registerUserAccountDTO);
     }
 
     @Test(expected = RoleNotFoundException.class)

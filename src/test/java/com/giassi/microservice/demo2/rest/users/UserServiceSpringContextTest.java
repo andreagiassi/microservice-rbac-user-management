@@ -42,7 +42,7 @@ public class UserServiceSpringContextTest {
         registerUserAccountDTO.setUsername("marco");
         registerUserAccountDTO.setPassword("Test!123");
 
-        User createdUser = userService.createNewUserAccount(registerUserAccountDTO);
+        User createdUser = userService.registerUserAccount(registerUserAccountDTO);
 
         assertNotNull(createdUser);
         assertEquals("Marco", createdUser.getName());

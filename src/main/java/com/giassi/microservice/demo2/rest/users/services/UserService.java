@@ -79,7 +79,7 @@ public class UserService {
     }
 
     @Transactional
-    public User createNewUserAccount(RegisterUserAccountDTO registerUserAccountDTO) {
+    public User registerUserAccount(RegisterUserAccountDTO registerUserAccountDTO) {
         if (registerUserAccountDTO == null) {
             throw new InvalidUserDataException("User account data cannot be null");
         }
