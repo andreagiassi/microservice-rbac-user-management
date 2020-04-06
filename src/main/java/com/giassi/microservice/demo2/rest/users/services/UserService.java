@@ -2,7 +2,7 @@ package com.giassi.microservice.demo2.rest.users.services;
 
 import com.giassi.microservice.demo2.rest.users.dtos.UserDTO;
 import com.giassi.microservice.demo2.rest.users.dtos.requests.CreateOrUpdateUserDTO;
-import com.giassi.microservice.demo2.rest.users.dtos.requests.CreateUserAccountDTO;
+import com.giassi.microservice.demo2.rest.users.dtos.requests.RegisterUserAccountDTO;
 import com.giassi.microservice.demo2.rest.users.entities.*;
 import com.giassi.microservice.demo2.rest.users.exceptions.*;
 import com.giassi.microservice.demo2.rest.users.repositories.AddressRepository;
@@ -79,26 +79,26 @@ public class UserService {
     }
 
     @Transactional
-    public User createNewUserAccount(CreateUserAccountDTO createUserAccountDTO) {
-        if (createUserAccountDTO == null) {
+    public User createNewUserAccount(RegisterUserAccountDTO registerUserAccountDTO) {
+        if (registerUserAccountDTO == null) {
             throw new InvalidUserDataException("User account data cannot be null");
         }
 
-        checkIfUsernameNotUsed(createUserAccountDTO.getUsername());
-        passwordValidator.checkPassword(createUserAccountDTO.getPassword());
-        checkIfEmailNotUsed(createUserAccountDTO.getEmail());
+        checkIfUsernameNotUsed(registerUserAccountDTO.getUsername());
+        passwordValidator.checkPassword(registerUserAccountDTO.getPassword());
+        checkIfEmailNotUsed(registerUserAccountDTO.getEmail());
 
         // create the new user account: not all the user information required
         User user = new User();
-        user.setUsername(createUserAccountDTO.getUsername());
-        user.setPassword(EncryptionService.encrypt(createUserAccountDTO.getPassword(), salt));
+        user.setUsername(registerUserAccountDTO.getUsername());
+        user.setPassword(EncryptionService.encrypt(registerUserAccountDTO.getPassword(), salt));
 
-        user.setName(createUserAccountDTO.getName());
-        user.setSurname(createUserAccountDTO.getSurname());
+        user.setName(registerUserAccountDTO.getName());
+        user.setSurname(registerUserAccountDTO.getSurname());
         user.setEnabled(true);
 
         // set gender
-        Gender gender = Gender.getValidGender(createUserAccountDTO.getGender());
+        Gender gender = Gender.getValidGender(registerUserAccountDTO.getGender());
         user.setGender(gender);
 
         setUserRole(user, Role.USER);
@@ -108,7 +108,7 @@ public class UserService {
 
         // set contact
         Contact contact = new Contact();
-        contact.setEmail(createUserAccountDTO.getEmail());
+        contact.setEmail(registerUserAccountDTO.getEmail());
 
         addContactOnUser(userCreated, contact);
 

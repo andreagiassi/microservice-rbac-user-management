@@ -14,7 +14,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CreateUserAccountDTO implements Serializable {
+public class RegisterUserAccountDTO implements Serializable {
 
     private String username;
     private String password;

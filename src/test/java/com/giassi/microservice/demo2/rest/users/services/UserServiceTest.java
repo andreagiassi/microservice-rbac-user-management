@@ -2,7 +2,7 @@ package com.giassi.microservice.demo2.rest.users.services;
 
 import com.giassi.microservice.demo2.rest.users.dtos.UserDTO;
 import com.giassi.microservice.demo2.rest.users.dtos.requests.CreateOrUpdateUserDTO;
-import com.giassi.microservice.demo2.rest.users.dtos.requests.CreateUserAccountDTO;
+import com.giassi.microservice.demo2.rest.users.dtos.requests.RegisterUserAccountDTO;
 import com.giassi.microservice.demo2.rest.users.entities.Gender;
 import com.giassi.microservice.demo2.rest.users.entities.Role;
 import com.giassi.microservice.demo2.rest.users.entities.User;
@@ -169,7 +169,7 @@ public class UserServiceTest {
 
         given(userRepository.findByUsername("andrea")).willReturn(userDataForTest);
 
-        CreateUserAccountDTO createUserAccountDTO = CreateUserAccountDTO.builder()
+        RegisterUserAccountDTO registerUserAccountDTO = RegisterUserAccountDTO.builder()
                 .name("Andrea")
                 .surname("Giassi")
                 .email("andrea.test@gmail.com")
@@ -178,7 +178,7 @@ public class UserServiceTest {
                 .password(UserTestHelper.TEST_PASSWORD_DECRYPTED)
                 .build();
 
-        userService.createNewUserAccount(createUserAccountDTO);
+        userService.createNewUserAccount(registerUserAccountDTO);
     }
 
     @Test(expected = InvalidUserDataException.class)
@@ -189,7 +189,7 @@ public class UserServiceTest {
         given(userRepository.findByEmail("andrea.test@gmail.com")).willReturn(userDataForTest);
 
         // existing email
-        CreateUserAccountDTO createUserAccountDTO = CreateUserAccountDTO.builder()
+        RegisterUserAccountDTO registerUserAccountDTO = RegisterUserAccountDTO.builder()
                 .name("Marco")
                 .password("Marco!123")
                 .surname("Rossi")
@@ -199,7 +199,7 @@ public class UserServiceTest {
                 .password(UserTestHelper.TEST_PASSWORD_DECRYPTED)
                 .build();
 
-        userService.createNewUserAccount(createUserAccountDTO);
+        userService.createNewUserAccount(registerUserAccountDTO);
     }
 
     @Test(expected = RoleNotFoundException.class)

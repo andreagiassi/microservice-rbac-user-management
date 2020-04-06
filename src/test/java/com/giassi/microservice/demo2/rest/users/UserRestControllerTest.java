@@ -4,7 +4,7 @@ import com.giassi.microservice.demo2.rest.users.dtos.AddressDTO;
 import com.giassi.microservice.demo2.rest.users.dtos.RoleDTO;
 import com.giassi.microservice.demo2.rest.users.dtos.UserDTO;
 import com.giassi.microservice.demo2.rest.users.dtos.requests.CreateOrUpdateUserDTO;
-import com.giassi.microservice.demo2.rest.users.dtos.requests.CreateUserAccountDTO;
+import com.giassi.microservice.demo2.rest.users.dtos.requests.RegisterUserAccountDTO;
 import com.giassi.microservice.demo2.rest.users.entities.Role;
 import com.giassi.microservice.demo2.rest.users.entities.User;
 import com.giassi.microservice.demo2.rest.users.repositories.UserRepository;
@@ -124,41 +124,9 @@ public class UserRestControllerTest {
     }
 
     @Test
-    public void test_createNewUserAccount() {
-        // create a new user using the quick account endpoint
-        CreateUserAccountDTO quickAccount = CreateUserAccountDTO.builder()
-                .username("violet")
-                .password("Violet!123")
-                .name("Marco")
-                .surname("Violet")
-                .gender("MALE")
-                .email("marco.violet@gmail.com")
-                .build();
-
-        String userQuickAccountURL = "/users/quickAccount";
-
-        HttpEntity<CreateUserAccountDTO> request = new HttpEntity<>(quickAccount);
-        ResponseEntity<UserDTO> response = restTemplate.postForEntity(userQuickAccountURL, request, UserDTO.class);
-
-        assertThat(response.getStatusCode(), equalTo(HttpStatus.CREATED));
-
-        UserDTO userDTO = response.getBody();
-
-        assertNotNull(userDTO);
-        assertEquals("violet", userDTO.getUsername());
-        assertEquals("Marco", userDTO.getName());
-        assertEquals("Violet", userDTO.getSurname());
-        assertEquals("MALE", userDTO.getGender());
-        assertEquals("marco.violet@gmail.com", userDTO.getEmail());
-
-        // delete the created user
-        userService.deleteUserById(userDTO.getId());
-    }
-
-    @Test
     public void test_updateUser() {
         // create a new user to update
-        CreateUserAccountDTO quickAccount = CreateUserAccountDTO.builder()
+        RegisterUserAccountDTO quickAccount = RegisterUserAccountDTO.builder()
                 .username("anna")
                 .password("Anna!123")
                 .name("Anna")
@@ -168,7 +136,7 @@ public class UserRestControllerTest {
                 .build();
 
         String userQuickAccountURL = "/users/quickAccount";
-        HttpEntity<CreateUserAccountDTO> requestCreate = new HttpEntity<>(quickAccount);
+        HttpEntity<RegisterUserAccountDTO> requestCreate = new HttpEntity<>(quickAccount);
         ResponseEntity<UserDTO> responseCreate = restTemplate.postForEntity(userQuickAccountURL, requestCreate, UserDTO.class);
 
         assertThat(responseCreate.getStatusCode(), equalTo(HttpStatus.CREATED));
@@ -241,7 +209,7 @@ public class UserRestControllerTest {
     @Test
     public void test_deleteUser() {
         // create a new user to test the deletion
-        CreateUserAccountDTO quickAccount = CreateUserAccountDTO.builder()
+        RegisterUserAccountDTO quickAccount = RegisterUserAccountDTO.builder()
                 .username("anna2")
                 .password("Anna2!123")
                 .name("Anna2")
@@ -251,7 +219,7 @@ public class UserRestControllerTest {
                 .build();
 
         String userQuickAccountURL = "/users/quickAccount";
-        HttpEntity<CreateUserAccountDTO> request = new HttpEntity<>(quickAccount);
+        HttpEntity<RegisterUserAccountDTO> request = new HttpEntity<>(quickAccount);
         ResponseEntity<UserDTO> response = restTemplate.postForEntity(userQuickAccountURL, request, UserDTO.class);
 
         assertThat(response.getStatusCode(), equalTo(HttpStatus.CREATED));

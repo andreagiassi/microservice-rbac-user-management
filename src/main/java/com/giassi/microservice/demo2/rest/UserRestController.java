@@ -3,7 +3,6 @@ package com.giassi.microservice.demo2.rest;
 import com.giassi.microservice.demo2.rest.users.dtos.UserDTO;
 import com.giassi.microservice.demo2.rest.users.dtos.UserListDTO;
 import com.giassi.microservice.demo2.rest.users.dtos.requests.CreateOrUpdateUserDTO;
-import com.giassi.microservice.demo2.rest.users.dtos.requests.CreateUserAccountDTO;
 import com.giassi.microservice.demo2.rest.users.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,12 +29,6 @@ public class UserRestController {
     @PostMapping
     public ResponseEntity<UserDTO> createUser(@RequestBody CreateOrUpdateUserDTO createOrUpdateUserDTO) {
         return new ResponseEntity(new UserDTO(userService.createUser(createOrUpdateUserDTO)), null, HttpStatus.CREATED);
-    }
-
-    // quick account creation: no all the user information are required
-    @PostMapping("/quickAccount")
-    public ResponseEntity<UserDTO> createNewUserAccount(@RequestBody CreateUserAccountDTO createUserAccountDTO) {
-        return new ResponseEntity(new UserDTO(userService.createNewUserAccount(createUserAccountDTO)), null, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")

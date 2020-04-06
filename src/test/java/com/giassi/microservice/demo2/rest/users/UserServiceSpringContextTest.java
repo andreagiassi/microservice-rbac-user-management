@@ -1,7 +1,7 @@
 package com.giassi.microservice.demo2.rest.users;
 
 import com.giassi.microservice.demo2.rest.users.dtos.requests.CreateOrUpdateUserDTO;
-import com.giassi.microservice.demo2.rest.users.dtos.requests.CreateUserAccountDTO;
+import com.giassi.microservice.demo2.rest.users.dtos.requests.RegisterUserAccountDTO;
 import com.giassi.microservice.demo2.rest.users.entities.Role;
 import com.giassi.microservice.demo2.rest.users.entities.User;
 import com.giassi.microservice.demo2.rest.users.exceptions.UserNotFoundException;
@@ -34,15 +34,15 @@ public class UserServiceSpringContextTest {
 
     @Test
     public void given_valid_user_data_when_createNewUserAccount_return_createdUser() {
-        CreateUserAccountDTO createUserAccountDTO = new CreateUserAccountDTO();
-        createUserAccountDTO.setName("Marco");
-        createUserAccountDTO.setSurname("Rossi");
-        createUserAccountDTO.setEmail("marco.test@gmail.com");
-        createUserAccountDTO.setGender("MALE");
-        createUserAccountDTO.setUsername("marco");
-        createUserAccountDTO.setPassword("Test!123");
+        RegisterUserAccountDTO registerUserAccountDTO = new RegisterUserAccountDTO();
+        registerUserAccountDTO.setName("Marco");
+        registerUserAccountDTO.setSurname("Rossi");
+        registerUserAccountDTO.setEmail("marco.test@gmail.com");
+        registerUserAccountDTO.setGender("MALE");
+        registerUserAccountDTO.setUsername("marco");
+        registerUserAccountDTO.setPassword("Test!123");
 
-        User createdUser = userService.createNewUserAccount(createUserAccountDTO);
+        User createdUser = userService.createNewUserAccount(registerUserAccountDTO);
 
         assertNotNull(createdUser);
         assertEquals("Marco", createdUser.getName());
