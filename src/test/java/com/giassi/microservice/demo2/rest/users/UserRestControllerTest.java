@@ -23,6 +23,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.net.URI;
 import java.util.Optional;
+import java.util.Set;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
@@ -69,7 +70,6 @@ public class UserRestControllerTest {
                .surname("Blu")
                .gender("MALE")
                .enabled(true)
-               .roleId(Role.USER)
                .note("created for test")
                .email("frank.blu@gmail.com")
                .mobile("+3531194334455")
@@ -96,10 +96,9 @@ public class UserRestControllerTest {
         assertEquals("Blu", userDTO.getSurname());
         assertEquals("MALE", userDTO.getGender());
 
-        RoleDTO roleDTO = userDTO.getRoleDTO();
+        Set<RoleDTO> roleDTO = userDTO.getRoleDTOSet();
         assertNotNull(roleDTO);
-        assertEquals(Long.valueOf(1) ,roleDTO.getId());
-        assertEquals("USER", roleDTO.getRole());
+        assertTrue(roleDTO.contains(new RoleDTO(Role.USER, "USER")));
 
         assertEquals(true, userDTO.isEnabled());
         assertEquals("created for test", userDTO.getNote());
@@ -158,7 +157,6 @@ public class UserRestControllerTest {
                 .surname("Verdi")
                 .gender("FEMALE")
                 .enabled(true)
-                .roleId(Role.USER)
                 .note("updated for test")
                 .email("anna.verdi@gmail.com")
                 .mobile("+3531194334455")
@@ -183,8 +181,8 @@ public class UserRestControllerTest {
         assertEquals(true, userUpdatedDTO.isEnabled());
 
         // role
-        assertNotNull(userUpdatedDTO.getRoleDTO());
-        assertEquals("USER", userUpdatedDTO.getRoleDTO().getRole());
+        assertNotNull(userUpdatedDTO.getRoleDTOSet());
+        assertTrue(userUpdatedDTO.getRoleDTOSet().contains(new RoleDTO(Role.USER, "USER")));
 
         assertEquals("updated for test", userUpdatedDTO.getNote());
 

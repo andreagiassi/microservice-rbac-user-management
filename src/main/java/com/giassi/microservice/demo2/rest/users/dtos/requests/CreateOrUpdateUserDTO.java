@@ -25,8 +25,6 @@ public class CreateOrUpdateUserDTO implements Serializable {
 
     private boolean enabled;
 
-    private long roleId;
-
     private String note;
 
     // contact information

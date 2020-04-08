@@ -210,20 +210,23 @@ public class UserServiceTest {
                 "Giassi", "andrea.test@gmail.com", "+3531122334455");
 
         // role doesn't exists
-        userService.setUserRole(userDataForTest, 1);
+        userService.addUserRole(userDataForTest, 1);
     }
 
     @Test
-    public void given_valid_role_id_when_setUserRole_throw_RoleNotFoundException() {
+    public void given_valid_role_id_when_setUserRole_returnUser() {
         User userDataForTest = getUserTestData(1L, "andrea", "Andrea",
                 "Giassi", "andrea.test@gmail.com", "+3531122334455");
 
-        given(roleRepository.findById(1L)).willReturn(new Role(1L, "USER"));
+        given(roleRepository.findById(Role.USER)).willReturn(new Role(Role.USER, "USER"));
 
-        userService.setUserRole(userDataForTest, 1);
+        userService.addUserRole(userDataForTest, Role.USER);
 
         assertNotNull(userDataForTest);
-        assertEquals(Long.valueOf(1L) , userDataForTest.getRole().getId());
+
+        Role roleUser = new Role(Role.USER, "USER");
+        assertTrue(userDataForTest.getRoles().contains(roleUser));
+
         assertEquals("andrea", userDataForTest.getUsername());
         assertEquals("Andrea", userDataForTest.getName());
         assertEquals("Giassi", userDataForTest.getSurname());
@@ -261,8 +264,7 @@ public class UserServiceTest {
                 .gender("MALE")
                 .username("marco")
                 .mobile("+3531122334466")
-                .enabled(true)
-                .roleId(1L).build();
+                .enabled(true).build();
 
         User userDataForTest = getUserTestData(1L, "andrea", "Andrea",
                 "Giassi", "andrea.test@gmail.com", "+3531122334455");
@@ -319,7 +321,6 @@ public class UserServiceTest {
                 .username("andrea")
                 .mobile("+3531122334466")
                 .enabled(true)
-                .roleId(1L)
                 .build();
 
         User userDataForTest = getUserTestData(1L, "andrea", "Andrea",
@@ -345,7 +346,6 @@ public class UserServiceTest {
                 .password("Test!123")
                 .mobile("+3531122334466")
                 .enabled(true)
-                .roleId(1L)
                 .build();
 
         User userDataForTest = getUserTestData(1L, "andrea", "Andrea",
@@ -371,7 +371,6 @@ public class UserServiceTest {
                 .password("Test!123")
                 .mobile("+3539988776655")
                 .enabled(true)
-                .roleId(1L)
                 .address("via roma 3").city("Rome").country("Italy").zipCode("00100")
                 .build();
 

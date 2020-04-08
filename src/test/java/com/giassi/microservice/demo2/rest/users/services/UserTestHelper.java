@@ -6,6 +6,8 @@ import com.giassi.microservice.demo2.rest.users.entities.Role;
 import com.giassi.microservice.demo2.rest.users.entities.User;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 public class UserTestHelper {
 
@@ -36,7 +38,11 @@ public class UserTestHelper {
         user.setUpdatedDt(LocalDateTime.of(2020, 2, 1, 16, 45));
         user.setLoginDt(null);
 
-        user.setRole(new Role(Role.USER, "USER"));
+        // roles
+        Set<Role> roleSet = new HashSet<>();
+        roleSet.add(new Role(Role.USER, "USER"));
+
+        user.setRoles(roleSet);
         return user;
     }
 

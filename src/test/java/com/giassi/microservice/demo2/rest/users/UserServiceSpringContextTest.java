@@ -65,7 +65,6 @@ public class UserServiceSpringContextTest {
         createOrUpdateUserDTO.setUsername("john");
         createOrUpdateUserDTO.setPassword("Test!123");
         createOrUpdateUserDTO.setMobile("+3531122334499");
-        createOrUpdateUserDTO.setRoleId(Role.ADMINISTRATOR);
         createOrUpdateUserDTO.setNote("test note");
         // set address
         createOrUpdateUserDTO.setAddress("via Frescobaldi 123");
@@ -86,7 +85,10 @@ public class UserServiceSpringContextTest {
                 EncryptionService.DEFAULT_SALT));
 
         assertEquals("+3531122334499", createdUser.getContact().getPhone());
-        assertEquals("ADMINISTRATOR", createdUser.getRole().getRole());
+
+        Role adminRole = new Role(Role.USER, "USER");
+        assertTrue(createdUser.getRoles().contains(adminRole));
+
         assertEquals("test note", createdUser.getNote());
         // check on address
         assertEquals("via Frescobaldi 123" , createdUser.getAddress().getAddress());
@@ -105,7 +107,6 @@ public class UserServiceSpringContextTest {
         updateUserDTO.setUsername("andrea");
         updateUserDTO.setPassword("Test!123");
         updateUserDTO.setMobile("+35344335522"); // update the phone number
-        updateUserDTO.setRoleId(Role.ADMINISTRATOR);
         updateUserDTO.setNote("update phone number note");
         // set address
         updateUserDTO.setAddress("via Frescobaldi 123");
@@ -124,7 +125,10 @@ public class UserServiceSpringContextTest {
         assertEquals("1d/NZaEqNgtEomytAPrwm/+QjmbudLg33oeEk77Xh88=", updatedUser.getPassword());
         assertEquals("MALE", updatedUser.getGender().name());
         assertEquals("+35344335522", updatedUser.getContact().getPhone());
-        assertEquals("ADMINISTRATOR", updatedUser.getRole().getRole());
+
+        Role adminRole = new Role(Role.USER, "USER");
+        assertTrue(updatedUser.getRoles().contains(adminRole));
+
         assertEquals("update phone number note", updatedUser.getNote());
         // check on address
         assertEquals("via Frescobaldi 123", updatedUser.getAddress().getAddress());

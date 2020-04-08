@@ -5,6 +5,8 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 public class UserDTO implements Serializable {
@@ -29,14 +31,15 @@ public class UserDTO implements Serializable {
             this.updatedDt = user.getUpdatedDt();
             this.loginDt = user.getLoginDt();
 
+            // role, if set
+            if (user.getRoles() != null) {
+                roleDTOSet = new HashSet<>();
+                user.getRoles().stream().forEach(e -> roleDTOSet.add(new RoleDTO(e)));
+            }
+
             // contact, if set
             if (user.getContact() != null) {
                 this.contactDTO = new ContactDTO(user.getContact());
-            }
-
-            // role, if set
-            if (user.getRole() != null) {
-                this.roleDTO = new RoleDTO(user.getRole());
             }
 
             // address, if set
@@ -61,8 +64,9 @@ public class UserDTO implements Serializable {
     private LocalDateTime loginDt;
 
     // additional information
+    private Set<RoleDTO> roleDTOSet;
+
     private ContactDTO contactDTO;
-    private RoleDTO roleDTO;
     private AddressDTO addressDTO;
 
 }

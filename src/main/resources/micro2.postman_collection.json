@@ -31,16 +31,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://api.spoonacular.com/recipes/search",
-					"protocol": "https",
+					"raw": "localhost:8090/users",
 					"host": [
-						"api",
-						"spoonacular",
-						"com"
+						"localhost"
 					],
+					"port": "8090",
 					"path": [
-						"recipes",
-						"search"
+						"users"
 					]
 				}
 			},
@@ -106,7 +103,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\": \"john\",\n    \"password\": \"Test!123\",\n    \"name\": \"John\",\n    \"surname\": \"Green\",\n    \"email\": \"john.green@gmail.com\",\n    \"enabled\": true,\n    \"gender\": \"MALE\",\n    \"phone\" : \"+35322442266\",\n    \"roleId\" : \"1\",\n    \"note\" : \"this is mr john\"\n}",
+					"raw": "{\n    \"username\": \"john\",\n    \"password\": \"Test!123\",\n    \"name\": \"John\",\n    \"surname\": \"Green\",\n    \"email\": \"john.green@gmail.com\",\n    \"enabled\": true,\n    \"gender\": \"MALE\",\n    \"phone\" : \"+35322442266\",\n    \"note\" : \"this is mr john\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -175,7 +172,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": \"1\",\n    \"username\": \"andrea\",\n    \"password\": \"Test!123\",\n    \"name\": \"Andrea\",\n    \"surname\": \"Giassi\",\n    \"email\": \"test@gmail.com\",\n    \"enabled\": \"true\",\n    \"gender\": \"MALE\",\n    \"phone\" : \"+35311442266\",\n    \"roleId\" : \"2\",\n    \"note\" : \"changed phone and email for test\",\n    \"address\": \"Via rimini 79\",\n    \"city\": \"Florence\",\n    \"country\": \"Italy\",\n    \"zipCode\": \"50100\",\n    \"skype\": \"andreaSkype\"\n}",
+					"raw": "{\n    \"id\": \"1\",\n    \"username\": \"andrea\",\n    \"password\": \"Test!123\",\n    \"name\": \"Andrea\",\n    \"surname\": \"Giassi\",\n    \"email\": \"test@gmail.com\",\n    \"enabled\": \"true\",\n    \"gender\": \"MALE\",\n    \"phone\" : \"+35311442266\",\n    \"note\" : \"changed phone and email for test\",\n    \"address\": \"Via rimini 79\",\n    \"city\": \"Florence\",\n    \"country\": \"Italy\",\n    \"zipCode\": \"50100\",\n    \"skype\": \"andreaSkype\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"

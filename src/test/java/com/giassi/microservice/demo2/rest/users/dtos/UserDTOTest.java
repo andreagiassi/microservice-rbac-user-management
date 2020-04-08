@@ -7,9 +7,9 @@ import com.giassi.microservice.demo2.rest.users.entities.User;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 public class UserDTOTest {
 
@@ -40,8 +40,11 @@ public class UserDTOTest {
         LocalDateTime updatedDt = LocalDateTime.of(2020, 2, 1, 16, 45);
         user.setUpdatedDt(updatedDt);
 
-        Role role = new Role(Role.ADMINISTRATOR, "ADMINISTRATOR");
-        user.setRole(role);
+        Role roleUser = new Role(Role.USER, "USER");
+        Role roleAdmin = new Role(Role.ADMINISTRATOR, "ADMINISTRATOR");
+
+        user.getRoles().add(roleAdmin);
+        user.getRoles().add(roleUser);
 
         UserDTO userDTO = new UserDTO(user);
 
@@ -68,11 +71,12 @@ public class UserDTOTest {
         assertEquals(updatedDt, userDTO.getUpdatedDt());
         assertEquals(null, userDTO.getLoginDt());
 
-        assertNotNull(user.getRole());
+        assertNotNull(user.getRoles());
 
-        Role roleTest = user.getRole();
-        assertEquals(role.getId(), roleTest.getId());
-        assertEquals(role.getRole(), roleTest.getRole());
+        Set<Role> rolesTest = user.getRoles();
+
+        assertTrue(rolesTest.contains(roleUser));
+        assertTrue(rolesTest.contains(roleAdmin));
     }
 
 }

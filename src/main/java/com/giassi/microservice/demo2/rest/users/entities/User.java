@@ -4,6 +4,8 @@ import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="users")
@@ -53,8 +55,11 @@ public class User {
     @Basic
     private java.time.LocalDateTime loginDt;
 
-    @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="role_id")
-    private Role role;
+    @ManyToMany(fetch=FetchType.EAGER)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
 }

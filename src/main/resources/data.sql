@@ -1,21 +1,33 @@
 
 DELETE FROM roles;
+DELETE FROM users_roles;
+
 DELETE FROM contacts;
 DELETE FROM addresses;
+DELETE FROM users;
 
 INSERT INTO roles(id, role) VALUES (1, 'USER');
 INSERT INTO roles(id, role) VALUES (2, 'ADMINISTRATOR');
 
-DELETE FROM users;
+INSERT INTO users(id, username, password, name, surname, gender) VALUES (1, 'andrea', '1d/NZaEqNgtEomytAPrwm/+QjmbudLg33oeEk77Xh88=', 'Andrea', 'Test', 0);
+INSERT INTO users(id, username, password, name, surname, gender) VALUES (2, 'mario', '1d/NZaEqNgtEomytAPrwm/+QjmbudLg33oeEk77Xh88=', 'Mario', 'Rossi', 0);
+INSERT INTO users(id, username, password, name, surname, gender) VALUES (3, 'stefania', '1d/NZaEqNgtEomytAPrwm/+QjmbudLg33oeEk77Xh88=', 'Stefania', 'Verdi', 1);
+INSERT INTO users(id, username, password, name, surname, gender) VALUES (4, 'veronica', '1d/NZaEqNgtEomytAPrwm/+QjmbudLg33oeEk77Xh88=', 'Veronica', 'Gialli', 1);
+INSERT INTO users(id, username, password, name, surname, gender) VALUES (5, 'mark', '1d/NZaEqNgtEomytAPrwm/+QjmbudLg33oeEk77Xh88=', 'Mark', 'Green', 0);
+INSERT INTO users(id, username, password, name, surname, gender) VALUES (6, 'paul', '1d/NZaEqNgtEomytAPrwm/+QjmbudLg33oeEk77Xh88=', 'Paul', 'Ludwing', 0);
+INSERT INTO users(id, username, password, name, surname, gender) VALUES (7, 'jennifer', '1d/NZaEqNgtEomytAPrwm/+QjmbudLg33oeEk77Xh88=', 'Jennifer', 'Red', 0);
+INSERT INTO users(id, username, password, name, surname, gender) VALUES (8, 'karina', '1d/NZaEqNgtEomytAPrwm/+QjmbudLg33oeEk77Xh88=', 'Karina', 'Yellow', 1);
 
-INSERT INTO users(id, username, password, name, surname, gender, role_id) VALUES (1, 'andrea', '1d/NZaEqNgtEomytAPrwm/+QjmbudLg33oeEk77Xh88=', 'Andrea', 'Test', 0, 2);
-INSERT INTO users(id, username, password, name, surname, gender, role_id) VALUES (2, 'mario', '1d/NZaEqNgtEomytAPrwm/+QjmbudLg33oeEk77Xh88=', 'Mario', 'Rossi', 0, 1);
-INSERT INTO users(id, username, password, name, surname, gender, role_id) VALUES (3, 'stefania', '1d/NZaEqNgtEomytAPrwm/+QjmbudLg33oeEk77Xh88=', 'Stefania', 'Verdi', 1, 1);
-INSERT INTO users(id, username, password, name, surname, gender, role_id) VALUES (4, 'veronica', '1d/NZaEqNgtEomytAPrwm/+QjmbudLg33oeEk77Xh88=', 'Veronica', 'Gialli', 1, 1);
-INSERT INTO users(id, username, password, name, surname, gender, role_id) VALUES (5, 'mark', '1d/NZaEqNgtEomytAPrwm/+QjmbudLg33oeEk77Xh88=', 'Mark', 'Green', 0, 1);
-INSERT INTO users(id, username, password, name, surname, gender, role_id) VALUES (6, 'paul', '1d/NZaEqNgtEomytAPrwm/+QjmbudLg33oeEk77Xh88=', 'Paul', 'Ludwing', 0, 1);
-INSERT INTO users(id, username, password, name, surname, gender, role_id) VALUES (7, 'jennifer', '1d/NZaEqNgtEomytAPrwm/+QjmbudLg33oeEk77Xh88=', 'Jennifer', 'Red', 0, 1);
-INSERT INTO users(id, username, password, name, surname, gender, role_id) VALUES (8, 'karina', '1d/NZaEqNgtEomytAPrwm/+QjmbudLg33oeEk77Xh88=', 'Karina', 'Yellow', 1, 1);
+INSERT INTO users_roles(user_id, role_id) VALUES (1, 1);
+INSERT INTO users_roles(user_id, role_id) VALUES (1, 2);
+
+INSERT INTO users_roles(user_id, role_id) VALUES (2, 1);
+INSERT INTO users_roles(user_id, role_id) VALUES (3, 1);
+INSERT INTO users_roles(user_id, role_id) VALUES (4, 1);
+INSERT INTO users_roles(user_id, role_id) VALUES (5, 1);
+INSERT INTO users_roles(user_id, role_id) VALUES (6, 1);
+INSERT INTO users_roles(user_id, role_id) VALUES (7, 1);
+INSERT INTO users_roles(user_id, role_id) VALUES (8, 1);
 
 UPDATE users SET ENABLED = false WHERE id = 6;
 

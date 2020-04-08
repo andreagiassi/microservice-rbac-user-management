@@ -101,7 +101,7 @@ public class UserService {
         Gender gender = Gender.getValidGender(registerUserAccountDTO.getGender());
         user.setGender(gender);
 
-        setUserRole(user, Role.USER);
+        addUserRole(user, Role.USER);
         user.setCreationDt(LocalDateTime.now());
 
         User userCreated = userRepository.save(user);
@@ -170,9 +170,8 @@ public class UserService {
         user.setNote(createUserDTO.getNote());
         user.setCreationDt(LocalDateTime.now());
 
-        // set the role
-        Role role = roleRepository.findById(createUserDTO.getRoleId());
-        user.setRole(role);
+        // set default user the role
+        addUserRole(user, Role.USER);
 
         User userCreated = userRepository.save(user);
 
@@ -218,12 +217,12 @@ public class UserService {
         log.debug(String.format("Address information set on User %s .", user.getId()));
     }
 
-    public void setUserRole(User user, long roleId) {
+    public void addUserRole(User user, long roleId) {
         Role role = roleRepository.findById(roleId);
         if (role == null) {
             throw new RoleNotFoundException("Role cannot be null");
         }
-        user.setRole(role);
+        user.getRoles().add(role);
     }
 
     @Transactional
@@ -281,10 +280,6 @@ public class UserService {
 
         user.setEnabled(updateUserDTO.isEnabled());
         user.setNote(updateUserDTO.getNote());
-
-        // set the role
-        Role role = roleRepository.findById(updateUserDTO.getRoleId());
-        user.setRole(role);
 
         // set contact, entity always present
         Contact contact = user.getContact();

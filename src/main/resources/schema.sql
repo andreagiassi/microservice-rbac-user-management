@@ -1,7 +1,10 @@
 DROP TABLE IF EXISTS contacts;
 DROP TABLE IF EXISTS addresses;
-DROP TABLE IF EXISTS users;
+
+DROP TABLE IF EXISTS users_roles;
+
 DROP TABLE IF EXISTS roles;
+DROP TABLE IF EXISTS users;
 
 CREATE TABLE `roles` (
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -16,11 +19,17 @@ CREATE TABLE `users` (
   `surname` varchar(100) DEFAULT NULL,
   gender TINYINT DEFAULT NULL,
   enabled TINYINT DEFAULT '1',
-  `role_id` BIGINT(20) NOT NULL DEFAULT '1',
   creation_dt timestamp NOT NULL DEFAULT current_timestamp,
   updated_dt timestamp DEFAULT current_timestamp,
   login_dt timestamp NULL,
-  note varchar(255) DEFAULT NULL,
+  note varchar(255) DEFAULT NULL
+);
+
+CREATE TABLE users_roles (
+  `user_id` BIGINT(20) NOT NULL,
+  `role_id` BIGINT(20) NOT NULL,
+  PRIMARY KEY (user_id, role_id),
+  FOREIGN KEY (user_id) REFERENCES users(id),
   FOREIGN KEY (role_id) REFERENCES roles(id)
 );
 
@@ -49,9 +58,8 @@ CREATE TABLE `addresses` (
 DROP VIEW IF EXISTS enabled_users;
 
 CREATE VIEW enabled_users AS
-SELECT username, roles.role, contacts.email, contacts.phone
+SELECT username, contacts.email, contacts.phone
 FROM users
-INNER JOIN roles on roles.id = users.role_id
 INNER JOIN contacts on contacts.user_id = users.id
 WHERE
 enabled IS TRUE;

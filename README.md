@@ -11,13 +11,12 @@ Connect and discover more here:
 https://www.linkedin.com/in/andreagiassi/
 
 #### Overview
-Goal of the project is to offer a set of REST apis in order to manage a set of user's data.
+Goal of the project is to offer a general purpose microservice fur user's data management.
 
 The microservice is using Spring Boot 2 and JPA to exposes the REST apis and to retrieve and store the information
 on a database.
 
-The idea is to offer a simple microservice to reuse for simple 
-The software is handling account's data, contacts, roles and addresses and offer a simple login endpoint.
+The software is handling account's data, contacts, roles and addresses and offer simple endpoints.
 
 The project support the basic CRUD operations on an User account and the information are stored on a
  MySql database.
@@ -62,7 +61,7 @@ http://localhost:8090/swagger-ui.html
 
 Another alternative is to using an external tool, for example Postman (https://www.postman.com/).
 
-This project contains the export file micro2.postman_collection.json with some configured test calls.
+This project contains also the Postman export file micro2.postman_collection.json with some configured test calls.
 
 #### Security, encryption and decryption of sensible data
 I've followed the blog post below in order to implement an encryption and decryption method for sensible data such
