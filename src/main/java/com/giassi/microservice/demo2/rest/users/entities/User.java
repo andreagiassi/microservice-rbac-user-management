@@ -34,6 +34,7 @@ public class User {
     @Column(columnDefinition = "tinyint")
     private Gender gender;
 
+    // Birth date without a time-zone in the ISO-8601 calendar system, such as 2007-12-03
     @Column(name = "birth_date")
     private java.time.LocalDate birthDate;
 
