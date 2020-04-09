@@ -34,6 +34,9 @@ public class User {
     @Column(columnDefinition = "tinyint")
     private Gender gender;
 
+    @Column(name = "birth_date")
+    private java.time.LocalDate birthDate;
+
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Contact contact;
 

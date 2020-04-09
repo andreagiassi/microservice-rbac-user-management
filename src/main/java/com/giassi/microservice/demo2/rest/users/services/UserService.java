@@ -166,6 +166,9 @@ public class UserService {
         Gender gender = Gender.getValidGender(createUserDTO.getGender());
         user.setGender(gender);
 
+        // date of birth
+        user.setBirthDate(createUserDTO.getBirthDate());
+
         user.setEnabled(true);
         user.setNote(createUserDTO.getNote());
         user.setCreationDt(LocalDateTime.now());
@@ -277,6 +280,9 @@ public class UserService {
         // set gender
         Gender gender = Gender.getValidGender(updateUserDTO.getGender());
         user.setGender(gender);
+
+        // date of birth
+        user.setBirthDate(updateUserDTO.getBirthDate());
 
         user.setEnabled(updateUserDTO.isEnabled());
         user.setNote(updateUserDTO.getNote());

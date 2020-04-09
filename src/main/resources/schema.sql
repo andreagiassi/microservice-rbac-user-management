@@ -26,6 +26,7 @@ CREATE TABLE `users` (
   `name` varchar(100) DEFAULT NULL,
   `surname` varchar(100) DEFAULT NULL,
   gender TINYINT DEFAULT NULL,
+  birth_date DATE DEFAULT NULL,
   enabled TINYINT DEFAULT '1',
   creation_dt timestamp NOT NULL DEFAULT current_timestamp,
   updated_dt timestamp DEFAULT current_timestamp,

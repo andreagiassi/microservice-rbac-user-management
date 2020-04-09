@@ -23,6 +23,8 @@ public class UserDTO implements Serializable {
             this.surname = user.getSurname();
             this.gender = user.getGender().name();
 
+            this.birthDate = user.getBirthDate();
+
             this.enabled = user.isEnabled();
 
             this.note = user.getNote();
@@ -54,6 +56,7 @@ public class UserDTO implements Serializable {
     private String name;
     private String surname;
     private String gender;
+    private java.time.LocalDate birthDate;
 
     private boolean enabled;
 

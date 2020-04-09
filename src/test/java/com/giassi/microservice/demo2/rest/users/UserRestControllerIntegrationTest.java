@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
@@ -75,6 +76,8 @@ public class UserRestControllerIntegrationTest {
         User user1 = UserTestHelper.getUserTestData(1L, "andrea", "Andrea",
                 "Giassi", "andrea.test@gmail.com", "+3531122334455");
 
+        user1.setBirthDate(LocalDate.of(1977, 8, 14));
+
         given(userService.getUserById(1L)).willReturn(user1);
 
         Long userId = 1L;
@@ -88,6 +91,7 @@ public class UserRestControllerIntegrationTest {
                 .andExpect(jsonPath("surname").value("Giassi"))
                 .andExpect(jsonPath("contactDTO.email").value("andrea.test@gmail.com"))
                 .andExpect(jsonPath("username").value("andrea"))
+                .andExpect(jsonPath("birthDate").value("1977-08-14"))
                 .andExpect(jsonPath("contactDTO.phone").value("+3531122334455"));
     }
 

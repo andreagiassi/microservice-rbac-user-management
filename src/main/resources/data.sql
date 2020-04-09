@@ -19,6 +19,9 @@ INSERT INTO users(id, username, password, name, surname, gender) VALUES (6, 'pau
 INSERT INTO users(id, username, password, name, surname, gender) VALUES (7, 'jennifer', '1d/NZaEqNgtEomytAPrwm/+QjmbudLg33oeEk77Xh88=', 'Jennifer', 'Red', 0);
 INSERT INTO users(id, username, password, name, surname, gender) VALUES (8, 'karina', '1d/NZaEqNgtEomytAPrwm/+QjmbudLg33oeEk77Xh88=', 'Karina', 'Yellow', 1);
 
+UPDATE users SET ENABLED = false WHERE id = 6;
+UPDATE users SET birth_date = '1977-08-14' WHERE id = 1;
+
 INSERT INTO users_roles(user_id, role_id) VALUES (1, 1);
 INSERT INTO users_roles(user_id, role_id) VALUES (1, 2);
 
@@ -30,7 +33,7 @@ INSERT INTO users_roles(user_id, role_id) VALUES (6, 1);
 INSERT INTO users_roles(user_id, role_id) VALUES (7, 1);
 INSERT INTO users_roles(user_id, role_id) VALUES (8, 1);
 
-UPDATE users SET ENABLED = false WHERE id = 6;
+
 
 INSERT INTO contacts(user_id, email, phone, note) VALUES (1, 'andrea.test@gmail.com', NULL, NULL);
 INSERT INTO contacts(user_id, email, phone, note) VALUES (2, 'mario.rossi@gmail.com', NULL, 'test contact note on mario rossi');
