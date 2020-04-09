@@ -3,12 +3,20 @@ DROP TABLE IF EXISTS addresses;
 
 DROP TABLE IF EXISTS users_roles;
 
+DROP TABLE IF EXISTS permissions;
 DROP TABLE IF EXISTS roles;
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE `roles` (
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `role` varchar(80) NOT NULL UNIQUE
+);
+
+CREATE TABLE `permissions` (
+  `id` BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `role_id` BIGINT(20) NOT NULL,
+  `permission` varchar(80) NOT NULL UNIQUE,
+  FOREIGN KEY (role_id) REFERENCES roles(id)
 );
 
 CREATE TABLE `users` (

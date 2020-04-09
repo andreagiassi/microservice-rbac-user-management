@@ -1,6 +1,7 @@
 
-DELETE FROM roles;
+DELETE FROM permissions;
 DELETE FROM users_roles;
+DELETE FROM roles;
 
 DELETE FROM contacts;
 DELETE FROM addresses;

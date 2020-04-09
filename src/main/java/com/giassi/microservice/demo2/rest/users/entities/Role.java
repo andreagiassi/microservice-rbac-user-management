@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="roles")
@@ -25,5 +27,26 @@ public class Role {
 
     @Column(name="role", nullable = false)
     private String role;
+
+    public Role(Long id, String role) {
+        this.id = id;
+        this.role = role;
+    }
+
+    @OneToMany
+    @JoinColumn(name = "role_id")
+    private List<Permission> permissions= new ArrayList<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Role )) return false;
+        return id != null && id.equals(((Role) o).getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return 31;
+    }
 
 }
