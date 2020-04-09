@@ -27,6 +27,16 @@ The project is thought using the Docker technologies with two different containe
 The code has been tested using JUnit and Mockito, H2 in memory database and some standard libraries for the integration
 tests.
 
+#### Features
+
+* Register a new user account
+* Login with standard username & password
+* Retrieve single user account
+* Retrieve the list of all the existing user accounts
+* Update an user account (basic user data, contacts, address)
+* Add or remove a role on an existing user account
+* Delete a user account
+
 #### Spring Boot Microservice
 The microservice code is based on Java 8 and the popular Spring Boot 2 framework.
 
