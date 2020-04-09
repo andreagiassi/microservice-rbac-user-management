@@ -11,12 +11,11 @@ Connect and discover more here:
 https://www.linkedin.com/in/andreagiassi/
 
 #### Overview
-Goal of the project is to offer a general purpose microservice fur user's data management.
+Goal of this project is to offer a general purpose microservice fur user's data management.
 
-The microservice is using Spring Boot 2 and JPA to exposes the REST apis and to retrieve and store the information
-on a database.
-
-The software is handling account's data, contacts, roles and addresses and offer simple endpoints.
+The project is handling the user account's data, contacts and addresses and offers an implemented solution to manage
+ a Role Base Access Control system (RBAC). RBAC allows you to defines the necessary roles for your
+  application, defines the permissions for each role and associate them to the users.
 
 The project support the basic CRUD operations on an User account and the information are stored on a
  MySql database.
