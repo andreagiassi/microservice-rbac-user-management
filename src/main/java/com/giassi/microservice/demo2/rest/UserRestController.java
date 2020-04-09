@@ -46,4 +46,15 @@ public class UserRestController {
         userService.deleteUserById(id);
     }
 
+    // add or remove a Role on a User
+    @PostMapping("/{id}/roles/{roleId}")
+    public ResponseEntity<UserDTO> addRole(@PathVariable("id") Long id, @PathVariable("roleId") Long roleId) {
+        return new ResponseEntity(new UserDTO(userService.addRole(id, roleId)), null, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{id}/roles/{roleId}")
+    public ResponseEntity<UserDTO> removeRole(@PathVariable("id") Long id, @PathVariable("roleId") Long roleId) {
+        return new ResponseEntity(new UserDTO(userService.removeRole(id, roleId)), null, HttpStatus.OK);
+    }
+
 }

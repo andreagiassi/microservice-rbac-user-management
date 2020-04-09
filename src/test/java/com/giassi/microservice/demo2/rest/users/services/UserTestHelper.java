@@ -38,7 +38,7 @@ public class UserTestHelper {
         user.setUpdatedDt(LocalDateTime.of(2020, 2, 1, 16, 45));
         user.setLoginDt(null);
 
-        // roles
+        // add the USER role
         Set<Role> roleSet = new HashSet<>();
         roleSet.add(new Role(Role.USER, "USER"));
 

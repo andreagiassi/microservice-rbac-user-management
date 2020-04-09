@@ -221,11 +221,11 @@ public class UserService {
     }
 
     public void addUserRole(User user, long roleId) {
-        Role role = roleRepository.findById(roleId);
-        if (role == null) {
+        Optional<Role> roleOpt = roleRepository.findById(roleId);
+        if (!roleOpt.isPresent()) {
             throw new RoleNotFoundException("Role cannot be null");
         }
-        user.getRoles().add(role);
+        user.getRoles().add(roleOpt.get());
     }
 
     @Transactional
@@ -365,6 +365,60 @@ public class UserService {
         } else {
             throw new InvalidLoginException("Invalid username or password");
         }
+        return user;
+    }
+
+    // add or remove a role on user
+
+    @Transactional
+    public User addRole(Long id, Long roleId) {
+        // check user
+        Optional<User> userOpt = userRepository.findById(id);
+        if (!userOpt.isPresent()) {
+            throw new UserNotFoundException(String.format("User not found with Id = %s", id));
+        }
+        User user = userOpt.get();
+
+        // check role
+        Optional<Role> roleOpt = roleRepository.findById(roleId);
+        if (!roleOpt.isPresent()) {
+            throw new RoleNotFoundException(String.format("Role not found with Id = %s", roleId));
+        }
+
+        Role role = roleOpt.get();
+
+        user.getRoles().add(role);
+        user.setUpdatedDt(LocalDateTime.now());
+
+        userRepository.save(user);
+        log.info(String.format("Added role %s on user id = %s", role.getRole(), user.getId()));
+
+        return user;
+    }
+
+    @Transactional
+    public User removeRole(Long id, Long roleId) {
+        // check user
+        Optional<User> userOpt = userRepository.findById(id);
+        if (!userOpt.isPresent()) {
+            throw new UserNotFoundException(String.format("User not found with Id = %s", id));
+        }
+        User user = userOpt.get();
+
+        // check role
+        Optional<Role> roleOpt = roleRepository.findById(roleId);
+        if (!roleOpt.isPresent()) {
+            throw new RoleNotFoundException(String.format("Role not found with Id = %s", roleId));
+        }
+
+        Role role = roleOpt.get();
+
+        user.getRoles().remove(role);
+        user.setUpdatedDt(LocalDateTime.now());
+
+        userRepository.save(user);
+        log.info(String.format("Removed role %s on user id = %s", role.getRole(), user.getId()));
+
         return user;
     }
 

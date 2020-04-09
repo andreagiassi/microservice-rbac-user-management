@@ -240,4 +240,142 @@ public class UserRestControllerTest {
         assertFalse(userOpt.isPresent());
     }
 
+    // test add role on User
+    @Test
+    public void test_addRoleOnUser() {
+        // create a new user
+        RegisterUserAccountDTO registerUserAccountDTO = RegisterUserAccountDTO.builder()
+                .username("anna")
+                .password("Anna!123")
+                .name("Anna")
+                .surname("Verdi")
+                .gender("FEMALE")
+                .email("anna.verdi@gmail.com")
+                .build();
+
+        String registerAccountURL = "/users/register";
+        HttpEntity<RegisterUserAccountDTO> requestCreate = new HttpEntity<>(registerUserAccountDTO);
+        ResponseEntity<UserDTO> responseCreate = restTemplate.postForEntity(registerAccountURL, requestCreate, UserDTO.class);
+
+        assertThat(responseCreate.getStatusCode(), equalTo(HttpStatus.CREATED));
+        UserDTO userDTO = responseCreate.getBody();
+
+        assertNotNull(userDTO);
+
+        // test the add role
+        Long userId = userDTO.getId();
+        URI uri = URI.create("/users/" + userId + "/roles/" + Role.ADMINISTRATOR);
+        ResponseEntity<UserDTO> response = restTemplate.exchange(uri, HttpMethod.POST, null, UserDTO.class);
+
+        assertThat(response.getStatusCode(), is(HttpStatus.CREATED));
+
+        UserDTO addedRoleOnUserDTO = response.getBody();
+
+        assertEquals("anna", addedRoleOnUserDTO.getUsername());
+        assertEquals("Anna", addedRoleOnUserDTO.getName());
+        assertEquals("Verdi", addedRoleOnUserDTO.getSurname());
+        assertEquals("FEMALE", addedRoleOnUserDTO.getGender());
+        assertEquals(true, addedRoleOnUserDTO.isEnabled());
+
+        // check the role list
+        assertNotNull(addedRoleOnUserDTO.getRoleDTOSet());
+        assertEquals(2L, addedRoleOnUserDTO.getRoleDTOSet().size());
+        assertTrue(addedRoleOnUserDTO.getRoleDTOSet().contains(new RoleDTO(Role.USER, "USER")));
+        assertTrue(addedRoleOnUserDTO.getRoleDTOSet().contains(new RoleDTO(Role.ADMINISTRATOR, "ADMINISTRATOR")));
+
+        // delete the user
+        userService.deleteUserById(addedRoleOnUserDTO.getId());
+    }
+
+    @Test
+    public void test_addRoleOnUser_wrongUserId() {
+        // perform add role ADMINISTRATOR on not existing user
+        Long userId = 99L; // not existing user
+        URI uri = URI.create("/users/" + userId + "/roles/" + Role.ADMINISTRATOR);
+        ResponseEntity<UserDTO> removeResponse = restTemplate.exchange(uri, HttpMethod.POST, null, UserDTO.class);
+
+        assertThat(removeResponse.getStatusCode(), is(HttpStatus.NOT_FOUND));
+    }
+
+    @Test
+    public void test_addRoleOnUser_wrongRoleId() {
+        // perform add role with not existing role
+        URI uri = URI.create("/users/" + 1L + "/roles/" + 99L);
+        ResponseEntity<UserDTO> removeResponse = restTemplate.exchange(uri, HttpMethod.POST, null, UserDTO.class);
+
+        assertThat(removeResponse.getStatusCode(), is(HttpStatus.NOT_FOUND));
+    }
+
+    @Test
+    public void test_removeRoleOnUser() {
+        // create a new user
+        RegisterUserAccountDTO registerUserAccountDTO = RegisterUserAccountDTO.builder()
+                .username("anna")
+                .password("Anna!123")
+                .name("Anna")
+                .surname("Verdi")
+                .gender("FEMALE")
+                .email("anna.verdi@gmail.com")
+                .build();
+
+        String registerAccountURL = "/users/register";
+        HttpEntity<RegisterUserAccountDTO> requestCreate = new HttpEntity<>(registerUserAccountDTO);
+        ResponseEntity<UserDTO> responseCreate = restTemplate.postForEntity(registerAccountURL, requestCreate, UserDTO.class);
+
+        assertThat(responseCreate.getStatusCode(), equalTo(HttpStatus.CREATED));
+        UserDTO userDTO = responseCreate.getBody();
+
+        assertNotNull(userDTO);
+
+        // test the add role
+        Long userId = userDTO.getId();
+        URI uri = URI.create("/users/" + userId + "/roles/" + Role.ADMINISTRATOR);
+        ResponseEntity<UserDTO> response = restTemplate.exchange(uri, HttpMethod.POST, null, UserDTO.class);
+
+        assertThat(response.getStatusCode(), is(HttpStatus.CREATED));
+
+        UserDTO addedRoleOnUserDTO = response.getBody();
+
+        // check the role list
+        assertNotNull(addedRoleOnUserDTO.getRoleDTOSet());
+        assertEquals(2L, addedRoleOnUserDTO.getRoleDTOSet().size());
+        assertTrue(addedRoleOnUserDTO.getRoleDTOSet().contains(new RoleDTO(Role.USER, "USER")));
+        assertTrue(addedRoleOnUserDTO.getRoleDTOSet().contains(new RoleDTO(Role.ADMINISTRATOR, "ADMINISTRATOR")));
+
+        // perform the remove role ADMIN
+        uri = URI.create("/users/" + userId + "/roles/" + Role.ADMINISTRATOR);
+        ResponseEntity<UserDTO> removeResponse = restTemplate.exchange(uri, HttpMethod.DELETE, null, UserDTO.class);
+
+        assertThat(removeResponse.getStatusCode(), is(HttpStatus.OK));
+
+        UserDTO removedRoleOnUserDTO = removeResponse.getBody();
+
+        // check the role list
+        assertNotNull(removedRoleOnUserDTO.getRoleDTOSet());
+        assertEquals(1L, removedRoleOnUserDTO.getRoleDTOSet().size());
+        assertTrue(removedRoleOnUserDTO.getRoleDTOSet().contains(new RoleDTO(Role.USER, "USER")));
+
+        // delete the user
+        userService.deleteUserById(removedRoleOnUserDTO.getId());
+    }
+
+    @Test
+    public void test_removeRoleOnUser_wrongUserId() {
+        // perform the remove role ADMINISTRATOR on not existing user
+        Long userId = 99L; // not existing user
+        URI uri = URI.create("/users/" + userId + "/roles/" + Role.ADMINISTRATOR);
+        ResponseEntity<UserDTO> removeResponse = restTemplate.exchange(uri, HttpMethod.DELETE, null, UserDTO.class);
+
+        assertThat(removeResponse.getStatusCode(), is(HttpStatus.NOT_FOUND));
+    }
+
+    @Test
+    public void test_removeRoleOnUser_wrongRoleId() {
+        // perform the remove not existing role
+        URI uri = URI.create("/users/" + 1L + "/roles/" + 99L);
+        ResponseEntity<UserDTO> removeResponse = restTemplate.exchange(uri, HttpMethod.DELETE, null, UserDTO.class);
+
+        assertThat(removeResponse.getStatusCode(), is(HttpStatus.NOT_FOUND));
+    }
+
 }

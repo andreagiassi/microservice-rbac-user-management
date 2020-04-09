@@ -22,6 +22,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import static com.giassi.microservice.demo2.rest.users.services.UserTestHelper.getUserTestData;
 import static org.junit.Assert.*;
@@ -218,7 +219,7 @@ public class UserServiceTest {
         User userDataForTest = getUserTestData(1L, "andrea", "Andrea",
                 "Giassi", "andrea.test@gmail.com", "+3531122334455");
 
-        given(roleRepository.findById(Role.USER)).willReturn(new Role(Role.USER, "USER"));
+        given(roleRepository.findById(Role.USER)).willReturn(Optional.of(new Role(Role.USER, "USER")));
 
         userService.addUserRole(userDataForTest, Role.USER);
 
@@ -414,7 +415,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void given_valid_login_when_login_return_user() {
+    public void given_valid_login_when_login_return_User() {
         User userDataForTest = getUserTestData(1L, "andrea", "Andrea",
                 "Giassi", "andrea.test@gmail.com", "+3531122334455");
 
@@ -446,6 +447,84 @@ public class UserServiceTest {
         given(userRepository.findByUsername("andrea")).willReturn(userDataForTest);
 
         User user = userService.login("andrea", UserTestHelper.TEST_PASSWORD_DECRYPTED);
+    }
+
+    // tests add role on User
+    @Test(expected = UserNotFoundException.class)
+    public void given_notExistingUserId_when_addRole_throw_UserNotFoundException() {
+        User user = userService.addRole(99L, 2L);
+    }
+
+    @Test(expected = RoleNotFoundException.class)
+    public void given_existingUserId_notExistingRoleId_when_addRole_throw_RoleNotFoundException() {
+        User userDataForTest = getUserTestData(1L, "andrea", "Andrea",
+                "Giassi", "andrea.test@gmail.com", "+3531122334455");
+
+        given(userRepository.findById(1L)).willReturn(Optional.of(userDataForTest));
+
+        userService.addRole(1L, 99L);
+    }
+
+    @Test
+    public void given_validUserAndRoleIds_when_addRole_returnUser() {
+        User userDataForTest = getUserTestData(1L, "andrea", "Andrea",
+                "Giassi", "andrea.test@gmail.com", "+3531122334455");
+
+        given(userRepository.findById(1L)).willReturn(Optional.of(userDataForTest));
+
+        Role roleAdmin = new Role(Role.ADMINISTRATOR, "Administrator");
+
+        given(roleRepository.findById(2L)).willReturn(Optional.of(roleAdmin));
+
+        User user = userService.addRole(1L, 2L);
+
+        assertNotNull(user);
+
+        // check the new added role
+        Set<Role> roleSet = user.getRoles();
+
+        assertNotNull(roleSet);
+        assertEquals(2, roleSet.size());
+        assertTrue(roleSet.contains(roleAdmin));
+    }
+
+    // test remove role from User
+    @Test(expected = UserNotFoundException.class)
+    public void given_notExistingUserId_when_removeRole_throw_UserNotFoundException() {
+        User user = userService.removeRole(99L, 2L);
+    }
+
+    @Test(expected = RoleNotFoundException.class)
+    public void given_existingUserId_notExistingRoleId_when_removeRole_throw_RoleNotFoundException() {
+        User userDataForTest = getUserTestData(1L, "andrea", "Andrea",
+                "Giassi", "andrea.test@gmail.com", "+3531122334455");
+
+        given(userRepository.findById(1L)).willReturn(Optional.of(userDataForTest));
+
+        userService.removeRole(1L, 99L);
+    }
+
+    @Test
+    public void given_validUserAndRoleIds_when_removeRole_returnUser() {
+        User userDataForTest = getUserTestData(1L, "andrea", "Andrea",
+                "Giassi", "andrea.test@gmail.com", "+3531122334455");
+
+        Role roleAdmin = new Role(Role.ADMINISTRATOR, "Administrator");
+        userDataForTest.getRoles().add(roleAdmin);
+
+        given(userRepository.findById(1L)).willReturn(Optional.of(userDataForTest));
+        given(roleRepository.findById(2L)).willReturn(Optional.of(roleAdmin));
+
+        User user = userService.removeRole(1L, 2L);
+
+        assertNotNull(user);
+
+        // check the remove role
+        Set<Role> roleSet = user.getRoles();
+
+        assertNotNull(roleSet);
+        assertEquals(1, roleSet.size());
+        assertTrue(!roleSet.contains(roleAdmin));
     }
 
 }
