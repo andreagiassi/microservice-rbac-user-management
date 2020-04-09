@@ -1,4 +1,4 @@
-# Microservice Demo project using Spring Boot, JPA and Docker
+# User management microservice
 
 #### Author
 This microservice project has been created in February 2020 by Andrea Giassi.
