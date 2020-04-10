@@ -22,6 +22,8 @@ public class UserDTOTest {
         user.setSurname("testSurname");
         user.setEnabled(true);
         user.setGender(Gender.MALE);
+        user.setEnabled(true);
+        user.setSecured(false);
 
         Contact contactInput = new Contact();
         contactInput.setEmail("email");
@@ -52,6 +54,9 @@ public class UserDTOTest {
         assertEquals(userDTO.getUsername(), user.getUsername());
         assertEquals(userDTO.getName(), user.getName());
         assertEquals(userDTO.getSurname(), user.getSurname());
+
+        assertTrue(userDTO.isEnabled());
+        assertTrue(!userDTO.isSecured());
 
         // contact
         ContactDTO contactDTO = userDTO.getContactDTO();

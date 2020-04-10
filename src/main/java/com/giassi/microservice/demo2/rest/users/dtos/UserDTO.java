@@ -33,6 +33,8 @@ public class UserDTO implements Serializable {
             this.updatedDt = user.getUpdatedDt();
             this.loginDt = user.getLoginDt();
 
+            this.secured = user.isSecured();
+
             // role, if set
             if (user.getRoles() != null) {
                 roleDTOSet = new HashSet<>();
@@ -65,6 +67,8 @@ public class UserDTO implements Serializable {
     private LocalDateTime creationDt;
     private LocalDateTime updatedDt;
     private LocalDateTime loginDt;
+
+    private boolean secured;
 
     // additional information
     private Set<RoleDTO> roleDTOSet;

@@ -378,4 +378,34 @@ public class UserRestControllerTest {
         assertThat(removeResponse.getStatusCode(), is(HttpStatus.NOT_FOUND));
     }
 
+    @Test
+    public void test_delete_securedUser_return_BAD_REQUEST() {
+        // create a new user to test the deletion
+        RegisterUserAccountDTO quickAccount = RegisterUserAccountDTO.builder()
+                .username("anna2")
+                .password("Anna2!123")
+                .name("Anna2")
+                .surname("Verdi")
+                .gender("FEMALE")
+                .email("anna2.verdi@gmail.com")
+                .build();
+
+        String registerAccountURL = "/users/register";
+        HttpEntity<RegisterUserAccountDTO> request = new HttpEntity<>(quickAccount);
+        ResponseEntity<UserDTO> response = restTemplate.postForEntity(registerAccountURL, request, UserDTO.class);
+
+        assertThat(response.getStatusCode(), equalTo(HttpStatus.CREATED));
+        UserDTO userDTO = response.getBody();
+
+        assertNotNull(userDTO);
+
+        // call the delete endpoint
+        String deleteUserURL = "/users/" + userDTO.getId();
+        restTemplate.delete(deleteUserURL);
+
+        // retrieve a not existing user must to be empty response
+        Optional<User> userOpt = userRepository.findById(userDTO.getId());
+        assertFalse(userOpt.isPresent());
+    }
+
 }

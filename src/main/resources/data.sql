@@ -20,7 +20,9 @@ INSERT INTO users(id, username, password, name, surname, gender) VALUES (7, 'jen
 INSERT INTO users(id, username, password, name, surname, gender) VALUES (8, 'karina', '1d/NZaEqNgtEomytAPrwm/+QjmbudLg33oeEk77Xh88=', 'Karina', 'Yellow', 1);
 
 UPDATE users SET ENABLED = false WHERE id = 6;
+
 UPDATE users SET birth_date = '1977-08-14' WHERE id = 1;
+UPDATE users SET secured = true WHERE id = 1;
 
 INSERT INTO users_roles(user_id, role_id) VALUES (1, 1);
 INSERT INTO users_roles(user_id, role_id) VALUES (1, 2);

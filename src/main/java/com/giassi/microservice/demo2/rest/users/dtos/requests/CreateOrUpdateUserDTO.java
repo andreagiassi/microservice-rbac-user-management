@@ -25,6 +25,7 @@ public class CreateOrUpdateUserDTO implements Serializable {
     private java.time.LocalDate birthDate;
 
     private boolean enabled;
+    private boolean secured;
 
     private String note;
 

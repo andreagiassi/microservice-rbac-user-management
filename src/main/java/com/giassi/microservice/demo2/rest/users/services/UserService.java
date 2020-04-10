@@ -40,11 +40,11 @@ public class UserService {
     @Value("${microservice.security.salt}")
     private String salt;
 
+    private PasswordValidator passwordValidator;
+
     public UserService() {
         passwordValidator = new PasswordValidator();
     }
-
-    private PasswordValidator passwordValidator;
 
     public List<UserDTO> getUserPresentationList() {
         ArrayList<UserDTO> listDto = new ArrayList<>();
@@ -96,6 +96,7 @@ public class UserService {
         user.setName(registerUserAccountDTO.getName());
         user.setSurname(registerUserAccountDTO.getSurname());
         user.setEnabled(true);
+        user.setSecured(false);
 
         // set gender
         Gender gender = Gender.getValidGender(registerUserAccountDTO.getGender());
@@ -170,6 +171,8 @@ public class UserService {
         user.setBirthDate(createUserDTO.getBirthDate());
 
         user.setEnabled(true);
+        user.setSecured(createUserDTO.isSecured());
+
         user.setNote(createUserDTO.getNote());
         user.setCreationDt(LocalDateTime.now());
 
@@ -328,9 +331,17 @@ public class UserService {
             throw new InvalidUserIdentifierException("Id cannot be null");
         }
 
-        if (!userRepository.existsById(id)) {
+        Optional<User> userOpt = userRepository.findById(id);
+        if (!userOpt.isPresent()) {
             throw new UserNotFoundException(String.format("User not found with Id = %s", id));
         }
+
+        // only not secured users can be deleted
+        User user = userOpt.get();
+        if (user.isSecured()) {
+            throw new UserIsSecuredException(String.format("User %s is secured and cannot be deleted.", id));
+        }
+
         userRepository.deleteById(id);
         log.info(String.format("User %s has been deleted.", id));
     }

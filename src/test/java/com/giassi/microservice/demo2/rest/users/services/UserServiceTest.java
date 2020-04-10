@@ -527,4 +527,17 @@ public class UserServiceTest {
         assertTrue(!roleSet.contains(roleAdmin));
     }
 
+    @Test(expected = UserIsSecuredException.class)
+    public void given_validSecuredUser_when_deleteUser_throw_UserIsSecuredException() {
+        User userDataForTest = getUserTestData(1L, "andrea", "Andrea",
+                "Giassi", "andrea.test@gmail.com", "+3531122334455");
+        // set a secure user
+        userDataForTest.setSecured(true);
+
+        given(userRepository.findById(1L)).willReturn(Optional.of(userDataForTest));
+
+        userService.deleteUserById(1L);
+    }
+
+
 }

@@ -31,7 +31,8 @@ CREATE TABLE `users` (
   creation_dt timestamp NOT NULL DEFAULT current_timestamp,
   updated_dt timestamp DEFAULT current_timestamp,
   login_dt timestamp NULL,
-  note varchar(255) DEFAULT NULL
+  note varchar(255) DEFAULT NULL,
+  secured TINYINT DEFAULT '0'
 );
 
 CREATE TABLE users_roles (

@@ -36,6 +36,7 @@ tests.
 * Update an user account (basic user data, contacts, address)
 * Add or remove a role on an existing user account
 * Delete a user account
+* Define secured accounts that cannot be deleted but only modified
 
 #### Spring Boot Microservice
 The microservice code is based on Java 8 and the popular Spring Boot 2 framework.

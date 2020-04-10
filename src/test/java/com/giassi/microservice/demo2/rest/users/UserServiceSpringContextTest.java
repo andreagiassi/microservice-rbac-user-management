@@ -139,10 +139,9 @@ public class UserServiceSpringContextTest {
 
     @Test(expected = UserNotFoundException.class)
     public void given_valid_user_when_deleteUserById_user_deleted() {
-        Long userId= 1L;
+        Long userId= 2L;
         userService.deleteUserById(userId);
 
-        // throws an UserNotFoundException
         User user = userService.getUserById(userId);
     }
 

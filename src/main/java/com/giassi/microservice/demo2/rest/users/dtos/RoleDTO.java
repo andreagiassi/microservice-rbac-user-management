@@ -1,7 +1,6 @@
 package com.giassi.microservice.demo2.rest.users.dtos;
 
 import com.giassi.microservice.demo2.rest.users.entities.Role;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,9 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Data
 public class RoleDTO implements Serializable {
+
+    private Long id;
+    private String role;
+
+    // permissions
+    private List<PermissionDTO> permissions = new ArrayList<>();
 
     public RoleDTO(Role role) {
         this.id = role.getId();
@@ -26,11 +30,5 @@ public class RoleDTO implements Serializable {
         this.id = id;
         this.role = role;
     }
-
-    private Long id;
-    private String role;
-
-    // permissions
-    private List<PermissionDTO> permissions = new ArrayList<>();
 
 }
