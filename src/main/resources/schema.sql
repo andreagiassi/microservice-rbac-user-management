@@ -68,7 +68,7 @@ CREATE TABLE `addresses` (
 DROP VIEW IF EXISTS enabled_users;
 
 CREATE VIEW enabled_users AS
-SELECT username, contacts.email, contacts.phone
+SELECT username, contacts.email, contacts.phone, secured
 FROM users
 INNER JOIN contacts on contacts.user_id = users.id
 WHERE
