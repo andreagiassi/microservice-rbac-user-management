@@ -15,38 +15,35 @@ Goal of this project is to offer a general purpose Java microservice for user's 
 
 The project is handling the user account's data, contacts and addresses and offers an implemented solution to manage
  a Role Base Access Control system (RBAC). RBAC allows you to defines the necessary roles for your
-  application, defines the permissions for each role and associate them to the users.
-
-The project support the basic CRUD operations on an User account and the information are stored on a
- MySql database.
+  application, defines the permissions to associate to the roles and to grant the roles on the users.
  
 The project is thought using the Docker technologies with two different containers:
 * Spring Boot REST apis: that exposing the services
 * MySql 8.0 database: that is storing/retrieving the information
 
-The code has been tested using JUnit and Mockito, H2 in memory database and some standard libraries for the integration
+The code has been tested (more than 100 tests) using JUnit and Mockito, H2 in memory database and some standard libraries for the integration
 tests.
 
-#### User management features: manages user data
+#### User management features: user data accounts
 
 * Register a new user account
-* Login with standard username & password
-* Retrieve single user account
+* Login with username & password
+* Retrieve a single user account
 * Retrieve the list of all the existing user accounts
 * Update user account data (basic user data, contacts, address)
-* Add or remove a role on an existing user account
+* Add or remove a role on an user account
 * Delete a user account
 * Define secured accounts that cannot be deleted but only modified
 
-##### RBAC feature: manages roles and permissions
+#### RBAC features: manages roles and permissions
 
-* retrieve all the defined permissions
-* retrieve the list of the existing roles
-* create a new role
-* get single role
-* delete a role
-* add a permission on a role
-* remove a permission on a role
+* Retrieve all the permissions
+* Retrieve the list of the existing roles
+* Create a new role
+* Retrieve a single role
+* Delete a role
+* Add a permission on a role
+* Remove a permission on a role
 
 #### Spring Boot Microservice
 The microservice code is based on Java 8 and the popular Spring Boot 2 framework.
