@@ -35,7 +35,11 @@ tests.
 * Delete a user account
 * Define secured accounts that cannot be deleted but only modified
 
+<<<<<<< HEAD
 #### RBAC features: manages roles and permissions
+=======
+##### RBAC features: manages roles and permissions
+>>>>>>> deaa93f74ff305e2895580e121d5d13b063035a5
 
 * Retrieve all the permissions
 * Retrieve the list of the existing roles
