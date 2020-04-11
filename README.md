@@ -1,30 +1,31 @@
 # Role Based Access Control User Management Microservice
 
 #### Author
-This microservice project has been created in February 2020 by Andrea Giassi.
+This project has been created in February 2020 by Andrea Giassi.
 
 Andrea he's an italian Agile professional and Software Engineer actives in web systems and services.
 Since 2002, Andrea is working in the IT market for several different companies and start ups and it has contributed
- to the success of several solutions and products.
+ to the success of several solutions and products with roles from senior developer to manager and product owner.
 
-Connect and discover more here:
+Connect here:
 https://www.linkedin.com/in/andreagiassi/
 
 #### Overview
-Goal of this project is to offer a general purpose Java microservice for user's data management.
+Goal of this project is to offer a generic user's data management microservice.
 
-The project is handling the user account's data, contacts and addresses and offers an implemented solution to manage
- a Role Base Access Control system (RBAC). RBAC allows you to defines the necessary roles for your
-  application, defines the permissions to associate to the roles and to grant the roles on the users.
- 
+The need to manage a user base for an online system is very frequent. This microservice can offer a good and solid starting point for managing your accounts. Thanks to the RBAC implementation, it is possible to define the roles and permissions for the specific application through REST apis and subsequently apply these roles to users.
+
+This project lends itself very well to implement new prototypes or to create new solutions based on microservice architecture.
+
 The project is thought using the Docker technologies with two different containers:
 * Spring Boot REST apis: that exposing the services
 * MySql 8.0 database: that is storing/retrieving the information
 
-The code has been tested (more than 100 tests) using JUnit and Mockito, H2 in memory database and some standard libraries for the integration
-tests.
+The code has been tested (more than 100 tests) using JUnit and Mockito, H2 in memory database and some standard libraries for the integration tests.
 
-#### User management features: user data accounts
+Here below the releavant features.
+
+#### User management features
 
 * Register a new user account
 * Login with username & password
@@ -45,8 +46,8 @@ tests.
 * Add a permission on a role
 * Remove a permission on a role
 
-#### Spring Boot Microservice
-The microservice code is based on Java 8 and the popular Spring Boot 2 framework.
+#### About the Spring Boot Microservice
+The microservice code is based on Java 8 and the Spring Boot 2 framework.
 
 Thanks to the abstractions of Spring Data the information are persisted into the database using the JPA.
 Using Swagger the REST apis are also easy to manage throw the included Swagger dependency.
