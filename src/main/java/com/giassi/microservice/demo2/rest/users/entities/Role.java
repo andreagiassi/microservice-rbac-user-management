@@ -33,8 +33,10 @@ public class Role {
         this.role = role;
     }
 
-    @OneToMany
-    @JoinColumn(name = "role_id")
+    @ManyToMany(fetch=FetchType.EAGER)
+    @JoinTable(name = "permissions_roles",
+            joinColumns = @JoinColumn(name = "role_id"),
+            inverseJoinColumns = @JoinColumn(name = "permission_id"))
     private List<Permission> permissions= new ArrayList<>();
 
     @Override

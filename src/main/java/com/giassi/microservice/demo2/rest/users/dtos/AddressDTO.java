@@ -20,7 +20,6 @@ public class AddressDTO implements Serializable {
             this.country = address.getCountry();
             this.zipCode = address.getZipCode();
         }
-
     }
 
     private String address;

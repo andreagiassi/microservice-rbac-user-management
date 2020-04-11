@@ -1,4 +1,5 @@
 
+DELETE FROM permissions_roles;
 DELETE FROM permissions;
 DELETE FROM users_roles;
 DELETE FROM roles;
@@ -7,8 +8,20 @@ DELETE FROM contacts;
 DELETE FROM addresses;
 DELETE FROM users;
 
+INSERT INTO permissions(id, permission) VALUES (1, 'LOGIN');
+INSERT INTO permissions(id, permission) VALUES (2, 'VIEW_PROFILE');
+INSERT INTO permissions(id, permission) VALUES (3, 'ADMIN_USER_DATA');
+
 INSERT INTO roles(id, role) VALUES (1, 'USER');
 INSERT INTO roles(id, role) VALUES (2, 'ADMINISTRATOR');
+
+INSERT INTO permissions_roles(permission_id, role_id) VALUES (1, 1);
+INSERT INTO permissions_roles(permission_id, role_id) VALUES (2, 1);
+
+INSERT INTO permissions_roles(permission_id, role_id) VALUES (1, 2);
+INSERT INTO permissions_roles(permission_id, role_id) VALUES (2, 2);
+INSERT INTO permissions_roles(permission_id, role_id) VALUES (3, 2);
+
 
 INSERT INTO users(id, username, password, name, surname, gender) VALUES (1, 'andrea', '1d/NZaEqNgtEomytAPrwm/+QjmbudLg33oeEk77Xh88=', 'Andrea', 'Test', 0);
 INSERT INTO users(id, username, password, name, surname, gender) VALUES (2, 'mario', '1d/NZaEqNgtEomytAPrwm/+QjmbudLg33oeEk77Xh88=', 'Mario', 'Rossi', 0);

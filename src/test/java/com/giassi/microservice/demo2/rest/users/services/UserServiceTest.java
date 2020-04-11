@@ -539,5 +539,4 @@ public class UserServiceTest {
         userService.deleteUserById(1L);
     }
 
-
 }

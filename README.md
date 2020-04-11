@@ -1,4 +1,4 @@
-# User management microservice
+# Role Based Access Control User Management Microservice
 
 #### Author
 This microservice project has been created in February 2020 by Andrea Giassi.
@@ -11,7 +11,7 @@ Connect and discover more here:
 https://www.linkedin.com/in/andreagiassi/
 
 #### Overview
-Goal of this project is to offer a general purpose microservice fur user's data management.
+Goal of this project is to offer a general purpose Java microservice for user's data management.
 
 The project is handling the user account's data, contacts and addresses and offers an implemented solution to manage
  a Role Base Access Control system (RBAC). RBAC allows you to defines the necessary roles for your
@@ -27,16 +27,26 @@ The project is thought using the Docker technologies with two different containe
 The code has been tested using JUnit and Mockito, H2 in memory database and some standard libraries for the integration
 tests.
 
-#### Features
+#### User management features: manages user data
 
 * Register a new user account
 * Login with standard username & password
 * Retrieve single user account
 * Retrieve the list of all the existing user accounts
-* Update an user account (basic user data, contacts, address)
+* Update user account data (basic user data, contacts, address)
 * Add or remove a role on an existing user account
 * Delete a user account
 * Define secured accounts that cannot be deleted but only modified
+
+##### RBAC feature: manages roles and permissions
+
+* retrieve all the defined permissions
+* retrieve the list of the existing roles
+* create a new role
+* get single role
+* delete a role
+* add a permission on a role
+* remove a permission on a role
 
 #### Spring Boot Microservice
 The microservice code is based on Java 8 and the popular Spring Boot 2 framework.

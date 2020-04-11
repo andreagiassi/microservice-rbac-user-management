@@ -15,7 +15,6 @@ public class RoleDTO implements Serializable {
     private Long id;
     private String role;
 
-    // permissions
     private List<PermissionDTO> permissions = new ArrayList<>();
 
     public RoleDTO(Role role) {
@@ -29,6 +28,18 @@ public class RoleDTO implements Serializable {
     public RoleDTO(Long id, String role) {
         this.id = id;
         this.role = role;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof RoleDTO)) return false;
+        return id != null && id.equals(((RoleDTO) o).getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return 31;
     }
 
 }

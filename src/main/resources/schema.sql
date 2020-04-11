@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS contacts;
 DROP TABLE IF EXISTS addresses;
 
+DROP TABLE IF EXISTS permissions_roles;
 DROP TABLE IF EXISTS users_roles;
 
 DROP TABLE IF EXISTS permissions;
@@ -14,8 +15,14 @@ CREATE TABLE `roles` (
 
 CREATE TABLE `permissions` (
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `permission` varchar(80) NOT NULL UNIQUE
+);
+
+CREATE TABLE permissions_roles (
+  `permission_id` BIGINT(20) NOT NULL,
   `role_id` BIGINT(20) NOT NULL,
-  `permission` varchar(80) NOT NULL UNIQUE,
+  PRIMARY KEY (permission_id, role_id),
+  FOREIGN KEY (permission_id) REFERENCES permissions(id),
   FOREIGN KEY (role_id) REFERENCES roles(id)
 );
 
