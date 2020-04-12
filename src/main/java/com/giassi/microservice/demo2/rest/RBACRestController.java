@@ -40,9 +40,9 @@ public class RBACRestController {
     }
 
     @DeleteMapping("/roles/{roleId}")
-    public void deleteRoleById(@PathVariable("roleId") Long roleId) {
-        // TODO: check correct http status code to return
+    public ResponseEntity<?> deleteRoleById(@PathVariable("roleId") Long roleId) {
         roleService.deleteRole(roleId);
+        return ResponseEntity.noContent().build();
     }
 
     // retrieve the permission's list
