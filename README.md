@@ -85,8 +85,7 @@ The other sql files are executed in automatic from Spring Boot in order to creat
 * data.sql: insert some test data inside the users table on start up.
 
 #### REST apis exposed
-Using a browser it's possible to interact with the REST apis with Swagger and its comfortable web interface.
-The address to explore the REST apis using the web browser is (on localhost):
+Using a browser it's possible to interact with the REST apis with Swagger:
 
 http://localhost:8090/swagger-ui.html
 
@@ -95,6 +94,8 @@ http://localhost:8090/swagger-ui.html
 Another alternative is to using an external tool, for example Postman (https://www.postman.com/).
 
 This project contains also the Postman export file with all the configured test calls.
+
+![Swagger](https://github.com/andreagiassi/microservice-rbac-user-management/blob/master/src/main/resources/images/postman.png "Swagger interface")
 
 #### Security, encryption and decryption of sensible data
 I've followed the blog post below in order to implement an encryption and decryption method for sensible data such
