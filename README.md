@@ -93,7 +93,7 @@ http://localhost:8090/swagger-ui.html
 
 Another alternative is to using an external tool, for example Postman (https://www.postman.com/).
 
-This project contains also the Postman export file with all the configured test calls.
+This project contains also the Postman export file with all the configured test calls:
 
 ![Swagger](https://github.com/andreagiassi/microservice-rbac-user-management/blob/master/src/main/resources/images/postman.png "Swagger interface")
 
