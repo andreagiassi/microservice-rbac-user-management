@@ -2,7 +2,6 @@ package com.giassi.microservice.demo2.rest.users;
 
 import com.giassi.microservice.demo2.rest.users.dtos.AddressDTO;
 import com.giassi.microservice.demo2.rest.users.dtos.ContactDTO;
-import com.giassi.microservice.demo2.rest.users.dtos.RoleDTO;
 import com.giassi.microservice.demo2.rest.users.dtos.UserDTO;
 import com.giassi.microservice.demo2.rest.users.dtos.requests.CreateOrUpdateUserDTO;
 import com.giassi.microservice.demo2.rest.users.dtos.requests.RegisterUserAccountDTO;
@@ -22,8 +21,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
@@ -96,9 +95,9 @@ public class UserRestControllerTest {
         assertEquals("Blu", userDTO.getSurname());
         assertEquals("MALE", userDTO.getGender());
 
-        Set<RoleDTO> roleDTO = userDTO.getRoleDTOSet();
-        assertNotNull(roleDTO);
-//        assertTrue(roleDTO.contains(new RoleDTO(Role.USER, "USER")));
+        List<String> roles = userDTO.getRoles();
+        assertNotNull(roles);
+        assertTrue(roles.contains("USER"));
 
         assertEquals(true, userDTO.isEnabled());
         assertEquals("created for test", userDTO.getNote());
@@ -181,8 +180,8 @@ public class UserRestControllerTest {
         assertEquals(true, userUpdatedDTO.isEnabled());
 
         // role
-        assertNotNull(userUpdatedDTO.getRoleDTOSet());
-//        assertTrue(userUpdatedDTO.getRoleDTOSet().contains(new RoleDTO(Role.USER, "USER")));
+        assertNotNull(userUpdatedDTO.getRoles());
+        assertTrue(userUpdatedDTO.getRoles().contains( "USER"));
 
         assertEquals("updated for test", userUpdatedDTO.getNote());
 
@@ -278,10 +277,10 @@ public class UserRestControllerTest {
         assertEquals(true, addedRoleOnUserDTO.isEnabled());
 
         // check the role list
-        assertNotNull(addedRoleOnUserDTO.getRoleDTOSet());
-        assertEquals(2L, addedRoleOnUserDTO.getRoleDTOSet().size());
-        assertTrue(addedRoleOnUserDTO.getRoleDTOSet().contains(new RoleDTO(Role.USER, "USER")));
-        assertTrue(addedRoleOnUserDTO.getRoleDTOSet().contains(new RoleDTO(Role.ADMINISTRATOR, "ADMINISTRATOR")));
+        assertNotNull(addedRoleOnUserDTO.getRoles());
+        assertEquals(2L, addedRoleOnUserDTO.getRoles().size());
+        assertTrue(addedRoleOnUserDTO.getRoles().contains("USER"));
+        assertTrue(addedRoleOnUserDTO.getRoles().contains("ADMINISTRATOR"));
 
         // delete the user
         userService.deleteUserById(addedRoleOnUserDTO.getId());
@@ -337,10 +336,10 @@ public class UserRestControllerTest {
         UserDTO addedRoleOnUserDTO = response.getBody();
 
         // check the role list
-        assertNotNull(addedRoleOnUserDTO.getRoleDTOSet());
-        assertEquals(2L, addedRoleOnUserDTO.getRoleDTOSet().size());
-        assertTrue(addedRoleOnUserDTO.getRoleDTOSet().contains(new RoleDTO(Role.USER, "USER")));
-        assertTrue(addedRoleOnUserDTO.getRoleDTOSet().contains(new RoleDTO(Role.ADMINISTRATOR, "ADMINISTRATOR")));
+        assertNotNull(addedRoleOnUserDTO.getRoles());
+        assertEquals(2L, addedRoleOnUserDTO.getRoles().size());
+        assertTrue(addedRoleOnUserDTO.getRoles().contains("USER"));
+        assertTrue(addedRoleOnUserDTO.getRoles().contains("ADMINISTRATOR"));
 
         // perform the remove role ADMIN
         uri = URI.create("/users/" + userId + "/roles/" + Role.ADMINISTRATOR);
@@ -351,9 +350,9 @@ public class UserRestControllerTest {
         UserDTO removedRoleOnUserDTO = removeResponse.getBody();
 
         // check the role list
-        assertNotNull(removedRoleOnUserDTO.getRoleDTOSet());
-        assertEquals(1L, removedRoleOnUserDTO.getRoleDTOSet().size());
-        assertTrue(removedRoleOnUserDTO.getRoleDTOSet().contains(new RoleDTO(Role.USER, "USER")));
+        assertNotNull(removedRoleOnUserDTO.getRoles());
+        assertEquals(1L, removedRoleOnUserDTO.getRoles().size());
+        assertTrue(removedRoleOnUserDTO.getRoles().contains("USER"));
 
         // delete the user
         userService.deleteUserById(removedRoleOnUserDTO.getId());

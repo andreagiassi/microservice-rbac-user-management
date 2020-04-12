@@ -9,24 +9,7 @@
 			"name": "get user list presentation",
 			"request": {
 				"auth": {
-					"type": "apikey",
-					"apikey": [
-						{
-							"key": "key",
-							"value": "apiKey",
-							"type": "string"
-						},
-						{
-							"key": "in",
-							"value": "query",
-							"type": "string"
-						},
-						{
-							"key": "value",
-							"value": "02759a1d80414242ba039cd49c0841f0",
-							"type": "string"
-						}
-					]
+					"type": "noauth"
 				},
 				"method": "GET",
 				"header": [],
@@ -64,12 +47,15 @@
 		},
 		{
 			"name": "login",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
-				"method": "POST",
+				"method": "GET",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"username\" : \"Andrea\",\n\t\"password\" : \"Test!123\"\n}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -77,13 +63,15 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8090/login",
+					"raw": "localhost:8090/users/rbac/permissions",
 					"host": [
 						"localhost"
 					],
 					"port": "8090",
 					"path": [
-						"login"
+						"users",
+						"rbac",
+						"permissions"
 					]
 				}
 			},
@@ -103,7 +91,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\": \"john\",\n    \"password\": \"Test!123\",\n    \"name\": \"John\",\n    \"surname\": \"Green\",\n    \"email\": \"john.green@gmail.com\",\n    \"enabled\": true,\n    \"gender\": \"MALE\",\n    \"birthDate\": \"1954-12-01\",\n    \"phone\" : \"+35322442266\",\n    \"note\" : \"this is mr john\"\n}",
+					"raw": "{\n    \"username\": \"john\",\n    \"password\": \"Test!123\",\n    \"name\": \"John\",\n    \"surname\": \"Green\",\n    \"email\": \"john.green@gmail.com\",\n    \"enabled\": true,\n    \"gender\": \"MALE\",\n    \"birthDate\": \"1954-12-01\",\n    \"phone\" : \"+35322442266\",\n    \"note\" : \"This is mr John\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -281,6 +269,280 @@
 					"path": [
 						"users",
 						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "rbac - get permissions",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "key",
+							"value": "apiKey",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						},
+						{
+							"key": "value",
+							"value": "02759a1d80414242ba039cd49c0841f0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8090/users",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "rbac - get roles",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "key",
+							"value": "apiKey",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						},
+						{
+							"key": "value",
+							"value": "02759a1d80414242ba039cd49c0841f0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8090/users/rbac/roles",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"users",
+						"rbac",
+						"roles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "rbac - create role",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"role\": \"TEST_ROLE\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8090/users/rbac/roles",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"users",
+						"rbac",
+						"roles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "rbac - get roles by Id",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "key",
+							"value": "apiKey",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						},
+						{
+							"key": "value",
+							"value": "02759a1d80414242ba039cd49c0841f0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8090/users/rbac/roles/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"users",
+						"rbac",
+						"roles",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "rbac - delete roles by Id",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "key",
+							"value": "apiKey",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						},
+						{
+							"key": "value",
+							"value": "02759a1d80414242ba039cd49c0841f0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8090/users/rbac/roles/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"users",
+						"rbac",
+						"roles",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "rbac - add permission on role",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"role\": \"TEST_ROLE\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8090/users/rbac/roles/1/permissions/VIEW_CUSTOMER_LIST",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"users",
+						"rbac",
+						"roles",
+						"1",
+						"permissions",
+						"VIEW_CUSTOMER_LIST"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "rbac - remove permission on role Copy",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"role\": \"TEST_ROLE\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8090/users/rbac/roles/1/permissions/VIEW_CUSTOMER_LIST",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"users",
+						"rbac",
+						"roles",
+						"1",
+						"permissions",
+						"VIEW_CUSTOMER_LIST"
 					]
 				}
 			},

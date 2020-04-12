@@ -1,18 +1,22 @@
 package com.giassi.microservice.demo2.rest.users.dtos;
 
+import com.giassi.microservice.demo2.rest.users.entities.Permission;
+import com.giassi.microservice.demo2.rest.users.entities.Role;
 import com.giassi.microservice.demo2.rest.users.entities.User;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 public class UserDTO implements Serializable {
 
     public UserDTO() {
         // empty constructor
+        roles = new ArrayList<>();
+        permissions = new ArrayList<>();
     }
 
     public UserDTO(User user) {
@@ -35,12 +39,6 @@ public class UserDTO implements Serializable {
 
             this.secured = user.isSecured();
 
-            // role, if set
-            if (user.getRoles() != null) {
-                roleDTOSet = new HashSet<>();
-                user.getRoles().stream().forEach(e -> roleDTOSet.add(new RoleDTO(e)));
-            }
-
             // contact, if set
             if (user.getContact() != null) {
                 this.contactDTO = new ContactDTO(user.getContact());
@@ -49,6 +47,20 @@ public class UserDTO implements Serializable {
             // address, if set
             if (user.getAddress() != null) {
                 this.addressDTO = new AddressDTO(user.getAddress());
+            }
+
+            // Because the permissions can be associated to more than one roles i'm creating two String arrays
+            // with the distinct keys of roles and permissions.
+            roles = new ArrayList<>();
+            permissions = new ArrayList<>();
+            for (Role role : user.getRoles()) {
+                roles.add(role.getRole());
+                for (Permission p : role.getPermissions()) {
+                    String key = p.getPermission();
+                    if (!permissions.contains(key)) {
+                        permissions.add(key);
+                    }
+                }
             }
         }
     }
@@ -70,10 +82,11 @@ public class UserDTO implements Serializable {
 
     private boolean secured;
 
-    // additional information
-    private Set<RoleDTO> roleDTOSet;
-
     private ContactDTO contactDTO;
     private AddressDTO addressDTO;
+
+    // permissions and roles list
+    private List<String> roles;
+    private List<String> permissions;
 
 }
