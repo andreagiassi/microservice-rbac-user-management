@@ -5,9 +5,9 @@ This project has been created in February 2020 by Andrea Giassi.
 
 Andrea he's an italian Agile professional and Software Engineer actives in web systems and services.
 Since 2002, Andrea is working in the IT market for several different companies and start ups and it has contributed
- to the success of several solutions and products with roles from senior developer to manager and product owner.
+ to the success of several solutions and products.
 
-Connect here:
+Connect here for more info about me:
 https://www.linkedin.com/in/andreagiassi/
 
 #### Overview
