@@ -1,6 +1,5 @@
 package com.giassi.microservice.demo2.rest.users.entities;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
@@ -12,7 +11,6 @@ import java.util.List;
 @Entity
 @Table(name="roles")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class Role {
 

@@ -189,6 +189,30 @@ public class RoleServiceTest {
         assertEquals(1L, roleUpdated.getPermissions().size());
     }
 
+    @Test(expected = InvalidPermissionDataException.class)
+    public void given_existing_role_and_existing_already_associated_permission_throw_InvalidPermissionDataException() {
+        Role role = new Role(1L, "TEST");
+        role.getPermissions().add(new Permission(1L, "PERMISSION_ONE"));
+
+        given(roleRepository.findById(1L)).willReturn(Optional.of(role));
+
+        Permission permission = new Permission();
+        permission.setId(1L);
+        permission.setPermission("PERMISSION_ONE");
+
+        given(permissionRepository.findByPermission("PERMISSION_ONE")).willReturn(Optional.of(permission));
+
+        Role roleUpdated = roleService.addPermissionOnRole(1L, "PERMISSION_ONE");
+
+        assertNotNull(roleUpdated);
+        // role data
+        assertEquals(Long.valueOf(1L), roleUpdated.getId());
+        assertEquals("TEST", roleUpdated.getRole());
+
+        // permissions
+        assertEquals(1L, roleUpdated.getPermissions().size());
+    }
+
     // removePermissionOnRole
 
     @Test(expected = InvalidPermissionDataException.class)

@@ -111,7 +111,7 @@ public class RoleService {
         }
         Role role = roleOpt.get();
 
-        // check permission
+        // check if exists the permission key
         Permission permission;
 
         Optional<Permission> permissionOpt = permissionRepository.findByPermission(permissionKey);
@@ -119,11 +119,17 @@ public class RoleService {
             // the permission exists
             permission = permissionOpt.get();
         } else {
-            // if the permission doesn't exists create one
+            // if the permission doesn't exists: create one
             permission = new Permission();
             permission.setPermission(permissionKey);
 
             permission = permissionRepository.save(permission);
+        }
+
+        // check if this role contains already the given permission
+        if (role.getPermissions().contains(permission)) {
+            throw new InvalidPermissionDataException(String.format("The permission %s has been already" +
+                            " associated on the role %s", permission.getPermission(), role.getRole() ));
         }
 
         role.getPermissions().add(permission);

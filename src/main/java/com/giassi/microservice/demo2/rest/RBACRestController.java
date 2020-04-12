@@ -23,7 +23,6 @@ public class RBACRestController {
     // roles
     @GetMapping("/roles")
     public ResponseEntity<List<RoleDTO>> getRolePresentationList() {
-        // TODO: create a permission service instead to wrap the permissionRepo into the roleService
         Iterable<Role> roleList = roleService.getRoleList();
         ArrayList<RoleDTO> list = new ArrayList<>();
         roleList.forEach(e -> list.add(new RoleDTO(e)));

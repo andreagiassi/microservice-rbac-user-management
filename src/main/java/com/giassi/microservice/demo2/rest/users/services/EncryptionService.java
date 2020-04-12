@@ -17,6 +17,8 @@ import java.util.Random;
  */
 public class EncryptionService {
 
+    public static final String ALGORITHM = "PBKDF2WithHmacSHA1";
+
     // demo salt for testing or first setup purpose
     public static final String DEFAULT_SALT = "WZeBXmCI9cAz3LyY9Sdllj9l5iPsXC";
 
@@ -37,7 +39,7 @@ public class EncryptionService {
         PBEKeySpec spec = new PBEKeySpec(password, salt, ITERATIONS, KEY_LENGTH);
         Arrays.fill(password, Character.MIN_VALUE);
         try {
-            SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+            SecretKeyFactory skf = SecretKeyFactory.getInstance(ALGORITHM);
             return skf.generateSecret(spec).getEncoded();
         } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             throw new AssertionError("Error while hashing a password: " + e.getMessage(), e);
