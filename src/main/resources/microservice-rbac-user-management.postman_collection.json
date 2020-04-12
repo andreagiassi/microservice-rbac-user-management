@@ -1,31 +1,10 @@
 {
 	"info": {
 		"_postman_id": "c183867a-ca14-42c0-97de-173eb9a8754e",
-		"name": "micro2",
+		"name": "microservice-rbac-user-management",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
-		{
-			"name": "get user list presentation",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8090/users",
-					"host": [
-						"localhost"
-					],
-					"port": "8090",
-					"path": [
-						"users"
-					]
-				}
-			},
-			"response": []
-		},
 		{
 			"name": "get single user",
 			"request": {
@@ -46,16 +25,34 @@
 			"response": []
 		},
 		{
-			"name": "login",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
+			"name": "get user list",
 			"request": {
+				"auth": {
+					"type": "noauth"
+				},
 				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8090/users",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "",
+					"raw": "{\n\t\"username\" : \"andrea\",\n\t\"password\" : \"Test!123\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -63,15 +60,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8090/users/rbac/permissions",
+					"raw": "localhost:8090/login",
 					"host": [
 						"localhost"
 					],
 					"port": "8090",
 					"path": [
-						"users",
-						"rbac",
-						"permissions"
+						"login"
 					]
 				}
 			},
@@ -278,35 +273,20 @@
 			"name": "rbac - get permissions",
 			"request": {
 				"auth": {
-					"type": "apikey",
-					"apikey": [
-						{
-							"key": "key",
-							"value": "apiKey",
-							"type": "string"
-						},
-						{
-							"key": "in",
-							"value": "query",
-							"type": "string"
-						},
-						{
-							"key": "value",
-							"value": "02759a1d80414242ba039cd49c0841f0",
-							"type": "string"
-						}
-					]
+					"type": "noauth"
 				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8090/users",
+					"raw": "localhost:8090/users/rbac/permissions",
 					"host": [
 						"localhost"
 					],
 					"port": "8090",
 					"path": [
-						"users"
+						"users",
+						"rbac",
+						"permissions"
 					]
 				}
 			},
@@ -316,24 +296,7 @@
 			"name": "rbac - get roles",
 			"request": {
 				"auth": {
-					"type": "apikey",
-					"apikey": [
-						{
-							"key": "key",
-							"value": "apiKey",
-							"type": "string"
-						},
-						{
-							"key": "in",
-							"value": "query",
-							"type": "string"
-						},
-						{
-							"key": "value",
-							"value": "02759a1d80414242ba039cd49c0841f0",
-							"type": "string"
-						}
-					]
+					"type": "noauth"
 				},
 				"method": "GET",
 				"header": [],
@@ -392,24 +355,7 @@
 			"name": "rbac - get roles by Id",
 			"request": {
 				"auth": {
-					"type": "apikey",
-					"apikey": [
-						{
-							"key": "key",
-							"value": "apiKey",
-							"type": "string"
-						},
-						{
-							"key": "in",
-							"value": "query",
-							"type": "string"
-						},
-						{
-							"key": "value",
-							"value": "02759a1d80414242ba039cd49c0841f0",
-							"type": "string"
-						}
-					]
+					"type": "noauth"
 				},
 				"method": "GET",
 				"header": [],
@@ -433,24 +379,7 @@
 			"name": "rbac - delete roles by Id",
 			"request": {
 				"auth": {
-					"type": "apikey",
-					"apikey": [
-						{
-							"key": "key",
-							"value": "apiKey",
-							"type": "string"
-						},
-						{
-							"key": "in",
-							"value": "query",
-							"type": "string"
-						},
-						{
-							"key": "value",
-							"value": "02759a1d80414242ba039cd49c0841f0",
-							"type": "string"
-						}
-					]
+					"type": "noauth"
 				},
 				"method": "DELETE",
 				"header": [],
@@ -510,7 +439,7 @@
 			"response": []
 		},
 		{
-			"name": "rbac - remove permission on role Copy",
+			"name": "rbac - remove permission on role",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -547,6 +476,28 @@
 				}
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "a03b5b9a-3989-4dab-befd-9dab432bc938",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "e51fd2af-05ef-49cd-b98b-061ff0cef020",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	]
 }
