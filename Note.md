@@ -1,34 +1,52 @@
 
-## Setup notes
-To compile and run the microservice code you need to setup Java 8 JDK.
+## Setup using Docker containers
+The Docker environment is necessary in order to work with the containers and the setup depends about your Os.
+Proceed the setup for the Docker environment.
 
-Follow the instructions below to setup a local docker image for the mysql8.0 database:
+The project needs two containers:
+* a Java microservice
+* a MySql database
+
+To compile and run the Java project you need to install a Java 8 JDK on your local machine.
+
+Follow the instructions below to setup a local docker image for a mysql8.0 database:
 
 https://medium.com/@crmcmullen/how-to-run-mysql-in-a-docker-container-on-macos-with-persistent-local-data-58b89aec496a
 
-- Build the new micro service deploy file locally with maven:
-
-mvn install -DskipTests
-
-- Run the micro service application:
-
-docker run --name micro-rbac-users -p 8090:8090 micro-rbac-users
-
-Two scripts files has been created:
-* run.cmd as utility to assist during the normal development
-* db.cmd as utility to pull down the database image and start it
-
----
-Setup local development network
-
 The microservice application has been updated to support a docker dev-network and there are no needs to
- configure manually the IP address of the database target.
- 
-To create the dev-network is sufficient launch the Docker's command:
+ configure manually the IP address of the database target: this setup is necessary only one time.
 
-docker network create dev-network
+Create the developer network:
 
-To have confirmation that the new docker network has been defined run the command:
+    docker network create dev-network
 
-docker network ls
+Check that the network has been defined:
 
+    docker network ls
+
+Run the MySql container using the specific bash script:
+
+    ./db.cmd
+
+Execute the run bash script to compile and run the microservice container:
+
+    ./run.cmd
+
+Open a browser and explore the REST apis:
+
+http://localhost:8090/swagger-ui.html
+
+Everything should be up and running :)
+
+## Setup without Docker
+You can setup and work on this project also without to consider to use Docker.
+
+If you want to do this:
+- setup a MySql on your local machine
+- setup a Java 8 JDK
+- change the database address on the application.properties file using localhost
+
+Execute the microservice code using Mave:
+
+    ./mvnw spring-boot:run
+    
