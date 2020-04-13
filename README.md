@@ -1,4 +1,4 @@
-# Role Based Access Control User Management Microservice
+# Role Based Access Control - User Management Microservice
 
 #### Author
 This project has been created in February 2020 by Andrea Giassi.
@@ -7,24 +7,23 @@ Andrea he's an italian Agile professional and Software Engineer actives in web s
 Since 2002, Andrea is working in the IT market for several different companies and start ups and it has contributed
  to the success of several solutions and products.
 
-Connect or contact me here:
+About me:
 https://www.linkedin.com/in/andreagiassi/
 
 #### Overview
+The need to manage a user base for an online system is very frequent.
 Goal of this project is to offer a generic user's data management microservice.
 
-The need to manage a user base for an online system is very frequent.
 This microservice can offer a good and solid starting point for managing your accounts.
-Thanks to this Role Based Access Control implementation, it's easy to define the roles and permissions for the specific application
- through REST apis, and subsequently apply these roles on users.
+Thanks to this Role Based Access Control implementation it's easy to define roles and permissions for your specific application and subsequently apply these access rules on the users.
 
 This project lends itself very well to implement new prototypes or to create new solutions based on microservice architecture.
 
 The project is thought using the Docker technologies with two different containers:
-* Spring Boot REST apis: that exposing the services
+* Spring Boot REST apis: that exposing the services using REST apis
 * MySql 8.0 database: that is storing/retrieving the information
 
-The code has been tested (more than 100 tests) using JUnit and Mockito, H2 in memory database and some standard libraries for the integration tests.
+The code has been tested (> 100 tests) using JUnit and Mockito, H2 in memory database and some standard libraries for the integration tests.
 
 Here below the most relevant features exposed using REST Apis:
 
@@ -107,17 +106,6 @@ Open a browser and explore the REST apis:
 http://localhost:8090/swagger-ui.html
 
 Everything should be up and running using your local MySql :)
-
-#### About the Spring Boot Microservice
-The microservice code is based on Java 8 and the Spring Boot 2 framework.
-
-Thanks to the abstractions of Spring Data the information are persisted into the database using the JPA.
-Using Swagger the REST apis are also easy to manage throw the included Swagger dependency.
-
-This architectural component has a specific Docker image and the services exposed
- from the microservice are available on the port 8090 .
-
-The deploy of the two architectural components is using now the docker network definition.
 
 #### REST apis exposed
 Using a browser it's possible to interact with the REST apis with Swagger:
