@@ -476,6 +476,143 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "rbac - create permission",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"enabled\": true,\n  \"note\": \"New permission test\",\n  \"permission\": \"NEW_UPLOAD\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8090/users/rbac/permissions",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"users",
+						"rbac",
+						"permissions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "rbac - update permission",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\" : 5,\n  \"enabled\": false,\n  \"note\": \"Upload disable due to new changes\",\n  \"permission\": \"NEW_UPLOAD\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8090/users/rbac/permissions",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"users",
+						"rbac",
+						"permissions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "rbac - get permission by Key",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\" : 5,\n  \"enabled\": false,\n  \"note\": \"Upload disable due to new changes\",\n  \"permission\": \"NEW_UPLOAD\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8090/users/rbac/permissions/LOGIN",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"users",
+						"rbac",
+						"permissions",
+						"LOGIN"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "rbac - delete permission by Key",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\" : 5,\n  \"enabled\": false,\n  \"note\": \"Upload disable due to new changes\",\n  \"permission\": \"NEW_UPLOAD\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8090/users/rbac/permissions/NEW_UPLOAD",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"users",
+						"rbac",
+						"permissions",
+						"NEW_UPLOAD"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
