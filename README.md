@@ -47,6 +47,10 @@ Here below the most relevant features exposed using REST Apis:
 * Delete a role
 * Add a permission on a role
 * Remove a permission on a role
+* Create a new permission
+* Update an existing permission (also enabled or disable it)
+* Retrieve single permission
+* Delete not used permission
 
 ## Quick Start
 
