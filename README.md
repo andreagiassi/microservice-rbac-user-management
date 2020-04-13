@@ -19,7 +19,7 @@ Thanks to this Role Based Access Control implementation it's easy to define role
 
 This project lends itself very well to implement new prototypes or to create new solutions based on microservice architecture.
 
-The project is thought using the Docker technologies with two different containers:
+The solution is thought using the Docker technologies with two different containers:
 * Spring Boot REST apis: that exposing the services using REST apis
 * MySql 8.0 database: that is storing/retrieving the information
 
