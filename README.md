@@ -15,7 +15,7 @@ The need to manage a user base for an online system is very frequent.
 Goal of this project is to offer a generic user's data management microservice.
 
 This microservice can offer a good and solid starting point for managing your accounts.
-Thanks to this Role Based Access Control implementation it's easy to define roles and permissions for your specific application and subsequently apply these access rules on the users.
+Thanks to this Role Based Access Control implementation it's easy to define roles and permissions for your specific application/prototype and subsequently apply these access rules on the users.
 
 This project lends itself very well to implement new prototypes or to create new solutions based on microservice architecture.
 
@@ -23,7 +23,7 @@ The project is thought using the Docker technologies with two different containe
 * Spring Boot REST apis: that exposing the services using REST apis
 * MySql 8.0 database: that is storing/retrieving the information
 
-The code has been tested (> 100 tests) using JUnit and Mockito, H2 in memory database and some standard libraries for the integration tests.
+The code has been well tested (> 100 tests) using JUnit and Mockito, H2 in memory database and some standard libraries for the integration tests.
 
 Here below the most relevant features exposed using REST Apis:
 
