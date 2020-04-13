@@ -1,7 +1,7 @@
-echo "Building MicroserviceDemo2..."
+echo "Building microservice micro-rbac-users..."
 mvn install -DskipTests
-echo "Dockerizing MicroserviceDemo2..."
-docker rm micro2
-docker build -t micro2 .
-echo "Running the Docker container for micro2..."
-docker run --name micro2 --network dev-network -p 8090:8090 micro2
+echo "Dockerizing microservice micro-rbac-users..."
+docker rm micro-rbac-users
+docker build -t micro-rbac-users .
+echo "Running container micro-rbac-users..."
+docker run --name micro-rbac-users --network dev-network -p 8090:8090 micro-rbac-users

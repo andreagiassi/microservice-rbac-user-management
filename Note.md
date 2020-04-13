@@ -12,7 +12,7 @@ mvn install -DskipTests
 
 - Run the micro service application:
 
-docker run --name micro2 -p 8090:8090 micro2
+docker run --name micro-rbac-users -p 8090:8090 micro-rbac-users
 
 Two scripts files has been created:
 * run.cmd as utility to assist during the normal development

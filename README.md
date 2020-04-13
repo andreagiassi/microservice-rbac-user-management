@@ -54,10 +54,9 @@ Here below the most relevant features exposed using REST Apis:
 You can run this project on your local machine and configure the MySql using the localhost into the application.properties file or
 you can use, as suggested, the Docker image for a MySql image.
 
-
-
-
-
+Two scripts files has been created to automate the build and deploy:
+* run.cmd as utility to assist during the normal development
+* db.cmd as utility to pull down the database image and start it
 
 #### About the Spring Boot Microservice
 The microservice code is based on Java 8 and the Spring Boot 2 framework.
