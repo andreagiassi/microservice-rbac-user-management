@@ -52,6 +52,19 @@ Here below the most relevant features exposed using REST Apis:
 * Retrieve single permission
 * Delete not used permission
 
+## REST apis exposed
+Using a browser it's possible to interact with the REST apis with Swagger:
+
+http://localhost:8090/swagger-ui.html
+
+![Swagger](https://github.com/andreagiassi/microservice-rbac-user-management/blob/master/src/main/resources/images/swagger.png "Swagger interface")
+
+Another alternative is to using an external tool, for example Postman (https://www.postman.com/).
+
+This project contains also the Postman export file with all the configured test calls:
+
+![Swagger](https://github.com/andreagiassi/microservice-rbac-user-management/blob/master/src/main/resources/images/postman.png "Swagger interface")
+
 ## Quick Start
 
 ### Setup using Docker containers
@@ -110,19 +123,6 @@ Open a browser and explore the REST apis:
 http://localhost:8090/swagger-ui.html
 
 Everything should be up and running using your local MySql :)
-
-#### REST apis exposed
-Using a browser it's possible to interact with the REST apis with Swagger:
-
-http://localhost:8090/swagger-ui.html
-
-![Swagger](https://github.com/andreagiassi/microservice-rbac-user-management/blob/master/src/main/resources/images/swagger.png "Swagger interface")
-
-Another alternative is to using an external tool, for example Postman (https://www.postman.com/).
-
-This project contains also the Postman export file with all the configured test calls:
-
-![Swagger](https://github.com/andreagiassi/microservice-rbac-user-management/blob/master/src/main/resources/images/postman.png "Swagger interface")
 
 #### Security, encryption and decryption of sensible data
 I've followed the blog post below in order to implement an encryption and decryption method for sensible data such
