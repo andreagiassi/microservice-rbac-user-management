@@ -55,7 +55,7 @@ public class UserService {
 
     public User getUserById(Long id) {
         if (id == null) {
-            throw new InvalidUserIdentifierException("Id cannot be null");
+            throw new InvalidUserIdentifierException("User Id cannot be null");
         }
         Optional<User> userOpt = userRepository.findById(id);
         if (userOpt.isPresent()) {

@@ -27,10 +27,6 @@ public class RoleService {
         return roleRepository.findAll();
     }
 
-    public Iterable<Permission> getPermissionList() {
-        return permissionRepository.findAll();
-    }
-
     public Role getRoleById(Long id) {
         if (id == null) {
             throw new InvalidRoleIdentifierException("Id role cannot be null");
@@ -161,13 +157,6 @@ public class RoleService {
 
         role.getPermissions().remove(permission);
         roleRepository.save(role);
-
-        // check if the permission is in use
-        Long countUsages = permissionRepository.countPermissionUsage(permission.getId());
-        if (countUsages == 0) {
-            permissionRepository.deleteByPermission(permissionKey);
-            log.info(String.format("Removed not used permission key %s", permissionKey));
-        }
 
         log.info(String.format("Removed permission %s from role id = %s", permissionKey, roleId));
         return roleRepository.findById(roleId).get();

@@ -53,15 +53,20 @@ public class UserDTO implements Serializable {
             // with the distinct keys of roles and permissions.
             roles = new ArrayList<>();
             permissions = new ArrayList<>();
+
             for (Role role : user.getRoles()) {
                 roles.add(role.getRole());
                 for (Permission p : role.getPermissions()) {
                     String key = p.getPermission();
                     if (!permissions.contains(key)) {
-                        permissions.add(key);
+                        // add the permission only if enabled
+                        if (p.isEnabled()) {
+                            permissions.add(key);
+                        }
                     }
                 }
             }
+
         }
     }
 

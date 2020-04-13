@@ -196,9 +196,7 @@ public class RoleServiceTest {
 
         given(roleRepository.findById(1L)).willReturn(Optional.of(role));
 
-        Permission permission = new Permission();
-        permission.setId(1L);
-        permission.setPermission("PERMISSION_ONE");
+        Permission permission = new Permission(1L, "PERMISSION_ONE");
 
         given(permissionRepository.findByPermission("PERMISSION_ONE")).willReturn(Optional.of(permission));
 
@@ -265,7 +263,6 @@ public class RoleServiceTest {
         permission.setPermission("PERMISSION");
 
         given(permissionRepository.findByPermission("PERMISSION")).willReturn(Optional.of(permission));
-        given(permissionRepository.countPermissionUsage(1L)).willReturn(10L);
 
         Role roleUpdated = roleService.removePermissionOnRole(1L, "PERMISSION");
 
@@ -291,27 +288,6 @@ public class RoleServiceTest {
         Iterable<Role> roleIterable = roleService.getRoleList();
 
         assertNotNull(roleIterable);
-
-        // TODO: check on size and or data
-    }
-
-    // getPermissionList
-
-    @Test
-    public void calling_getPermissionList_then_return_list_of_roles() {
-        ArrayList<Permission> permissionArrayList = new ArrayList<>();
-
-        Permission permission1 = new Permission();
-        Permission permission2 = new Permission();
-
-        permissionArrayList.add(permission1);
-        permissionArrayList.add(permission2);
-
-        given(permissionRepository.findAll()).willReturn(permissionArrayList);
-
-        Iterable<Permission> permissionList = roleService.getPermissionList();
-
-        assertNotNull(permissionList);
 
         // TODO: check on size and or data
     }

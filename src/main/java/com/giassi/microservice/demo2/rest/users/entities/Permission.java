@@ -14,6 +14,11 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class Permission {
 
+    public Permission(Long id, String permission) {
+        this.id = id;
+        this.permission = permission;
+    }
+
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO, generator="native")
     @GenericGenerator(name = "native", strategy = "native")
@@ -22,5 +27,12 @@ public class Permission {
 
     @Column(name="permission", nullable = false)
     private String permission;
+
+    // enabled as default
+    @Column(name="enabled")
+    private boolean enabled = true;
+
+    @Column(name="note")
+    private String note;
 
 }

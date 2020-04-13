@@ -4,6 +4,7 @@ import com.giassi.microservice.demo2.rest.users.dtos.PermissionDTO;
 import com.giassi.microservice.demo2.rest.users.dtos.RoleDTO;
 import com.giassi.microservice.demo2.rest.users.entities.Permission;
 import com.giassi.microservice.demo2.rest.users.entities.Role;
+import com.giassi.microservice.demo2.rest.users.services.PermissionService;
 import com.giassi.microservice.demo2.rest.users.services.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,9 @@ public class RBACRestController {
 
     @Autowired
     private RoleService roleService;
+
+    @Autowired
+    private PermissionService permissionService;
 
     // roles
     @GetMapping("/roles")
@@ -48,10 +52,34 @@ public class RBACRestController {
     // retrieve the permission's list
     @GetMapping("/permissions")
     public ResponseEntity<List<PermissionDTO>> getPermissionPresentationList() {
-        Iterable<Permission> permissionList = roleService.getPermissionList();
+        Iterable<Permission> permissionList = permissionService.getPermissionList();
         ArrayList<PermissionDTO> list = new ArrayList<>();
         permissionList.forEach(e -> list.add(new PermissionDTO(e)));
         return ResponseEntity.ok(list);
+    }
+
+    // permissions
+
+    @GetMapping("/permissions/{permissionKey}")
+    public ResponseEntity<PermissionDTO> getPermissionByKey(@PathVariable("permissionKey") String permissionKey) {
+        PermissionDTO permissionDTO = new PermissionDTO(permissionService.getPermissionByKey(permissionKey));
+        return ResponseEntity.ok(permissionDTO);
+    }
+
+    @PostMapping("/permissions")
+    public ResponseEntity<PermissionDTO> createPermission(@RequestBody PermissionDTO permissionDTO) {
+        return new ResponseEntity(new PermissionDTO(permissionService.createPermission(permissionDTO)), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/permissions")
+    public ResponseEntity<PermissionDTO> updatePermission(@RequestBody PermissionDTO permissionDTO) {
+        return new ResponseEntity(new PermissionDTO(permissionService.updatePermission(permissionDTO)), HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/permissions/{permissionKey}")
+    public ResponseEntity<?> deletePermissionByKey(@PathVariable("permissionKey") String permissionKey) {
+        permissionService.deletePermissionByKey(permissionKey);
+        return ResponseEntity.noContent().build();
     }
 
     // add or remove a Permission on a Role

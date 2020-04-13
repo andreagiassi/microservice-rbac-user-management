@@ -4,6 +4,7 @@ import com.giassi.microservice.demo2.rest.users.entities.Permission;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class PermissionDTOTest {
 
@@ -23,6 +24,7 @@ public class PermissionDTOTest {
 
         assertEquals(permission.getId(), permissionDTO.getId());
         assertEquals(permission.getPermission(), permissionDTO.getPermission());
+        assertTrue(permissionDTO.isEnabled());
     }
 
 }

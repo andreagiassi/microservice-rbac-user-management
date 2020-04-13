@@ -15,7 +15,9 @@ CREATE TABLE `roles` (
 
 CREATE TABLE `permissions` (
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `permission` varchar(80) NOT NULL UNIQUE
+  `permission` varchar(80) NOT NULL UNIQUE,
+  enabled TINYINT DEFAULT '1',
+  note varchar(255) DEFAULT NULL
 );
 
 CREATE TABLE permissions_roles (
