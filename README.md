@@ -51,12 +51,62 @@ Here below the most relevant features exposed using REST Apis:
 
 ## Quick Start
 
-You can run this project on your local machine and configure the MySql using the localhost into the application.properties file or
-you can use, as suggested, the Docker image for a MySql image.
+### Setup using Docker containers
+The Docker environment is necessary in order to work with the containers and the setup depends about your Os.
+Proceed the setup for the Docker environment.
 
-Two scripts files has been created to automate the build and deploy:
-* run.cmd as utility to assist during the normal development
-* db.cmd as utility to pull down the database image and start it
+The project needs two containers:
+* a Java microservice
+* a MySql database
+
+To compile and run the Java project you need to install a Java 8 JDK on your local machine.
+
+Follow the instructions below to setup a local docker image for a mysql8.0 database:
+
+https://medium.com/@crmcmullen/how-to-run-mysql-in-a-docker-container-on-macos-with-persistent-local-data-58b89aec496a
+
+The microservice application has been updated to support a docker dev-network and there are no needs to
+ configure manually the IP address of the database target: this setup is necessary only one time.
+
+Create the developer network:
+
+    docker network create dev-network
+
+Check that the network has been defined:
+
+    docker network ls
+
+Run the MySql container using the specific bash script:
+
+    ./db.cmd
+
+Execute the run bash script to compile and run the microservice container:
+
+    ./run.cmd
+
+Open a browser and explore the REST apis:
+
+http://localhost:8090/swagger-ui.html
+
+Everything should be up and running :)
+
+### Setup without Docker
+You can setup and work on this project also without to consider to use Docker.
+
+If you want to do this:
+- setup a MySql on your local machine
+- setup a Java 8 JDK
+- change the database address on the application.properties file using localhost
+
+Execute the microservice code using Maven:
+
+    ./mvnw spring-boot:run
+    
+Open a browser and explore the REST apis:
+
+http://localhost:8090/swagger-ui.html
+
+Everything should be up and running using your local MySql :)
 
 #### About the Spring Boot Microservice
 The microservice code is based on Java 8 and the Spring Boot 2 framework.
@@ -68,20 +118,6 @@ This architectural component has a specific Docker image and the services expose
  from the microservice are available on the port 8090 .
 
 The deploy of the two architectural components is using now the docker network definition.
-
-#### Database
-The database must to be created using the simple db.sql script included one time,
- once the docker image will be created.
-
-* db_create.sql: create the empty database "users" . 
-
-For more information related the deploy read the file Note.txt.
-
-The other sql files are executed in automatic from Spring Boot in order to create the database schema and to
- populate some test data during the application start up.
-
-* schema.sql: create the table/s on the database.
-* data.sql: insert some test data inside the users table on start up.
 
 #### REST apis exposed
 Using a browser it's possible to interact with the REST apis with Swagger:
@@ -103,4 +139,3 @@ I've followed the blog post below in order to implement an encryption and decryp
 http://www.appsdeveloperblog.com/encrypt-user-password-example-java/
 
 The application.properties file contains the default salt that will be used to encrypt the password data.
-
