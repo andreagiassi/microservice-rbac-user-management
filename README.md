@@ -92,7 +92,9 @@ Check that the network has been defined:
 
     docker network ls
 
-Run the MySql container using the specific bash script:
+Modify the file db.cmd and set a folder to use for the MySql's docker volume.
+
+Run the MySql container:
 
     ./db.cmd
 
