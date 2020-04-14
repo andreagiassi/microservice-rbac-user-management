@@ -69,7 +69,10 @@ This project contains also the Postman export file with all the configured test 
 
 ### Setup using Docker containers
 The Docker environment is necessary in order to work with the containers and the setup depends about your Os.
+
 Proceed the setup for the Docker environment.
+
+[Get Docker](https://docs.docker.com/get-docker/)
 
 The project needs two containers:
 * a Java microservice
