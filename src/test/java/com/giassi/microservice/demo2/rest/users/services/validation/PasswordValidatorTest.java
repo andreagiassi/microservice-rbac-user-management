@@ -1,4 +1,4 @@
-package com.giassi.microservice.demo2.rest.users.services;
+package com.giassi.microservice.demo2.rest.users.services.validation;
 
 import com.giassi.microservice.demo2.rest.users.exceptions.InvalidUserDataException;
 import org.junit.Before;

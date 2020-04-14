@@ -23,7 +23,7 @@ The solution is thought using the Docker technologies with two different contain
 * Spring Boot REST apis: that exposing the services using REST apis
 * MySql 8.0 database: that is storing/retrieving the information
 
-The code has been well tested (> 100 tests) using JUnit and Mockito, H2 in memory database and some standard libraries for the integration tests.
+The code has been well tested (> 110 tests) using JUnit and Mockito, H2 in memory database and some standard libraries for the integration tests.
 
 Here below the most relevant features exposed using REST Apis:
 

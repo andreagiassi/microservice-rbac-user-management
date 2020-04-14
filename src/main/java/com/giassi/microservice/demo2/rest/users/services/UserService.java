@@ -9,6 +9,8 @@ import com.giassi.microservice.demo2.rest.users.repositories.AddressRepository;
 import com.giassi.microservice.demo2.rest.users.repositories.ContactRepository;
 import com.giassi.microservice.demo2.rest.users.repositories.RoleRepository;
 import com.giassi.microservice.demo2.rest.users.repositories.UserRepository;
+import com.giassi.microservice.demo2.rest.users.services.validation.EmailValidator;
+import com.giassi.microservice.demo2.rest.users.services.validation.PasswordValidator;
 import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,9 +43,11 @@ public class UserService {
     private String salt;
 
     private PasswordValidator passwordValidator;
+    private EmailValidator emailValidator;
 
     public UserService() {
         passwordValidator = new PasswordValidator();
+        emailValidator = new EmailValidator();
     }
 
     public List<UserDTO> getUserPresentationList() {
@@ -86,6 +90,8 @@ public class UserService {
 
         checkIfUsernameNotUsed(registerUserAccountDTO.getUsername());
         passwordValidator.checkPassword(registerUserAccountDTO.getPassword());
+        emailValidator.checkEmail(registerUserAccountDTO.getEmail());
+
         checkIfEmailNotUsed(registerUserAccountDTO.getEmail());
 
         // create the new user account: not all the user information required
@@ -154,6 +160,7 @@ public class UserService {
         checkIfUsernameNotUsed(createUserDTO.getUsername());
         checkIfEmailNotUsed(createUserDTO.getEmail());
         passwordValidator.checkPassword(createUserDTO.getPassword());
+        emailValidator.checkEmail(createUserDTO.getEmail());
 
         // create the user
         User user = new User();
@@ -259,6 +266,7 @@ public class UserService {
         }
 
         passwordValidator.checkPassword(updateUserDTO.getPassword());
+        emailValidator.checkEmail(updateUserDTO.getEmail());
 
         // check if the new email has not been registered yet
         User userEmail = getUserByEmail(updateUserDTO.getEmail());
