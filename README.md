@@ -169,7 +169,7 @@ Proceed with your RBAC configuration using the REST apis:
 
 http://localhost:8090/swagger-ui.html
 
-Restarting the db or the microservices should not affect the persistance of your RBAC configuration.
+Restarting the db or the microservices should not affect the persistence of your RBAC configuration.
 
 #### Security, encryption and decryption of sensible data
 I've followed the blog post below in order to implement an encryption and decryption method for sensible data such
