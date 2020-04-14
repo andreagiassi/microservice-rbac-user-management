@@ -51,6 +51,7 @@ Here below the most relevant features exposed using REST Apis:
 * Update an existing permission (also enabled or disable it)
 * Retrieve single permission
 * Delete not used permission
+* Api to generate a salt random value to encrypt password (configuration)
 
 ## REST apis exposed
 Using a browser it's possible to interact with the REST apis with Swagger:
