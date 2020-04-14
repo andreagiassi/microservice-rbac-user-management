@@ -11,7 +11,7 @@ About me:
 https://www.linkedin.com/in/andreagiassi/
 
 #### Overview
-The need to manage a user base for an online system is very frequent.
+>The need to manage a user base for an online system is very frequent.
 Goal of this project is to offer a generic user's data management microservice.
 
 This microservice can offer a good and solid starting point for managing your accounts.
@@ -69,15 +69,15 @@ This project contains also the Postman export file with all the configured test 
 ## Quick Start
 
 ### Setup using Docker containers
+>Thanks to Docker it’s easy to create scalable and manageable applications built of microservices.
+
+The project is designed to use two containers:
+* one Java microservice
+* one MySql database
+
 The Docker environment is necessary in order to work with the containers and the setup depends about your Os.
 
-Proceed the setup for the Docker environment.
-
-[Get Docker](https://docs.docker.com/get-docker/)
-
-The project needs two containers:
-* a Java microservice
-* a MySql database
+Proceed the setup for the Docker environment: [Get Docker](https://docs.docker.com/get-docker/)
 
 To compile and run the Java project you need to install a Java 8 JDK on your local machine.
 
@@ -116,8 +116,8 @@ If you want to remove this demo data proceed to configure your system as in "Set
 Everything should be up and running :)
 
 ### Setup without Docker
-You can also setup and work on this project without to consider to use Docker.
-You will just launch the Spring Boot application targeting the MySql database (on localhost or a remote one).
+>You can also setup and work on this project without to consider to use Docker.
+You will just launch the Spring Boot application targeting the MySql database (on localhost or on a remote one).
 
 Install Java 8 JDK.
 
@@ -152,7 +152,8 @@ If you want to remove this demo data proceed to configure your system as in "Set
 Everything should be up and running using your local MySql :)
 
 ### Setup a ready and empty RBAC
-You can prepare a specific clean RBAC setup.
+>You can prepare a specific clean RBAC microservice setup without any demo data and
+> without to reset the database content at each restart.
 
 Install Java 8 JDK.
 
@@ -169,7 +170,7 @@ Set the username and password of the MySql's user:
     spring.datasource.username=yourMySqlUser
     spring.datasource.password=yourMySqlUserStrongPassword
 
-For production environment consider to create a specific MySql user for the database "users" using
+>For production environment consider to create a specific MySql user for the database "users" using
  a strong password.
 
 Disable the demo data setting as below:
