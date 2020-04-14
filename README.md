@@ -131,22 +131,22 @@ Open the application.properties file located in /src/main/resources.
 
 Set the username and password of your MySql database that you want to use:
 
-spring.datasource.username=rbacProtoUser
-spring.datasource.password=df9g8u34t8!9fhisidd84#
+    spring.datasource.username=yourMySqlUser
+    spring.datasource.password=yourMySqlUserStrongPassword
 
 For production environment consider creating a specific MySql user for the "users" database and a strong password.
 
 Set the db properties as below:
 
-# enable initialization using schema.sql and data.sql
-spring.datasource.initialize=false
-spring.jpa.hibernate.ddl-auto=update
-spring.datasource.initialization-mode=never
+    # enable initialization using schema.sql and data.sql
+    spring.datasource.initialize=false
+    spring.jpa.hibernate.ddl-auto=update
+    spring.datasource.initialization-mode=never
 
 Configure a different encryption salt:
 
-# password encryption
-microservice.security.salt=WZeBXmCI9cAz3LyY9Sdllj9l5iPsXC
+    # password encryption
+    microservice.security.salt=WZeBXmCI9cAz3LyY9Sdllj9l5iPsXC
 
 Save the application.properties file.
 
