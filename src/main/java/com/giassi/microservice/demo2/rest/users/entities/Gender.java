@@ -21,7 +21,7 @@ public enum Gender {
         try {
             gender = Gender.valueOf(genderName);
         } catch(IllegalArgumentException ex) {
-            throw new InvalidGenderException(String.format("Gender string %s not supported", genderName));
+            throw new InvalidGenderException(String.format("Invalid gender string %s. Are supported only: MALE or FEMALE strings", genderName));
         }
         return gender;
     }
