@@ -170,7 +170,7 @@ Set the username and password of the MySql's user:
     spring.datasource.username=yourMySqlUser
     spring.datasource.password=yourMySqlUserStrongPassword
 
->For production environment consider to create a specific MySql user for the database "users" using
+>For a production environment consider to create a specific MySql user for the database "users" using
  a strong password.
 
 Disable the demo data setting as below:
@@ -184,6 +184,9 @@ Configure a different encryption salt:
 
     # password encryption
     microservice.security.salt=WZeBXmCI9cAz3LyY9Sdllj9l5iPsXC
+
+>If you need, you can launch the microservice and using Swagger to call the rest endpoint /users/rbac/salt
+> in order to generate a new random one.
 
 Save the application.properties file.
 
@@ -204,10 +207,8 @@ I've followed the blog post below in order to implement an encryption and decryp
 
 http://www.appsdeveloperblog.com/encrypt-user-password-example-java/
 
-The application.properties file contains the default salt that will be used to encrypt the password data.
-
 #### Others
-You can contact me in case this project sounds good for you or if you're interested to evolve it.
+You can contact me in case this project sounds good for you or if you're interested to evolve it or others.
 
 Purpose of this project is to keep the concepts clear and easy to use for everyone that needs a
  simple RBAC implementation.
