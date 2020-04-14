@@ -128,6 +128,10 @@ Create and grant a new MySql user on the "users" database.
 
 Open the application.properties file located in /src/main/resources.
 
+Target your localhost MySql database:
+
+    spring.datasource.url=jdbc:mysql://localhost:3306/users?useSSL=false&allowPublicKeyRetrieval=true
+
 Set the username and password of the MySql's user:
 
     spring.datasource.username=yourMySqlUser

@@ -613,6 +613,26 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "rbac - generate salt",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8090/users/rbac/salt",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"users",
+						"rbac",
+						"salt"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [

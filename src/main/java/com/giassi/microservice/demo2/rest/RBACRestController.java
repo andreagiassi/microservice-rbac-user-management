@@ -4,6 +4,7 @@ import com.giassi.microservice.demo2.rest.users.dtos.PermissionDTO;
 import com.giassi.microservice.demo2.rest.users.dtos.RoleDTO;
 import com.giassi.microservice.demo2.rest.users.entities.Permission;
 import com.giassi.microservice.demo2.rest.users.entities.Role;
+import com.giassi.microservice.demo2.rest.users.services.EncryptionService;
 import com.giassi.microservice.demo2.rest.users.services.PermissionService;
 import com.giassi.microservice.demo2.rest.users.services.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,6 +93,12 @@ public class RBACRestController {
     @DeleteMapping("/roles/{roleId}/permissions/{permissionKey}")
     public ResponseEntity<RoleDTO> removePermissionOnRole(@PathVariable("roleId") Long roleId, @PathVariable("permissionKey") String permissionKey) {
         return new ResponseEntity(new RoleDTO(roleService.removePermissionOnRole(roleId, permissionKey)), null, HttpStatus.OK);
+    }
+
+    // salt generation
+    @GetMapping("/salt")
+    public ResponseEntity<String> generateSalt() {
+        return new ResponseEntity<String>(EncryptionService.generateSalt(32), HttpStatus.CREATED);
     }
 
 }

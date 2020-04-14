@@ -2,6 +2,7 @@
 
 #### 14/04/2020
 
+- Exposed salt generator endpoint
 - New email validation support
 - Documentation improvements
 
