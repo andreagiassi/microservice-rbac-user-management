@@ -126,6 +126,39 @@ http://localhost:8090/swagger-ui.html
 
 Everything should be up and running using your local MySql :)
 
+### Setup a ready and empty RBAC
+Open the application.properties file located in /src/main/resources.
+
+Set the username and password of your MySql database that you want to use:
+
+spring.datasource.username=rbacProtoUser
+spring.datasource.password=df9g8u34t8!9fhisidd84#
+
+For production environment consider creating a specific MySql user for the "users" database and a strong password.
+
+Set the db properties as below:
+
+# enable initialization using schema.sql and data.sql
+spring.datasource.initialize=false
+spring.jpa.hibernate.ddl-auto=update
+spring.datasource.initialization-mode=never
+
+Configure a different encryption salt:
+
+# password encryption
+microservice.security.salt=WZeBXmCI9cAz3LyY9Sdllj9l5iPsXC
+
+Save the application.properties file.
+
+Run the build of the microservice and lunch the container:
+
+    ./run.cmd
+
+The RBAC microservice should be up and running without demo data.
+Proceed with your RBAC configuration using the REST apis:
+
+http://localhost:8090/swagger-ui.html
+
 #### Security, encryption and decryption of sensible data
 I've followed the blog post below in order to implement an encryption and decryption method for sensible data such
  as passwords.
