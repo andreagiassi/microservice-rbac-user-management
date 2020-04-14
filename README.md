@@ -106,6 +106,9 @@ Open a browser and explore the REST apis:
 
 http://localhost:8090/swagger-ui.html
 
+The RBAC microservice should be up and running and connecting with the MySql instance with the demo data.
+If you want to remove this demo data proceed to configure your system as in "Setup a ready and empty RBAC" section.
+
 Everything should be up and running :)
 
 ### Setup without Docker
@@ -124,6 +127,9 @@ Open a browser and explore the REST apis:
 
 http://localhost:8090/swagger-ui.html
 
+The RBAC microservice should be up and running and connecting with the MySql instance with the demo data.
+If you want to remove this demo data proceed to configure your system as in "Setup a ready and empty RBAC" section.
+
 Everything should be up and running using your local MySql :)
 
 ### Setup a ready and empty RBAC
@@ -133,12 +139,12 @@ Set up your MySql instance and create the empty database "users":
 
 Open the application.properties file located in /src/main/resources.
 
-Set the username and password of the user of your MySql database that you want to use:
+Set the username and password of the MySql's user that you want to use:
 
     spring.datasource.username=yourMySqlUser
     spring.datasource.password=yourMySqlUserStrongPassword
 
-For production environment consider creating a specific MySql user for the "users" database and a strong password.
+For production environment consider to create a specific MySql user for the database "users" using a strong password.
 
 Disable the demo data setting the database properties as below:
 
