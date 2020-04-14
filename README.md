@@ -1,15 +1,5 @@
 # Role Based Access Control - User Management Microservice
 
-#### Author
-This project has been created in February 2020 by Andrea Giassi.
-
-Andrea he's an italian Agile professional and Software Engineer actives in web systems and services.
-Since 2002, Andrea is working in the IT market for several different companies and start ups and it has contributed
- to the success of several solutions and products.
-
-About me:
-https://www.linkedin.com/in/andreagiassi/
-
 #### Overview
 >The need to manage a user base for an online system is very frequent.
 Goal of this project is to offer a generic user's data management microservice.
@@ -207,8 +197,12 @@ I've followed the blog post below in order to implement an encryption and decryp
 
 http://www.appsdeveloperblog.com/encrypt-user-password-example-java/
 
-#### Others
-You can contact me in case this project sounds good for you or if you're interested to evolve it or others.
+#### Author
+This project has been created in February 2020 by Andrea Giassi.
 
-Purpose of this project is to keep the concepts clear and easy to use for everyone that needs a
- simple RBAC implementation.
+Andrea he's an italian Agile professional and Software Engineer actives in web systems and services.
+Since 2002, Andrea is working in the IT market for several different companies and start ups and it has contributed
+ to the success of several solutions and products.
+
+About me:
+https://www.linkedin.com/in/andreagiassi/
