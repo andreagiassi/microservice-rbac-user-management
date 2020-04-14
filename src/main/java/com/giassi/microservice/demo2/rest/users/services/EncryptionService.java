@@ -1,5 +1,8 @@
 package com.giassi.microservice.demo2.rest.users.services;
 
+import com.giassi.microservice.demo2.rest.users.exceptions.InvalidConfigurationException;
+import com.google.common.base.Strings;
+
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.security.NoSuchAlgorithmException;
@@ -49,8 +52,8 @@ public class EncryptionService {
     }
 
     public static String encrypt(String password, String salt) {
-        if (salt == null) {
-            throw new RuntimeException("Invalid salt - Wrong configuration");
+        if (Strings.isNullOrEmpty(salt)) {
+            throw new InvalidConfigurationException("Invalid salt: Wrong configuration. Salt cannot be empty or null");
         }
         byte[] securePassword = hash(password.toCharArray(), salt.getBytes());
         return Base64.getEncoder().encodeToString(securePassword);

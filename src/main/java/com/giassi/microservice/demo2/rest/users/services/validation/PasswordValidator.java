@@ -10,7 +10,7 @@ public class PasswordValidator {
 
     private static final int MAX_PASSWORD_LENGTH = 60;
 
-    private static String PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])(?=\\S+$).{8,}$";
+    private static final String PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])(?=\\S+$).{8,}$";
 
     private Pattern pattern;
 

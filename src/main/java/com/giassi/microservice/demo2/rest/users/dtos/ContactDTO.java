@@ -4,7 +4,7 @@ import com.giassi.microservice.demo2.rest.users.entities.Contact;
 import lombok.Data;
 
 @Data
-public class ContactDTO {
+public class ContactDTO implements java.io.Serializable {
 
     public ContactDTO() {
         // empty constructor

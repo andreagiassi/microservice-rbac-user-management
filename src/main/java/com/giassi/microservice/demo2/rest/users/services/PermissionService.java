@@ -87,7 +87,7 @@ public class PermissionService {
         Optional<Permission> permissionByKeyOpt = permissionRepository.findByPermission(permissionKey);
         if (permissionByKeyOpt.isPresent()) {
             Permission permission1 = permissionByKeyOpt.get();
-            if (permission1.getId() != permission.getId()) {
+            if (!permission1.getId().equals(permission.getId())) {
                 throw new InvalidPermissionDataException(String.format("Exists already a permission with the key %s." +
                         " Use another key", permissionKey));
             }
