@@ -112,12 +112,23 @@ If you want to remove this demo data proceed to configure your system as in "Set
 Everything should be up and running :)
 
 ### Setup without Docker
-You can setup and work on this project also without to consider to use Docker.
+You can also setup and work on this project without to consider to use Docker.
+You will just launch the Spring Boot application targeting the MySql database (on localhost or a remote one).
 
-If you want to do this:
-- setup a MySql on your local machine
-- setup a Java 8 JDK
-- change the database address on the application.properties file using localhost
+Install Java 8 JDK.
+
+Set up your MySql instance and create the empty database "users":
+
+    CREATE DATABASE IF NOT EXISTS users;
+
+Create and grant a new MySql user on the "users" database.
+
+Open the application.properties file located in /src/main/resources.
+
+Set the username and password of the MySql's user:
+
+    spring.datasource.username=yourMySqlUser
+    spring.datasource.password=yourMySqlUserStrongPassword
 
 Execute the microservice code using Maven:
 
@@ -133,20 +144,27 @@ If you want to remove this demo data proceed to configure your system as in "Set
 Everything should be up and running using your local MySql :)
 
 ### Setup a ready and empty RBAC
+You can prepare a specific clean RBAC setup.
+
+Install Java 8 JDK.
+
 Set up your MySql instance and create the empty database "users":
 
     CREATE DATABASE IF NOT EXISTS users;
 
+Create and grant a new MySql user on the "users" database.
+
 Open the application.properties file located in /src/main/resources.
 
-Set the username and password of the MySql's user that you want to use:
+Set the username and password of the MySql's user:
 
     spring.datasource.username=yourMySqlUser
     spring.datasource.password=yourMySqlUserStrongPassword
 
-For production environment consider to create a specific MySql user for the database "users" using a strong password.
+For production environment consider to create a specific MySql user for the database "users" using
+ a strong password.
 
-Disable the demo data setting the database properties as below:
+Disable the demo data setting as below:
 
     # enable initialization using schema.sql and data.sql
     spring.datasource.initialize=false
