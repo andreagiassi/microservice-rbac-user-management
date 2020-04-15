@@ -1,5 +1,9 @@
 # Changelog
 
+#### 15/04/2020
+
+- Using phone instead mobile - fix
+
 #### 14/04/2020
 
 - Exposed salt generator endpoint
