@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
- * Support the creation of a new user account with a minimum set of required data
+ * User account login
  */
 @Data
 @NoArgsConstructor
