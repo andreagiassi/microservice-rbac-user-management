@@ -191,7 +191,7 @@ public class UserService {
         // set contact
         Contact contact = new Contact();
         contact.setEmail(createUserDTO.getEmail());
-        contact.setPhone(createUserDTO.getMobile());
+        contact.setPhone(createUserDTO.getPhone());
         contact.setSkype(createUserDTO.getSkype());
         contact.setFacebook(createUserDTO.getFacebook());
         contact.setLinkedin(createUserDTO.getLinkedin());
@@ -301,7 +301,7 @@ public class UserService {
         // set contact, entity always present
         Contact contact = user.getContact();
         contact.setEmail(updateUserDTO.getEmail());
-        contact.setPhone(updateUserDTO.getMobile());
+        contact.setPhone(updateUserDTO.getPhone());
         contact.setSkype(updateUserDTO.getSkype());
         contact.setFacebook(updateUserDTO.getFacebook());
         contact.setLinkedin(updateUserDTO.getLinkedin());
