@@ -13,7 +13,7 @@ The solution is thought using the Docker technologies with two different contain
 * one Spring Boot REST Apis
 * one MySql 8.0 database
 
-The code has been well tested (> 110 tests) using JUnit and Mockito, H2 in memory database and some standard libraries for the integration tests.
+The code has been well tested (> 115 tests) using JUnit and Mockito, H2 in memory database and some standard libraries for the integration tests.
 
 Here below the most relevant features exposed using REST Apis:
 
@@ -27,6 +27,7 @@ Here below the most relevant features exposed using REST Apis:
 * Add or remove a role on an user account
 * Delete a user account
 * Define secured accounts that cannot be deleted but only modified
+* Standard validation for email, phone, password
 
 #### RBAC features: manages roles and permissions
 

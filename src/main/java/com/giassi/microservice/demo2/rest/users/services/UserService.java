@@ -11,6 +11,7 @@ import com.giassi.microservice.demo2.rest.users.repositories.RoleRepository;
 import com.giassi.microservice.demo2.rest.users.repositories.UserRepository;
 import com.giassi.microservice.demo2.rest.users.services.validation.EmailValidator;
 import com.giassi.microservice.demo2.rest.users.services.validation.PasswordValidator;
+import com.giassi.microservice.demo2.rest.users.services.validation.PhoneValidator;
 import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,10 +45,12 @@ public class UserService {
 
     private PasswordValidator passwordValidator;
     private EmailValidator emailValidator;
+    private PhoneValidator phoneValidator;
 
     public UserService() {
         passwordValidator = new PasswordValidator();
         emailValidator = new EmailValidator();
+        phoneValidator = new PhoneValidator();
     }
 
     public List<UserDTO> getUserPresentationList() {
@@ -161,6 +164,7 @@ public class UserService {
         checkIfEmailNotUsed(createUserDTO.getEmail());
         passwordValidator.checkPassword(createUserDTO.getPassword());
         emailValidator.checkEmail(createUserDTO.getEmail());
+        phoneValidator.checkPhone(createUserDTO.getPhone());
 
         // create the user
         User user = new User();
@@ -267,6 +271,7 @@ public class UserService {
 
         passwordValidator.checkPassword(updateUserDTO.getPassword());
         emailValidator.checkEmail(updateUserDTO.getEmail());
+        phoneValidator.checkPhone(updateUserDTO.getPhone());
 
         // check if the new email has not been registered yet
         User userEmail = getUserByEmail(updateUserDTO.getEmail());
@@ -298,7 +303,7 @@ public class UserService {
         user.setEnabled(updateUserDTO.isEnabled());
         user.setNote(updateUserDTO.getNote());
 
-        // set contact, entity always present
+        // set contact: entity always present
         Contact contact = user.getContact();
         contact.setEmail(updateUserDTO.getEmail());
         contact.setPhone(updateUserDTO.getPhone());

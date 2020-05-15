@@ -1,5 +1,9 @@
 # Changelog
 
+#### 15/05/2020
+
+- Phone validation ITU-T E.123 compliant (international numbers)
+
 #### 15/04/2020
 
 - Using phone instead mobile - fix
