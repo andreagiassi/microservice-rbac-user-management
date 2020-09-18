@@ -15,6 +15,13 @@ The solution is thought using the Docker technologies with two different contain
 
 The code has been well tested (> 115 tests) using JUnit and Mockito, H2 in memory database and some standard libraries for the integration tests.
 
+
+If you're using this software or a part of it, please support this open source with a small donation here:
+
+<a href="https://www.buymeacoffee.com/andreag" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
+
+
+#### Exposed REST apis
 Here below the most relevant features exposed using REST Apis:
 
 #### User management features
