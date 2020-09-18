@@ -207,3 +207,9 @@ Since 2002, Andrea is working in the IT market for several different companies a
 
 About me:
 https://www.linkedin.com/in/andreagiassi/
+
+
+Please support this open source with a small donation here:
+
+<a href="https://www.buymeacoffee.com/andreag" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
+
