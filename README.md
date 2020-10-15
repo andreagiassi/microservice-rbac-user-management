@@ -20,6 +20,7 @@ If you're using this software or a part of it, please support this open source w
 
 <a href="https://www.buymeacoffee.com/andreag" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
+I'm not working at the moment... Thanks!
 
 #### Exposed REST apis
 Here below the most relevant features exposed using REST Apis:
