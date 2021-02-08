@@ -2,7 +2,6 @@ package com.giassi.microservice.demo2.rest.users;
 
 import com.giassi.microservice.demo2.rest.users.dtos.UserDTO;
 import com.giassi.microservice.demo2.rest.users.dtos.requests.RegisterUserAccountDTO;
-import com.giassi.microservice.demo2.rest.users.repositories.UserRepository;
 import com.giassi.microservice.demo2.rest.users.services.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,9 +25,6 @@ public class RegisterRestControllerTest {
 
     @Autowired
     UserService userService;
-
-    @Autowired
-    UserRepository userRepository;
 
     @Test
     public void test_createNewUserAccount() {
