@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 public class RoleDTOTest {
 
     @Test
-    public void testRoleDTOConstructor() {
+    public void testRoleDTOConstructor1() {
         Role role = new Role(1L, "USER");
 
         RoleDTO roleDTO = new RoleDTO(role);

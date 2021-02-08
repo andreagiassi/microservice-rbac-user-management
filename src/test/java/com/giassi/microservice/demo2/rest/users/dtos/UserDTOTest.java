@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 public class UserDTOTest {
 
     @Test
-    public void userDTOTestConstructor() {
+    public void userDTOTestConstructor1() {
         User user = new User();
         user.setId(1L);
         user.setUsername("testUsername");

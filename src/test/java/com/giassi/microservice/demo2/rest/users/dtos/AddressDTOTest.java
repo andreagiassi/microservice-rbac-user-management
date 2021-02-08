@@ -8,7 +8,7 @@ import static org.junit.Assert.assertEquals;
 public class AddressDTOTest {
 
     @Test
-    public void getEmptyAddressDTO() {
+    public void testAddressDTOConstructor1() {
         AddressDTO addressDTO = new AddressDTO();
         assertEquals(null, addressDTO.getCity());
         assertEquals(null, addressDTO.getCountry());
@@ -18,7 +18,7 @@ public class AddressDTOTest {
     }
 
     @Test
-    public void getAddressDTO() {
+    public void testAddressDTOConstructor2() {
         Address address = new Address();
         address.setCity("Trieste");
         address.setCountry("Italy");
