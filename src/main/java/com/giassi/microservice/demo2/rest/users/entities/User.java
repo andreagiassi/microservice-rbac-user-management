@@ -3,7 +3,7 @@ package com.giassi.microservice.demo2.rest.users.entities;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 

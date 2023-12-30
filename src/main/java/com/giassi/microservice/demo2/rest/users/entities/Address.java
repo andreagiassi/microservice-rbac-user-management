@@ -2,7 +2,7 @@ package com.giassi.microservice.demo2.rest.users.entities;
 
 import lombok.Data;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name="addresses")

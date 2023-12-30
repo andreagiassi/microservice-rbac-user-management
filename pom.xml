@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.2.4.RELEASE</version>
+		<version>3.2.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.giassi.microservice</groupId>
@@ -14,9 +14,9 @@
 	<name>MicroserviceDemo2</name>
 	<description>Microservice Demo project for Spring Boot / JPA / Dockerfile</description>
 
-	<properties>
+<!--	<properties>
 		<java.version>1.8</java.version>
-	</properties>
+	</properties>-->
 
 	<dependencies>
 		<dependency>
@@ -54,17 +54,11 @@
 			</exclusions>
 		</dependency>
 
-		<!-- Swagger 2 -->
+		<!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
 		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger2</artifactId>
-			<version>2.9.2</version>
-		</dependency>
-
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger-ui</artifactId>
-			<version>2.9.2</version>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>33.0.0-jre</version>
 		</dependency>
 
         <dependency>
@@ -77,7 +71,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-			<version>2.2.4.RELEASE</version>
+			<version>3.2.1</version>
 		</dependency>
 
 		<dependency>
@@ -91,6 +85,14 @@
 			<artifactId>h2</artifactId>
 			<version>2.2.224</version>
 			<scope>test</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>4.0.1</version>
+			<scope>provided</scope>
 		</dependency>
 
 	</dependencies>

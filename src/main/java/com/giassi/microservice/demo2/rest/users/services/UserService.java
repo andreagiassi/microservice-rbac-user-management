@@ -12,6 +12,7 @@ import com.giassi.microservice.demo2.rest.users.repositories.UserRepository;
 import com.giassi.microservice.demo2.rest.users.services.validation.EmailValidator;
 import com.giassi.microservice.demo2.rest.users.services.validation.PasswordValidator;
 import com.giassi.microservice.demo2.rest.users.services.validation.PhoneValidator;
+
 import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
