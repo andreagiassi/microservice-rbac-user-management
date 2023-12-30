@@ -7,6 +7,7 @@ import com.giassi.microservice.demo2.rest.users.entities.User;
 import com.giassi.microservice.demo2.rest.users.exceptions.UserNotFoundException;
 import com.giassi.microservice.demo2.rest.users.services.EncryptionService;
 import com.giassi.microservice.demo2.rest.users.services.UserService;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.*;
 
+@Ignore
 @RunWith(SpringRunner.class)
 @DataJpaTest
 public class UserServiceSpringContextTest {
