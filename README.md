@@ -16,17 +16,15 @@ The solution is thought using the Docker technologies with two different contain
 The code has been well tested (> 115 tests) using JUnit and Mockito, H2 in memory database and some standard libraries for the integration tests.
 
 
-If you're using this software or a part of it, please support this open source with a small donation here:
+If you're using this software or a part of it, you can support this open source with a small donation here:
 
 <a href="https://www.buymeacoffee.com/andreag" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
-
-I'm not working at the moment... Thanks!
 
 #### Migration for Spring Boot 3
 The branch "spring-boot-3" contains the necessary updates in order to use this microservice with the last spring boot 3 version.
 
 Remember that Spring Boot 3 is based on the Jakarta project and not the J2EE one. Also the spring fox / Swagger dependency
-has been removed. In addition the java version needed is the Java 17.
+has been removed. In addition the java version needed is the Java 17. The Dockerfile has been updated using the eclipse-temurin:17 docker image.
 
 The REST apis offered from the "spring-boot-3" microservices are the same likes the standard java 8 version.
 
@@ -93,7 +91,7 @@ Follow the instructions below to setup a local docker image for a mysql8.0 datab
 https://medium.com/@crmcmullen/how-to-run-mysql-in-a-docker-container-on-macos-with-persistent-local-data-58b89aec496a
 
 The microservice application has been updated to support a docker dev-network and there are no needs to
- configure manually the IP address of the database target: this setup is necessary only one time.
+configure manually the IP address of the database target: this setup is necessary only one time.
 
 Create the developer network:
 
@@ -148,7 +146,7 @@ Set the username and password of the MySql's user:
 Execute the microservice code using Maven:
 
     ./mvnw spring-boot:run
-    
+
 Open a browser and explore the REST apis:
 
 http://localhost:8090/swagger-ui.html
@@ -178,7 +176,7 @@ Set the username and password of the MySql's user:
     spring.datasource.password=yourMySqlUserStrongPassword
 
 >For a production environment consider to create a specific MySql user for the database "users" using
- a strong password.
+a strong password.
 
 Disable the demo data setting as below:
 
@@ -210,7 +208,7 @@ Restarting the db or the microservices should not affect the persistence of your
 
 #### Security, encryption and decryption of sensible data
 I've followed the blog post below in order to implement an encryption and decryption method for sensible data such
- as passwords.
+as passwords.
 
 http://www.appsdeveloperblog.com/encrypt-user-password-example-java/
 
@@ -219,7 +217,7 @@ This project has been created in February 2020 by Andrea Giassi.
 
 Andrea he's an italian Agile professional and Software Engineer actives in web systems and services.
 Since 2002, Andrea is working in the IT market for several different companies and start ups and it has contributed
- to the success of several solutions and products.
+to the success of several solutions and products.
 
 About me:
 https://www.linkedin.com/in/andreagiassi/
