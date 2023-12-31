@@ -16,17 +16,15 @@ The solution is thought using the Docker technologies with two different contain
 The code has been well tested (> 115 tests) using JUnit and Mockito, H2 in memory database and some standard libraries for the integration tests.
 
 
-If you're using this software or a part of it, please support this open source with a small donation here:
+If you're using this software or a part of it, you can support this open source with a small donation here:
 
 <a href="https://www.buymeacoffee.com/andreag" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
-
-I'm not working at the moment... Thanks!
 
 #### Migration for Spring Boot 3
 The branch "spring-boot-3" contains the necessary updates in order to use this microservice with the last spring boot 3 version.
 
 Remember that Spring Boot 3 is based on the Jakarta project and not the J2EE one. Also the spring fox / Swagger dependency
-has been removed. In  addition the java version needed is the Java 17. The Dockerfile has been updated using the eclipse-temurin:17 docker image.
+has been removed. In addition the java version needed is the Java 17. The Dockerfile has been updated using the eclipse-temurin:17 docker image.
 
 The REST apis offered from the "spring-boot-3" microservices are the same likes the standard java 8 version.
 
